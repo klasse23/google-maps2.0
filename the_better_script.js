@@ -169,28 +169,28 @@ async function getData() {
     fetch("maps.json")
       .then((response) => response.json())
       .then((data) => {
-        Object.values(data[0]).forEach((el) => {
-            const markers = el.markers;
 
-            markers.forEach((marker) => {
+        Object.values(data[0]).forEach((category) => { 
 
-              const marker = new Marker({
+            category.markers.forEach((marker) => {
+              
+              const mark = new Marker({
                 map: map,
                 position: { lat: marker.lat, lng: marker.lng },
                 title: marker.title,
-                icon: marker.icon,
+                icon: category.icon,
               });
-              marker.addListener("click", () => {
+              mark.addListener("click", () => {
                 map.setZoom(18);
-                map.setCenter(marker.getPosition());
+                map.setCenter(mark.getPosition());
                 infoWindow.close();
-                infoWindow.setContent(marker.getTitle() + "\n\n" + description);
-                infoWindow.open(marker.getMap(), marker);
+                infoWindow.setContent(mark.getTitle() + "\n\n" + description);
+                infoWindow.open(mark.getMap(), mark);
               });
             });
           
         });
 
-        console.log(data);
+        
       });
 }
