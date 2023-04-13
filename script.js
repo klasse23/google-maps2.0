@@ -11,7 +11,6 @@ async function initMap() {
   map = new Map(document.getElementById("map"), {
     zoom: 16.5,
     center: position,
-    mapId: "d6cfdbd4ab499329",
   });
 
   const bounds = new google.maps.LatLngBounds(
@@ -124,18 +123,16 @@ async function initMap() {
     fetch("maps.json")
       .then((response) => response.json())
       .then((data) => {
-        for (var i = 0; i < data[0].length; i++) {
-          const infoWindow = new google.maps.InfoWindow();
-          console.log(data[0][i]);
-          if (data[i].markers) {
-            const icon = data[i].icon;
-            const markers = data[i].markers;
-            console.log(markers);
-            for (var a = 0; a < markers.length; i++) {
-              const title = markers[a].title;
-              const description = markers[a].description;
-              const lat = markers[a].lat;
-              const lng = markers[a].lng;
+        Object.values(data[0]).forEach((el) => {
+          if (el.markers != null && el.icon != null) {
+            const icon = el.icon;
+            const markers = el.markers;
+
+            markers.forEach((ty) => {
+              const title = ty.title;
+              const description = ty.description;
+              const lat = ty.lat;
+              const lng = ty.lng;
 
               const marker = new Marker({
                 map: map,
@@ -150,10 +147,11 @@ async function initMap() {
                 infoWindow.setContent(marker.getTitle() + "\n\n" + description);
                 infoWindow.open(marker.getMap(), marker);
               });
-            }
+            });
           } else {
+            console.erorr("Something went wrong :D");
           }
-        }
+        });
 
         console.log(data);
       });
