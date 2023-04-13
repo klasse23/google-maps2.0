@@ -1,15 +1,12 @@
-// Initialize and add the map
 let map;
 
 async function initMap() {
-  // The location of Uluru
+  /*
+    Variables
+  */
   const position = { lat: 60.79923462904757, lng: 11.025973056378175 };
-  // Request needed libraries.
-  //@ts-ignore
   const { Map } = await google.maps.importLibrary("maps");
   const { Marker } = await google.maps.importLibrary("marker");
-
-  // The map, centered at Uluru
   map = new Map(document.getElementById("map"), {
     zoom: 16.5,
     center: position,
@@ -17,13 +14,12 @@ async function initMap() {
   });
 
   const bounds = new google.maps.LatLngBounds(
-    new google.maps.LatLng(62.281819, -150.287132),
-    new google.maps.LatLng(62.400471, -150.005608)
+    new google.maps.LatLng(60.79923462904757, 11.025973056378175),
+    new google.maps.LatLng(60.8923462904757, 11.125973056378175)
   );
 
-  let image = "https://developers.google.com/maps/documentation/javascript/";
-
-  image += "examples/full/images/talkeetna.png";
+  let image =
+    "https://developers.google.com/maps/documentation/javascript/examples/full/images/talkeetna.png";
 
   // Add the custom overlay to the map
   class USGSOverlay extends google.maps.OverlayView {
@@ -60,13 +56,8 @@ async function initMap() {
       panes.overlayLayer.appendChild(this.div);
     }
     draw() {
-      // We use the south-west and north-east
-      // coordinates of the overlay to peg it to the correct position and size.
-      // To do this, we need to retrieve the projection from the overlay.
       const overlayProjection = this.getProjection();
-      // Retrieve the south-west and north-east coordinates of this overlay
-      // in LatLngs and convert them to pixel coordinates.
-      // We'll use these coordinates to resize the div.
+
       const sw = overlayProjection.fromLatLngToDivPixel(
         this.bounds.getSouthWest()
       );
@@ -74,7 +65,6 @@ async function initMap() {
         this.bounds.getNorthEast()
       );
 
-      // Resize the image's div to fit the indicated dimensions.
       if (this.div) {
         this.div.style.left = sw.x + "px";
         this.div.style.top = ne.y + "px";
@@ -124,30 +114,37 @@ async function initMap() {
   }
 
   const overlay = new USGSOverlay(bounds, image);
-
   overlay.setMap(map);
 
-  // The marker, positioned at Uluru
+  /*
+    FETCH
+  */
   try {
     fetch("maps.json")
       .then((response) => response.json())
       .then((data) => {
         for (var i = 0; i < data.length; i++) {
-          console.log(data[i]);
+          const infoWindow = new google.maps.InfoWindow();
           if (!data[i]["image"]) {
-            console.log("dd");
             const marker = new Marker({
               map: map,
               position: { lat: data[i].lat, lng: data[i].long },
               title: data[i].title,
             });
           } else {
-            console.log("yy");
             const marker = new Marker({
               map: map,
               position: { lat: data[i].lat, lng: data[i].long },
               title: data[i].title,
               icon: data[i].image,
+            });
+            marker.addListener("click", () => {
+              map.setZoom(20);
+              map.setCenter(marker.getPosition());
+              infoWindow.close();
+              console.log(marker);
+              infoWindow.setContent(marker.getTitle());
+              infoWindow.open(marker.getMap(), marker);
             });
           }
         }

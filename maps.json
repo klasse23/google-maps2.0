@@ -1,14 +1,14 @@
 [
-    {
-        "title": "Uluru",
-        "lat": 60.79923462904757,
-        "long": 11.025973056378175,
-        "image": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-    },
-    {
-        "title": "Hei",
-        "lat": 60.79923462904757,
-        "long": 11.025973056378175,
-        "image": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-    }
+  {
+    "title": "Uluru",
+    "lat": 60.79923462904757,
+    "long": 11.025973056378175,
+    "image": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+  },
+  {
+    "title": "Hei",
+    "lat": 60.79923462904757,
+    "long": 11.025983056378175,
+    "image": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+  }
 ]

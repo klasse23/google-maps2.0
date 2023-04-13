@@ -1,8 +1,12 @@
+body {
+  background: #333;
+  color: white;
+  font-family: "Roboto", sans-serif;
+}
+
 .title {
-  color: black;
   font-size: 50px;
   text-align: center;
-  font-family: "Roboto", sans-serif;
   font-weight: 700;
   margin-top: 0;
 }
@@ -14,7 +18,9 @@
 }
 
 #map {
-  height: 75vh;
+  height: 85vh;
   width: 75vw;
   border-radius: 1em;
+  color: black;
+  font-weight: 600;
 }
