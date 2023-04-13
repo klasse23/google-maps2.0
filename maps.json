@@ -1,7 +1,7 @@
 [
   {
     "food": {
-      "icon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+      "icon": "img/points/food.svg",
       "markers": [
         {
           "title": "Uluru",
