@@ -1,18 +1,26 @@
 [
   {
-    "title": "Uluru",
-    "description": "A large sandstone rock formation in the southern part of the Northern Territory, central Australia. It lies 335 km (208 mi) south west of the nearest large town, Alice Springs; 450 km (280 mi) by road. Kata Tjuta and Uluru are the two major features of the Uluru - Kata Tjuta National Park. Uluru is sacred to the Pitjantjatjara and Yankunytjatjara, the Aboriginal people of the area. It has many springs, waterholes, rock caves and ancient paintings. Uluru is listed as a World Heritage Site.",
-    "lat": 60.79923462904757,
-    "lng": 11.025973056378175,
-    "icon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-    "group": "Food"
-  },
-  {
-    "title": "Hei",
-    "description": "A large sandstone rock formation in the southern part of the Northern Territory, central Australia. It lies 335 km (208 mi) south west of the nearest large town, Alice Springs; 450 km (280 mi) by road. Kata Tjuta and Uluru are the two major features of the Uluru - Kata Tjuta National Park. Uluru is sacred to the Pitjantjatjara and Yankunytjatjara, the Aboriginal people of the area. It has many springs, waterholes, rock caves and ancient paintings. Uluru is listed as a World Heritage Site.",
-    "lat": 60.79923462904757,
-    "lng": 11.025983056378175,
-    "icon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
-    "group": "Food"
+    "food": {
+      "icon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+      "markers": [
+        {
+          "title": "Uluru",
+          "description": "A large sandstone rock formation in the southern part of the Northern Territory, central Australia. It lies 335 km (208 mi) south west of the nearest large town, Alice Springs; 450 km (280 mi) by road. Kata Tjuta and Uluru are the two major features of the Uluru - Kata Tjuta National Park. Uluru is sacred to the Pitjantjatjara and Yankunytjatjara, the Aboriginal people of the area. It has many springs, waterholes, rock caves and ancient paintings. Uluru is listed as a World Heritage Site.",
+          "lat": 60.79923462904757,
+          "lng": 11.025973056378175
+        }
+      ]
+    },
+    "money": {
+      "icon": "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png",
+      "markers": [
+        {
+          "title": "ok",
+          "description": "Aada large sandstone rock formation in the southern part of the Northern Territory, central Australia. It lies 335 km (208 mi) south west of the nearest large town, Alice Springs; 450 km (280 mi) by road. Kata Tjuta and Uluru are the two major features of the Uluru - Kata Tjuta National Park. Uluru is sacred to the Pitjantjatjara and Yankunytjatjara, the Aboriginal people of the area. It has many springs, waterholes, rock caves and ancient paintings. Uluru is listed as a World Heritage Site.",
+          "lat": 60.79953462904757,
+          "lng": 11.025973056378175
+        }
+      ]
+    }
   }
 ]

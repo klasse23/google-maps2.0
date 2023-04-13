@@ -4,7 +4,6 @@ async function initMap() {
   /*
     Variables
   */
-  const groups = ["Food", "Money", "bank"];
 
   const position = { lat: 60.79923462904757, lng: 11.025973056378175 };
   const { Map } = await google.maps.importLibrary("maps");
@@ -125,30 +124,33 @@ async function initMap() {
     fetch("maps.json")
       .then((response) => response.json())
       .then((data) => {
-        for (var i = 0; i < data.length; i++) {
+        for (var i = 0; i < data[0].length; i++) {
           const infoWindow = new google.maps.InfoWindow();
-
-          if (data[i].image || groups.includes(data[i].group)) {
-            const title = data[i].title;
-            const description = data[i].description;
-            const lat = data[i].lat;
-            const lng = data[i].lng;
+          console.log(data[0][i]);
+          if (data[i].markers) {
             const icon = data[i].icon;
-            const group = data[i].group;
+            const markers = data[i].markers;
+            console.log(markers);
+            for (var a = 0; a < markers.length; i++) {
+              const title = markers[a].title;
+              const description = markers[a].description;
+              const lat = markers[a].lat;
+              const lng = markers[a].lng;
 
-            const marker = new Marker({
-              map: map,
-              position: { lat: lat, lng: lng },
-              title: title,
-              icon: icon,
-            });
-            marker.addListener("click", () => {
-              map.setZoom(20);
-              map.setCenter(marker.getPosition());
-              infoWindow.close();
-              infoWindow.setContent(marker.getTitle() + "\n\n" + description);
-              infoWindow.open(marker.getMap(), marker);
-            });
+              const marker = new Marker({
+                map: map,
+                position: { lat: lat, lng: lng },
+                title: title,
+                icon: icon,
+              });
+              marker.addListener("click", () => {
+                map.setZoom(20);
+                map.setCenter(marker.getPosition());
+                infoWindow.close();
+                infoWindow.setContent(marker.getTitle() + "\n\n" + description);
+                infoWindow.open(marker.getMap(), marker);
+              });
+            }
           } else {
           }
         }
@@ -164,25 +166,16 @@ async function initMap() {
   */
   const infoWindow = new google.maps.InfoWindow();
 
-  const locationButton = document.createElement("button");
-
-  locationButton.textContent = "Pan to Current Location";
-  locationButton.classList.add("custom-map-control-button");
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
-  locationButton.addEventListener("click", () => {
+  document.addEventListener("DOMContentLoaded", () => {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
+      console.log("yesss");
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
-
-          infoWindow.setPosition(pos);
-          infoWindow.setContent("Location found.");
-          infoWindow.open(map);
-          map.setCenter(pos);
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
