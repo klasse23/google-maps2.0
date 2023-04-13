@@ -4,6 +4,8 @@ async function initMap() {
   /*
     Variables
   */
+  const groups = ["Food", "Money", "bank"];
+
   const position = { lat: 60.79923462904757, lng: 11.025973056378175 };
   const { Map } = await google.maps.importLibrary("maps");
   const { Marker } = await google.maps.importLibrary("marker");
@@ -14,8 +16,8 @@ async function initMap() {
   });
 
   const bounds = new google.maps.LatLngBounds(
-    new google.maps.LatLng(60.79923462904757, 11.025973056378175),
-    new google.maps.LatLng(60.8923462904757, 11.125973056378175)
+    new google.maps.LatLng(70.79923462904757, 21.025973056378175),
+    new google.maps.LatLng(70.8923462904757, 21.125973056378175)
   );
 
   let image =
@@ -125,27 +127,29 @@ async function initMap() {
       .then((data) => {
         for (var i = 0; i < data.length; i++) {
           const infoWindow = new google.maps.InfoWindow();
-          if (!data[i]["image"]) {
+
+          if (data[i].image || groups.includes(data[i].group)) {
+            const title = data[i].title;
+            const description = data[i].description;
+            const lat = data[i].lat;
+            const lng = data[i].lng;
+            const icon = data[i].icon;
+            const group = data[i].group;
+
             const marker = new Marker({
               map: map,
-              position: { lat: data[i].lat, lng: data[i].long },
-              title: data[i].title,
-            });
-          } else {
-            const marker = new Marker({
-              map: map,
-              position: { lat: data[i].lat, lng: data[i].long },
-              title: data[i].title,
-              icon: data[i].image,
+              position: { lat: lat, lng: lng },
+              title: title,
+              icon: icon,
             });
             marker.addListener("click", () => {
               map.setZoom(20);
               map.setCenter(marker.getPosition());
               infoWindow.close();
-              console.log(marker);
-              infoWindow.setContent(marker.getTitle());
+              infoWindow.setContent(marker.getTitle() + "\n\n" + description);
               infoWindow.open(marker.getMap(), marker);
             });
+          } else {
           }
         }
 
@@ -153,6 +157,51 @@ async function initMap() {
       });
   } catch {
     console.log("error");
+  }
+
+  /*
+    Player Location
+  */
+  const infoWindow = new google.maps.InfoWindow();
+
+  const locationButton = document.createElement("button");
+
+  locationButton.textContent = "Pan to Current Location";
+  locationButton.classList.add("custom-map-control-button");
+  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+  locationButton.addEventListener("click", () => {
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+
+          infoWindow.setPosition(pos);
+          infoWindow.setContent("Location found.");
+          infoWindow.open(map);
+          map.setCenter(pos);
+        },
+        () => {
+          handleLocationError(true, infoWindow, map.getCenter());
+        }
+      );
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+    }
+  });
+
+  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(
+      browserHasGeolocation
+        ? "Error: The Geolocation service failed."
+        : "Error: Your browser doesn't support geolocation."
+    );
+    infoWindow.open(map);
   }
 }
 
