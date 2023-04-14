@@ -14,12 +14,11 @@ async function initMap() {
   });
 
   const bounds = new google.maps.LatLngBounds(
-    new google.maps.LatLng(70.79923462904757, 21.025973056378175),
-    new google.maps.LatLng(70.8923462904757, 21.125973056378175)
+    new google.maps.LatLng(60.79923462904757, 11.025973056378175),
+    new google.maps.LatLng(60.8923462904757, 11.125973056378175)
   );
 
-  let image =
-    "https://developers.google.com/maps/documentation/javascript/examples/full/images/talkeetna.png";
+  let image = "img/map.svg";
 
   // Add the custom overlay to the map
   class USGSOverlay extends google.maps.OverlayView {
@@ -245,11 +244,10 @@ async function getData(infoWindow) {
           const str = key;
           const str2 = str.charAt(0).toUpperCase() + str.slice(1);
           filterButton.textContent = str2;
-          console.log(color);
           filterButton.style.border = "2px solid " + color;
           filterButton.style.backgroundColor = color;
           filterButton.classList.add("filter-button");
-          map.controls[google.maps.ControlPosition.TOP_CENTER].push(
+          map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(
             filterButton
           );
           filterButton.addEventListener("click", () => {

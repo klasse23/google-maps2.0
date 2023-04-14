@@ -2,6 +2,7 @@ body {
   background: #333;
   color: white;
   font-family: "Roboto", sans-serif;
+  overflow: hidden;
 }
 
 .title {
