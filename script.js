@@ -175,6 +175,7 @@ async function getData(infoWindow) {
           newData[key]["markers"] = [];
 
           let web_location = item[key]["web_location"];
+          let color = item[key]["color"];
 
           item[key]["markers"].forEach((marker) => {
             const mark = new Marker({
@@ -244,6 +245,9 @@ async function getData(infoWindow) {
           const str = key;
           const str2 = str.charAt(0).toUpperCase() + str.slice(1);
           filterButton.textContent = str2;
+          console.log(color);
+          filterButton.style.border = "2px solid " + color;
+          filterButton.style.backgroundColor = color;
           filterButton.classList.add("filter-button");
           map.controls[google.maps.ControlPosition.TOP_CENTER].push(
             filterButton
@@ -251,6 +255,7 @@ async function getData(infoWindow) {
           filterButton.addEventListener("click", () => {
             if (newData[key]["shown"]) {
               filterButton.classList.add("deactive");
+              filterButton.style.backgroundColor = "#F0F0F0";
               infoWindow.close();
               newData[key]["shown"] = false;
               newData[key]["markers"].forEach((marker) => {
@@ -258,6 +263,8 @@ async function getData(infoWindow) {
               });
             } else {
               filterButton.classList.remove("deactive");
+              filterButton.style.border = "2px solid " + color;
+              filterButton.style.backgroundColor = color;
               newData[key]["shown"] = true;
               newData[key]["markers"].forEach((marker) => {
                 marker.setMap(map);

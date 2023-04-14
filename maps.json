@@ -2,6 +2,7 @@
   {
     "food": {
       "icon": "img/points/mat.svg",
+      "color": "#ED1C24",
       "markers": [
         {
           "title": "Uluru",
@@ -14,6 +15,8 @@
     },
     "money": {
       "icon": "img/points/verksted.svg",
+
+      "color": "#39B54A",
       "web_location": "#",
       "markers": [
         {

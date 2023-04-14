@@ -73,9 +73,8 @@ body {
 }
 
 .filter-button {
-  background-color: #2ea44f;
   border: none;
-  color: white;
+  color: black;
   padding: 10px 16px;
   text-align: center;
   text-decoration: none;
@@ -84,8 +83,4 @@ body {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 12px;
-}
-
-.filter-button.deactive {
-  background-color: #47534a;
 }
