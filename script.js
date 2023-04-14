@@ -166,69 +166,103 @@ async function getData(infoWindow) {
   fetch("maps.json")
     .then((response) => response.json())
     .then((data) => {
-      Object.values(data[0]).forEach((category) => {
-        category.markers.forEach((marker) => {
-          const web_location = category.web_location;
-          //console.log(category.icon[3]);
+      let newData = {};
 
-          const mark = new Marker({
-            map: map,
-            position: { lat: marker.lat, lng: marker.lng },
-            title: marker.title,
-            animation: google.maps.Animation.DROP,
-            icon: {
-              url: category.icon,
-              scaledSize: new google.maps.Size(markerSize, markerSize),
-            },
-            //origin: new google.maps.Point(0, 0),
-            //anchor: new google.maps.Point(100/2, 100/2),
-          });
-          mark.addListener("click", () => {
-            map.setZoom(18);
-            map.setCenter(mark.getPosition());
-            infoWindow.close();
+      data.forEach((item) => {
+        Object.keys(item).forEach((key) => {
+          newData[key] = {};
+          newData[key]["shown"] = true;
+          newData[key]["markers"] = [];
 
-            if (web_location) {
-              infoWindow.setContent(
-                `<div id="content">
+          let web_location = item[key]["web_location"];
+
+          item[key]["markers"].forEach((marker) => {
+            const mark = new Marker({
+              map: map,
+              position: { lat: marker.lat, lng: marker.lng },
+              title: marker.title,
+              animation: google.maps.Animation.DROP,
+              icon: {
+                url: item[key].icon,
+                scaledSize: new google.maps.Size(markerSize, markerSize),
+              },
+            });
+
+            newData[key]["markers"].push(mark);
+
+            mark.addListener("click", () => {
+              map.setZoom(18);
+              map.setCenter(mark.getPosition());
+              infoWindow.close();
+
+              if (web_location) {
+                infoWindow.setContent(
+                  `<div id="content">
                   <a href="` +
-                  web_location +
-                  `" style="text-decoration: none; font-weight: 600; color: #219EBC;"><h3>` +
-                  mark.getTitle() +
-                  `</h3></a>
+                    web_location +
+                    `" style="text-decoration: none; font-weight: 600; color: #219EBC;"><h3>` +
+                    mark.getTitle() +
+                    `</h3></a>
                   <p style="">` +
-                  marker.description +
-                  `</p>
+                    marker.description +
+                    `</p>
                   <div style="display: flex; justify-content: center; align-items: center;">
                     <a href="` +
-                  web_location +
-                  `"><button id="more">Les mer</button></a>
+                    web_location +
+                    `"><button id="more">Les mer</button></a>
                   </div>
                 </div>`
-              );
-            } else {
-              infoWindow.setContent(
-                `<div id="content">
+                );
+              } else {
+                infoWindow.setContent(
+                  `<div id="content">
                 <a href="` +
-                  marker.web_location +
-                  `" style="text-decoration: none; font-weight: 600; color: #219EBC;"><h3>` +
-                  mark.getTitle() +
-                  `</h3></a>
+                    marker.web_location +
+                    `" style="text-decoration: none; font-weight: 600; color: #219EBC;"><h3>` +
+                    mark.getTitle() +
+                    `</h3></a>
                 <p style="">` +
-                  marker.description +
-                  `</p>
+                    marker.description +
+                    `</p>
                 <div style="display: flex; justify-content: center; align-items: center;">
                   <a href="` +
-                  marker.web_location +
-                  `"><button id="more">Les mer</button></a>
+                    marker.web_location +
+                    `"><button id="more">Les mer</button></a>
                 </div>
               </div>`
-              );
-            }
-            infoWindow.open(mark.getMap(), mark);
+                );
+              }
+              infoWindow.open(mark.getMap(), mark);
+            });
+
+            map.addListener("click", () => {
+              infoWindow.close();
+            });
           });
-          map.addListener("click", () => {
-            infoWindow.close();
+          //setup markers
+          const filterButton = document.createElement("button");
+          const str = key;
+          const str2 = str.charAt(0).toUpperCase() + str.slice(1);
+          filterButton.textContent = str2;
+          filterButton.classList.add("filter-button");
+          map.controls[google.maps.ControlPosition.TOP_CENTER].push(
+            filterButton
+          );
+          filterButton.addEventListener("click", () => {
+            if (newData[key]["shown"]) {
+              filterButton.classList.add("deactive");
+              infoWindow.close();
+              newData[key]["shown"] = false;
+              newData[key]["markers"].forEach((marker) => {
+                marker.setMap(null);
+              });
+            } else {
+              filterButton.classList.remove("deactive");
+              newData[key]["shown"] = true;
+              newData[key]["markers"].forEach((marker) => {
+                marker.setMap(map);
+              });
+            }
           });
         });
       });
