@@ -168,7 +168,8 @@ async function getData(infoWindow) {
     .then((data) => {
       Object.values(data[0]).forEach((category) => {
         category.markers.forEach((marker) => {
-          console.log(category.icon[3]);
+          const web_location = category.web_location;
+          //console.log(category.icon[3]);
 
           const mark = new Marker({
             map: map,
@@ -186,11 +187,12 @@ async function getData(infoWindow) {
             map.setZoom(18);
             map.setCenter(mark.getPosition());
             infoWindow.close();
-            if (category.web_location) {
+
+            if (web_location) {
               infoWindow.setContent(
                 `<div id="content">
                   <a href="` +
-                  category.web_location +
+                  web_location +
                   `" style="text-decoration: none; font-weight: 600; color: #219EBC;"><h3>` +
                   mark.getTitle() +
                   `</h3></a>
@@ -199,29 +201,30 @@ async function getData(infoWindow) {
                   `</p>
                   <div style="display: flex; justify-content: center; align-items: center;">
                     <a href="` +
-                  category.web_location +
+                  web_location +
                   `"><button id="more">Les mer</button></a>
                   </div>
                 </div>`
               );
-            }
-            infoWindow.setContent(
-              `<div id="content">
+            } else {
+              infoWindow.setContent(
+                `<div id="content">
                 <a href="` +
-                marker.web_location +
-                `" style="text-decoration: none; font-weight: 600; color: #219EBC;"><h3>` +
-                mark.getTitle() +
-                `</h3></a>
+                  marker.web_location +
+                  `" style="text-decoration: none; font-weight: 600; color: #219EBC;"><h3>` +
+                  mark.getTitle() +
+                  `</h3></a>
                 <p style="">` +
-                marker.description +
-                `</p>
+                  marker.description +
+                  `</p>
                 <div style="display: flex; justify-content: center; align-items: center;">
                   <a href="` +
-                marker.web_location +
-                `"><button id="more">Les mer</button></a>
+                  marker.web_location +
+                  `"><button id="more">Les mer</button></a>
                 </div>
               </div>`
-            );
+              );
+            }
             infoWindow.open(mark.getMap(), mark);
           });
           map.addListener("click", () => {

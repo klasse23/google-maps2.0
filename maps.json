@@ -1,7 +1,7 @@
 [
   {
     "food": {
-      "icon": "img/points/food.svg",
+      "icon": "img/points/mat.svg",
       "markers": [
         {
           "title": "Uluru",
@@ -13,7 +13,7 @@
       ]
     },
     "money": {
-      "icon": "img/points/workshop.svg",
+      "icon": "img/points/verksted.svg",
       "web_location": "#",
       "markers": [
         {
