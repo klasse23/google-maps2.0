@@ -186,16 +186,39 @@ async function getData(infoWindow) {
             map.setZoom(18);
             map.setCenter(mark.getPosition());
             infoWindow.close();
+            if (category.web_location) {
+              infoWindow.setContent(
+                `<div id="content">
+                  <a href="` +
+                  category.web_location +
+                  `" style="text-decoration: none; font-weight: 600; color: #219EBC;"><h3>` +
+                  mark.getTitle() +
+                  `</h3></a>
+                  <p style="">` +
+                  marker.description +
+                  `</p>
+                  <div style="display: flex; justify-content: center; align-items: center;">
+                    <a href="` +
+                  category.web_location +
+                  `"><button id="more">Les mer</button></a>
+                  </div>
+                </div>`
+              );
+            }
             infoWindow.setContent(
               `<div id="content">
-                <h3>` +
+                <a href="` +
+                marker.web_location +
+                `" style="text-decoration: none; font-weight: 600; color: #219EBC;"><h3>` +
                 mark.getTitle() +
-                `</h3>
+                `</h3></a>
                 <p style="">` +
                 marker.description +
                 `</p>
                 <div style="display: flex; justify-content: center; align-items: center;">
-                  <a href="#"><button id="more">Les mer</button></a>
+                  <a href="` +
+                marker.web_location +
+                `"><button id="more">Les mer</button></a>
                 </div>
               </div>`
             );
