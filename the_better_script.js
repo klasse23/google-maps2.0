@@ -2,13 +2,12 @@ let map;
 const { Map } = await google.maps.importLibrary("maps");
 const { Marker } = await google.maps.importLibrary("marker");
 
-const markerSize = 50 // This resizes both x and y
+const markerSize = 50; // This resizes both x and y
 
 async function initMap() {
   const position = { lat: 60.79923462904757, lng: 11.025973056378175 };
   const infoWindow = new google.maps.InfoWindow();
- 
- 
+
   map = new Map(document.getElementById("map"), {
     zoom: 16.5,
     center: position,
@@ -19,7 +18,8 @@ async function initMap() {
     new google.maps.LatLng(70.8923462904757, 21.125973056378175)
   );
 
-  let image = "https://developers.google.com/maps/documentation/javascript/examples/full/images/talkeetna.png";
+  let image =
+    "https://developers.google.com/maps/documentation/javascript/examples/full/images/talkeetna.png";
 
   // Add the custom overlay to the map
   class USGSOverlay extends google.maps.OverlayView {
@@ -120,16 +120,14 @@ async function initMap() {
     FETCH
   */
   try {
-
-    getData(infoWindow)
-  } catch(err) {
+    getData(infoWindow);
+  } catch (err) {
     console.log("Error when fetching overlay json: ", err);
   }
 
   /*
     Player Location
   */
-  
 
   document.addEventListener("DOMContentLoaded", () => {
     // Try HTML5 geolocation.
@@ -165,35 +163,33 @@ async function initMap() {
 
 initMap();
 
-
 async function getData(infoWindow) {
-    fetch("maps.json")
-      .then((response) => response.json())
-      .then((data) => {
+  fetch("maps.json")
+    .then((response) => response.json())
+    .then((data) => {
+      Object.values(data[0]).forEach((category) => {
+        category.markers.forEach((marker) => {
+          console.log(category.icon[3]);
 
-        Object.values(data[0]).forEach((category) => { 
-
-            category.markers.forEach((marker) => {
-              console.log(category.icon[3])
-
-              const mark = new Marker({
-                map: map,
-                position: { lat: marker.lat, lng: marker.lng },
-                title: marker.title,
-                icon:{
-                  url:category.icon,
-                  scaledSize: new google.maps.Size(markerSize, markerSize)},
-                  //origin: new google.maps.Point(0, 0),
-                  //anchor: new google.maps.Point(100/2, 100/2),   
-              });
-              mark.addListener("click", () => {
-                map.setZoom(18);
-                map.setCenter(mark.getPosition());
-                infoWindow.close();
-                infoWindow.setContent(mark.getTitle() + "\n\n" );
-                infoWindow.open(mark.getMap(), mark);
-              });
-            });
+          const mark = new Marker({
+            map: map,
+            position: { lat: marker.lat, lng: marker.lng },
+            title: marker.title,
+            icon: {
+              url: category.icon,
+              scaledSize: new google.maps.Size(markerSize, markerSize),
+            },
+            //origin: new google.maps.Point(0, 0),
+            //anchor: new google.maps.Point(100/2, 100/2),
+          });
+          mark.addListener("click", () => {
+            map.setZoom(18);
+            map.setCenter(mark.getPosition());
+            infoWindow.close();
+            infoWindow.setContent(mark.getTitle() + "\n\n");
+            infoWindow.open(mark.getMap(), mark);
+          });
         });
       });
+    });
 }

@@ -132,7 +132,6 @@ async function initMap() {
   document.addEventListener("DOMContentLoaded", () => {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
-      console.log("yesss");
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const pos = {
@@ -175,6 +174,7 @@ async function getData(infoWindow) {
             map: map,
             position: { lat: marker.lat, lng: marker.lng },
             title: marker.title,
+            animation: google.maps.Animation.DROP,
             icon: {
               url: category.icon,
               scaledSize: new google.maps.Size(markerSize, markerSize),
@@ -186,8 +186,23 @@ async function getData(infoWindow) {
             map.setZoom(18);
             map.setCenter(mark.getPosition());
             infoWindow.close();
-            infoWindow.setContent(mark.getTitle() + "\n\n");
+            infoWindow.setContent(
+              `<div id="content">
+                <h3>` +
+                mark.getTitle() +
+                `</h3>
+                <p style="">` +
+                marker.description +
+                `</p>
+                <div style="display: flex; justify-content: center; align-items: center;">
+                  <a href="#"><button id="more">Les mer</button></a>
+                </div>
+              </div>`
+            );
             infoWindow.open(mark.getMap(), mark);
+          });
+          map.addListener("click", () => {
+            infoWindow.close();
           });
         });
       });
