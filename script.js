@@ -5,20 +5,21 @@ const { Marker } = await google.maps.importLibrary("marker");
 const markerSize = 50; // This resizes both x and y
 
 async function initMap() {
-  const position = { lat: 60.79923462904757, lng: 11.025973056378175 };
+  const position = { lat: 60.797912, lng: 11.029991 };
   const infoWindow = new google.maps.InfoWindow();
 
   map = new Map(document.getElementById("map"), {
-    zoom: 16.5,
+    zoom: 17,
     center: position,
+
   });
-
+  
   const bounds = new google.maps.LatLngBounds(
-    new google.maps.LatLng(60.79923462904757, 11.025973056378175),
-    new google.maps.LatLng(60.8923462904757, 11.125973056378175)
+    new google.maps.LatLng(60.79697, 11.02375),
+    new google.maps.LatLng(60.79927, 11.03643)
   );
-
-  let image = "img/map.svg";
+  
+  let image = "img/uten_bakgrunn.svg";
 
   // Add the custom overlay to the map
   class USGSOverlay extends google.maps.OverlayView {
@@ -39,6 +40,7 @@ async function initMap() {
       this.div.style.borderStyle = "none";
       this.div.style.borderWidth = "0px";
       this.div.style.position = "absolute";
+      this.div.className = "map-encasing"
 
       // Create the img element and attach it to the div.
       const img = document.createElement("img");
@@ -46,7 +48,11 @@ async function initMap() {
       img.src = this.image;
       img.style.width = "100%";
       img.style.height = "100%";
-      img.style.position = "absolute";
+      img.style.position = "absolute"; // 
+
+      
+
+      
       this.div.appendChild(img);
 
       // Add the element to the "overlayLayer" pane.
@@ -56,7 +62,7 @@ async function initMap() {
     }
     draw() {
       const overlayProjection = this.getProjection();
-
+      
       const sw = overlayProjection.fromLatLngToDivPixel(
         this.bounds.getSouthWest()
       );
@@ -65,10 +71,12 @@ async function initMap() {
       );
 
       if (this.div) {
+       
         this.div.style.left = sw.x + "px";
         this.div.style.top = ne.y + "px";
         this.div.style.width = ne.x - sw.x + "px";
         this.div.style.height = sw.y - ne.y + "px";
+        this.div.style.transform = 'rotate(206.9deg)';
       }
     }
     /**
@@ -111,9 +119,11 @@ async function initMap() {
       }
     }
   }
-
+  
+  
   const overlay = new USGSOverlay(bounds, image);
   overlay.setMap(map);
+  
 
   /*
     FETCH
