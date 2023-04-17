@@ -1,7 +1,7 @@
 body {
   background: #333;
   color: white;
-  font-family: "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif !important;
   overflow: hidden;
 }
 
@@ -76,7 +76,7 @@ body {
 .filter-button {
   border: none;
   color: black;
-  padding: 10px 16px;
+  padding: 6px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;

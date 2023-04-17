@@ -1,29 +1,164 @@
 [
   {
-    "food": {
-      "icon": "img/points/mat.svg",
-      "color": "#ED1C24",
+    "utstilling": {
+      "icon": "img/points/utstilling.svg",
+      "color": "#27AAE1",
       "markers": [
         {
-          "title": "Uluru",
-          "web_location": "#",
-          "description": "A large sandstone rock formation in the southern part of the Northern Territory, central Australia. It lies 335 km (208 mi) south west of the nearest large town, Alice Springs; 450 km (280 mi) by road. Kata Tjuta and Uluru are the two major features of the Uluru - Kata Tjuta National Park. Uluru is sacred to the Pitjantjatjara and Yankunytjatjara, the Aboriginal people of the area. It has many springs, waterholes, rock caves and ancient paintings. Uluru is listed as a World Heritage Site.",
-          "lat": 60.79923462904757,
-          "lng": 11.025973056378175
+          "title": "No Mans Land",
+          "web_location": "http://program.stoppestedverden.no/utstilling-no-mans-land/",
+          "description": "Fotoutstillingen No man’s land har dokumentert 12 mennesker som bor i Norge.",
+          "lat": 60.79769066081008,
+          "lng": 11.034259089484898
         }
       ]
     },
-    "money": {
+    "konsert": {
+      "icon": "img/points/konsert.svg",
+      "color": "#262262",
+      "markers": [
+        {
+          "title": "KOTO",
+          "web_location": "http://program.stoppestedverden.no/41-konsert-koto-japan/",
+          "description": "Den er 2 meter lang og har 13 strenger! Det er ikke en langeleik, men det tradisjonelle japanske musikkinstrument «Koto». Strengeinstrumentet kom til Japan fra Kina på 700-tallet, opprinnelig som del av hoffmusikken gagaku.  ",
+          "lat": 60.79731023370046,
+          "lng": 11.0339278431458
+        }
+      ]
+    },
+    "verksted": {
       "icon": "img/points/verksted.svg",
 
       "color": "#39B54A",
-      "web_location": "#",
       "markers": [
         {
-          "title": "ok",
+          "title": "Verdenskappe | SY-DEN",
           "description": "Aada large sandstone rock formation in the southern part of the Northern Territory, central Australia. It lies 335 km (208 mi) south west of the nearest large town, Alice Springs; 450 km (280 mi) by road. Kata Tjuta and Uluru are the two major features of the Uluru - Kata Tjuta National Park. Uluru is sacred to the Pitjantjatjara and Yankunytjatjara, the Aboriginal people of the area. It has many springs, waterholes, rock caves and ancient paintings. Uluru is listed as a World Heritage Site.",
-          "lat": 60.79953462904757,
-          "lng": 11.025973056378175
+          "lat": 60.797686653169954,
+          "lng": 11.033716991795927
+        },
+        {
+          "title": "HÅP I EN TRÅD",
+          "web_location": "http://program.stoppestedverden.no/hap-i-en-trad/",
+          "description": "Lær av gårsdagen, lev for i dag, håp for i morgen (Albert Einstein).",
+          "lat": 60.79752529365576,
+          "lng": 11.034208346834637
+        },
+        {
+          "title": "KABUKI",
+          "web_location": "http://program.stoppestedverden.no/verksted-dans-kabuki-japan/",
+          "description": "Ordet «Geisha» har et mystisk og eksotisk sus over seg, men på japansk betyr Geisha (芸者) «kunstnerisk person».",
+          "lat": 60.79734654264593,
+          "lng": 11.033733209655681
+        },
+        {
+          "title": "GAMELAN",
+          "description": "Bli med å spille på gamelaninstrumentene, og kanskje blir du «sjefen» for den store gongen!",
+          "lat": 60.7973846076765,
+          "lng": 11.033376991440957
+        },
+        {
+          "title": "GIGANTAR",
+          "description": "Selvkonstruert strenge- og perkusjonsinstrumenter er noen av Drivhusets mange kreative prosjekter.",
+          "lat": 60.797356264095534,
+          "lng": 11.032703871047845
+        },
+        {
+          "title": "NYSIRKUS",
+          "description": "Hvordan kan hatter fly? Hvor høyt kan du svinge en diablo?",
+          "lat": 60.797219901142924,
+          "lng": 11.032877029628875
+        },
+        {
+          "title": "WORLD OF DRAG",
+          "description": "Hva er egentlig drag? Det får du svar på når stjerneartistene Elektra Puzzz og Cassie Brødskive inviterer barn og unge til å lære mer om den mangfoldige dragtradisjonen.",
+          "lat": 60.79758779402644,
+          "lng": 11.032096698315874
+        },
+        {
+          "title": "WAACKING",
+          "description": "Pose, pose, whack, pose, run, hit!",
+          "lat": 60.797514827760395,
+          "lng": 11.032149042119844
+        },
+        {
+          "title": "DET KOMMER AN PÅ ØYET SOM SER",
+          "description": "Siden starten i 2008 har Stoppested Verden årlig initiert kunstprosjekter i regionens barnehager.",
+          "lat": 60.79763157342137,
+          "lng": 11.031902279024694
+        },
+        {
+          "title": "DANCE HALL",
+          "description": "«Signal the Plane»! Er du klar for en skikkelig energi-boost?",
+          "lat": 60.79807490897996,
+          "lng": 11.030405161546172
+        },
+        {
+          "title": "LØVE OG VENNER",
+          "description": "Løven og hans venner er kunstnerens uttrykk for balansen mellom frislipp og kontroll i dagens samfunn.",
+          "lat": 60.79804567493395,
+          "lng": 11.029238908923512
+        },
+        {
+          "title": "NYSIRKUS",
+          "description": "Hvordan kan hatter fly? Hvor høyt kan du svinge en diablo?",
+          "lat": 60.79858473779487,
+          "lng": 11.028691679093619
+        },
+        {
+          "title": "MASKER",
+          "description": "I Benin transporteres bensin i plastkanner som er malt med røde og hvite striper.",
+          "lat": 60.7988135791248,
+          "lng": 11.028347698779438
+        }
+      ]
+    },
+    "aktivitet": {
+      "icon": "img/points/aktivitet.svg",
+      "color": "#FFDE17",
+      "markers": [
+        {
+          "title": "BARONG",
+          "description": "Utenfor Gamelan-verkstedet skal det danses!",
+          "lat": 60.79731842255215,
+          "lng": 11.033568504767405
+        },
+        {
+          "title": "KULTURBONAZA",
+          "description": "Hvem er du og hva er dine tradisjoner? Vår KULTURBONANZA er en arena hvor alle som vil kan vise sin kultur og hvem de er gjennom ulike aktiviteter på festivalen.",
+          "lat": 60.79858473963807,
+          "lng": 11.02898874960596
+        }
+      ]
+    },
+    "forestilling": {
+      "icon": "img/points/forestilling.svg",
+      "color": "#EE2A7B",
+      "markers": [
+        {
+          "title": "SULTANENS SØNN",
+          "description": "Den kjente sjøfarerfamilien Crovetto blir invitert til Sultanens rike.<br><br>Dag: spilles kun 5. juni <br><br>Tid: 12:00 + 14:00 <br><br>Varighet: Ca. 30 min. <br><br>Passer for: 0 – 99 år. <br><br>Merknad: Spilles på Bakgårdsscenen ",
+          "lat": 60.79862796612849,
+          "lng": 11.029035654545087
+        }
+      ]
+    },
+
+    "toalett": {
+      "icon": "img/points/toalett.svg",
+      "color": "#FFF",
+      "markers": [
+        {
+          "title": "Toalett",
+          "description": "Toaletter her",
+          "lat": 60.79756175056132,
+          "lng": 11.034861218111066
+        },
+        {
+          "title": "Toalett",
+          "description": "Toaletter her",
+          "lat": 60.797806661826996,
+          "lng": 11.029775726459755
         }
       ]
     }
