@@ -179,18 +179,17 @@ async function getData(infoWindow) {
           let web_location = item[key]["web_location"];
           let color = item[key]["color"];
 
-          item[key]["markers"].forEach((marker) => {
-            const mark = new Marker({
-              map: map,
-              position: { lat: marker.lat, lng: marker.lng },
-              title: marker.title,
+          const marker = item[key].markers.map((markerData, i) => {
+            const mark = new google.maps.Marker({
+              position: { lat: markerData.lat, lng: markerData.lng },
+              title: markerData.title,
               animation: google.maps.Animation.DROP,
+              map, // assuming you have a `map` variable referencing the Google Map
               icon: {
                 url: item[key].icon,
-                scaledSize: new google.maps.Size(markerSize, markerSize),
+                scaledSize: new google.maps.Size(30, 30),
               },
             });
-
             newData[key]["markers"].push(mark);
 
             mark.addListener("click", () => {
@@ -200,46 +199,29 @@ async function getData(infoWindow) {
               const str = key;
               const str2 = str.charAt(0).toUpperCase() + str.slice(1);
 
-              if (web_location) {
-                infoWindow.setContent(
-                  `<div id="content">
-                  <a href="` +
-                    web_location +
-                    `" style="text-decoration: none; font-weight: 600; color: #219EBC;"><h3>` +
-                    mark.getTitle() +
-                    `</h3></a>
-                  <p style="">` +
-                    marker.description +
-                    `</p>
-                  <div style="display: flex; justify-content: center; align-items: center;">
-                    <a href="` +
-                    web_location +
-                    `"><button id="more">Les mer</button></a>
-                  </div>
-                </div>`
-                );
-              } else {
-                infoWindow.setContent(
-                  `<div id="content">
+              infoWindow.setContent(
+                `<div id="content">
                   <div class="parent">
                   <img class="first" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5yBuaQ2kuWg9D11GzBsjcTc9PCxKm3r6Ur5FK3C4HKA&s" alt="cool" width="150" height="100"/>
                   <div class="second">
-                  <span class="tag">` +
-                    str2 +
-                    `</span>  
+                  <span class="tag" style="background-color: ` +
+                  item[key].color +
+                  `">` +
+                  str2 +
+                  `</span>  
                     <a href="` +
-                    marker.web_location +
-                    `" style="text-decoration: none; font-weight: 600;"><h3>` +
-                    mark.getTitle() +
-                    `</h3></a>
+                  marker.web_location +
+                  `" style="text-decoration: none; font-weight: 600;"><h3>` +
+                  mark.getTitle() +
+                  `</h3></a>
                   </div>
                   <div class="third">
-                  
-                  
+      
+      
                   <a href="` +
-                    marker.web_location +
-                    `">
-                    
+                  marker.web_location +
+                  `">
+      
                     <span class="material-symbols-outlined" id="more" style="font-size: 56px;">
                     chevron_right
                     </span>
@@ -247,15 +229,19 @@ async function getData(infoWindow) {
                   </div>
                     </div>
                 </div>`
-                );
-              }
+              );
               infoWindow.open(mark.getMap(), mark);
             });
 
             map.addListener("click", () => {
               infoWindow.close();
             });
+            return mark;
           });
+
+          new MarkerClusterer(map, newData[key]["markers"]);
+
+          item[key]["markers"].forEach((marker) => {});
           //setup markers
           const filterButton = document.createElement("button");
           const str = key;

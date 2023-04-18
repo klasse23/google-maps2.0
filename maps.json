@@ -143,10 +143,9 @@
         }
       ]
     },
-
     "toalett": {
       "icon": "img/points/toalett.svg",
-      "color": "#FFF",
+      "color": "#27FFE1",
       "markers": [
         {
           "title": "Toalett",
