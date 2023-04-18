@@ -8,7 +8,7 @@ body {
 }
 
 .title {
-  font-size: 50px;
+  font-size: 3.125rem;
   text-align: center;
   font-weight: 700;
   margin-top: 0;
@@ -28,7 +28,7 @@ body {
   font-weight: 600;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 62.5rem) {
   #map {
     height: 85vh;
     width: 85vw;
@@ -36,13 +36,59 @@ body {
   }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 46.875rem) {
   #map {
     height: 70vh;
     width: 100vw;
     border-radius: 1em;
     position: fixed;
+    transition: height 0.5s, width 0.5s, bottom 0.5s;
   }
+  
+  .gm-style-iw-tc {
+    display: none;
+  }
+
+  .gm-style .gm-style-iw-c {
+    position: fixed;
+    top: auto;
+    right: 0.625rem;
+    bottom: -40.36598493003229vh;
+    left: 0.625rem;
+    width: auto !important;
+    
+  }
+
+  #map:focus {
+    bottom: 3.125rem;
+  }
+
+  #map:focus ~ .gm-style .gm-style-iw-c {
+    bottom: 3.125rem;
+    transition: bottom 0.5s, right 0.5s;
+  }
+}
+
+@media screen and (max-width: 25rem) {
+  
+}
+
+.gm-style .gm-style-iw-d::-webkit-scrollbar-track,
+.gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
+.gm-style .gm-style-iw-c,
+.gm-style .gm-style-iw-t::after {
+  background: #f0f4df;
+}
+
+.content{
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
 }
 
 .parent {
@@ -53,8 +99,22 @@ body {
 }
 
 .first {
+  position: relative;
   grid-area: 3 / 2 / 4 / 3;
+  width: 100%;
+  max-width: 9.375rem;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+.first img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
 .second {
   grid-area: 3 / 3 / 4 / 4;
   display: flex;
@@ -65,25 +125,20 @@ body {
   color: rgb(20, 68, 50);
   font-size: larger;
   text-align: center;
-  margin-left: 0.8vw;
+  margin-left: 2vw;
 }
 
-.gm-style .gm-style-iw-d::-webkit-scrollbar-track,
-.gm-style .gm-style-iw-d::-webkit-scrollbar-track-piece,
-.gm-style .gm-style-iw-c,
-.gm-style .gm-style-iw-t::after {
-  background: #f0f4df;
-}
+
 
 .second a {
   color: black;
 }
 
 .tag {
-  padding: 7.5px;
+  padding: 0.469rem;
   background-color: #144432;
   color: #fff;
-  border-radius: 5px;
+  border-radius: 0.313rem;
   font-weight: 500;
   max-width: 9vw;
 }
@@ -101,12 +156,12 @@ body {
 .filter-button {
   border: none;
   color: white;
-  padding: 6px 10px;
+  padding: 0.375rem 0.625rem;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
+  font-size: 1rem;
+  margin: 0.25rem 0.125rem;
   cursor: pointer;
-  border-radius: 12px;
+  border-radius: 0.75rem;
 }

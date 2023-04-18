@@ -118,18 +118,11 @@ async function initMap() {
   const overlay = new USGSOverlay(bounds, image);
   overlay.setMap(map);
 
-  /*
-    FETCH
-  */
   try {
     getData(infoWindow);
   } catch (err) {
     console.log("Error when fetching overlay json: ", err);
   }
-
-  /*
-    Player Location
-  */
 
   document.addEventListener("DOMContentLoaded", () => {
     // Try HTML5 geolocation.
@@ -172,11 +165,10 @@ async function getData(infoWindow) {
       let markers = [];
 
       data.forEach((item) => {
-        
         Object.keys(item).forEach((key, index) => {
-
           let web_location = item[key]["web_location"];
           let color = item[key]["color"];
+          let currentWindowPosition;
 
           //getting the markers
           const marker = item[key].markers.map((markerData) => {
@@ -194,7 +186,6 @@ async function getData(infoWindow) {
 
             google.maps.event.addListenerOnce(map, "idle", function () {
               google.maps.event.addListener(marker, "click", function () {
-                map.setZoom(18);
                 map.setCenter(marker.getPosition());
                 infoWindow.close();
 
@@ -202,7 +193,9 @@ async function getData(infoWindow) {
 
                 const content = `<div id="content">
                 <div class="parent">
-                  <img class="first" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5yBuaQ2kuWg9D11GzBsjcTc9PCxKm3r6Ur5FK3C4HKA&s" alt="cool" width="150" height="100"/>
+                <div class="first">  
+                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5yBuaQ2kuWg9D11GzBsjcTc9PCxKm3r6Ur5FK3C4HKA&s" alt="cool" width="150" height="100"/>
+                </div>
                   <div class="second">
                     <span class="tag" style="background-color: ${item[key].color}">${category}</span>
                     <a href="${marker.web_location}" style="text-decoration: none; font-weight: 600;"><h3>${marker.title}</h3></a>
@@ -229,14 +222,10 @@ async function getData(infoWindow) {
             return marker;
           });
 
-          
-          
-          //if we click map, hide the current infoWindow
           google.maps.event.addListener(map, "click", function () {
             infoWindow.close();
           });
 
-          //setup markers
           const filterButton = document.createElement("button");
           const str = key;
           const str2 = str.charAt(0).toUpperCase() + str.slice(1);
@@ -270,20 +259,34 @@ async function getData(infoWindow) {
           map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(
             filterButton
           );
-
-          
         });
       });
 
-      console.log(markers);
+      //TODO: Fikse problemet når man drar, gjør slik at infoWindow følger etter kartet etter rundt 0.1 sekund
+      google.maps.event.addListener(map, "drag", function () {
+        if (
+          infoWindow &&
+          infoWindow.getMap() !== null &&
+          window.innerWidth <= 750 &&
+          infoWindow.getPosition() !== undefined &&
+          infoWindow.getPosition() !== null
+        ) {
+          console.log(
+            "InfoWindow: " + infoWindow.getPosition(),
+            "Map: " + map.getCenter()
+          );
+          infoWindow.setPosition(map.getCenter());
+        }else{
+          infoWindow.close();
+        }
+      });
 
+      // ? Legge til slik at dette er konfigurerbart i json filen? Slik at vi kan bytte "gridSizen" og "minimumClusterSize". Eventuelt bytte bildet som brukes for clusterer
       const clusterer = new MarkerClusterer(map, markers, {
         imagePath:
           "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
         gridSize: 50,
         minimumClusterSize: 2,
       });
-
-
     });
 }
