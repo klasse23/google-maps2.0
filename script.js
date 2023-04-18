@@ -11,14 +11,13 @@ async function initMap() {
   map = new Map(document.getElementById("map"), {
     zoom: 17,
     center: position,
-
   });
-  
+
   const bounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(60.79697, 11.02375),
     new google.maps.LatLng(60.79927, 11.03643)
   );
-  
+
   let image = "img/uten_bakgrunn.svg";
 
   // Add the custom overlay to the map
@@ -40,7 +39,7 @@ async function initMap() {
       this.div.style.borderStyle = "none";
       this.div.style.borderWidth = "0px";
       this.div.style.position = "absolute";
-      this.div.className = "map-encasing"
+      this.div.className = "map-encasing";
 
       // Create the img element and attach it to the div.
       const img = document.createElement("img");
@@ -48,11 +47,8 @@ async function initMap() {
       img.src = this.image;
       img.style.width = "100%";
       img.style.height = "100%";
-      img.style.position = "absolute"; // 
+      img.style.position = "absolute"; //
 
-      
-
-      
       this.div.appendChild(img);
 
       // Add the element to the "overlayLayer" pane.
@@ -62,7 +58,7 @@ async function initMap() {
     }
     draw() {
       const overlayProjection = this.getProjection();
-      
+
       const sw = overlayProjection.fromLatLngToDivPixel(
         this.bounds.getSouthWest()
       );
@@ -71,12 +67,11 @@ async function initMap() {
       );
 
       if (this.div) {
-       
         this.div.style.left = sw.x + "px";
         this.div.style.top = ne.y + "px";
         this.div.style.width = ne.x - sw.x + "px";
         this.div.style.height = sw.y - ne.y + "px";
-        this.div.style.transform = 'rotate(206.9deg)';
+        this.div.style.transform = "rotate(206.9deg)";
       }
     }
     /**
@@ -119,11 +114,9 @@ async function initMap() {
       }
     }
   }
-  
-  
+
   const overlay = new USGSOverlay(bounds, image);
   overlay.setMap(map);
-  
 
   /*
     FETCH
@@ -204,6 +197,8 @@ async function getData(infoWindow) {
               map.setZoom(18);
               map.setCenter(mark.getPosition());
               infoWindow.close();
+              const str = key;
+              const str2 = str.charAt(0).toUpperCase() + str.slice(1);
 
               if (web_location) {
                 infoWindow.setContent(
@@ -226,20 +221,32 @@ async function getData(infoWindow) {
               } else {
                 infoWindow.setContent(
                   `<div id="content">
-                <a href="` +
+                  <div class="parent">
+                  <img class="first" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5yBuaQ2kuWg9D11GzBsjcTc9PCxKm3r6Ur5FK3C4HKA&s" alt="cool" width="150" height="100"/>
+                  <div class="second">
+                  <span class="tag">` +
+                    str2 +
+                    `</span>  
+                    <a href="` +
                     marker.web_location +
-                    `" style="text-decoration: none; font-weight: 600; color: #219EBC;"><h3>` +
+                    `" style="text-decoration: none; font-weight: 600;"><h3>` +
                     mark.getTitle() +
                     `</h3></a>
-                <p style="">` +
-                    marker.description +
-                    `</p>
-                <div style="display: flex; justify-content: center; align-items: center;">
+                  </div>
+                  <div class="third">
+                  
+                  
                   <a href="` +
                     marker.web_location +
-                    `"><button id="more">Les mer</button></a>
-                </div>
-              </div>`
+                    `">
+                    
+                    <span class="material-symbols-outlined" id="more" style="font-size: 56px;">
+                    chevron_right
+                    </span>
+                    </a>
+                  </div>
+                    </div>
+                </div>`
                 );
               }
               infoWindow.open(mark.getMap(), mark);
