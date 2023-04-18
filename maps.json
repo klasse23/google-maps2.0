@@ -11,7 +11,8 @@
           "lat": 60.79769066081008,
           "lng": 11.034259089484898
         }
-      ]
+      ],
+      "shown": true
     },
     "konsert": {
       "icon": "img/points/konsert.svg",
@@ -24,7 +25,8 @@
           "lat": 60.79731023370046,
           "lng": 11.0339278431458
         }
-      ]
+      ],
+      "shown": true
     },
     "verksted": {
       "icon": "img/points/verksted.svg",
@@ -111,7 +113,8 @@
           "lat": 60.7988135791248,
           "lng": 11.028347698779438
         }
-      ]
+      ],
+      "shown": true
     },
     "aktivitet": {
       "icon": "img/points/aktivitet.svg",
@@ -129,7 +132,8 @@
           "lat": 60.79858473963807,
           "lng": 11.02898874960596
         }
-      ]
+      ],
+      "shown": true
     },
     "forestilling": {
       "icon": "img/points/forestilling.svg",
@@ -141,7 +145,8 @@
           "lat": 60.79862796612849,
           "lng": 11.029035654545087
         }
-      ]
+      ],
+      "shown": true
     },
     "toalett": {
       "icon": "img/points/toalett.svg",
@@ -159,7 +164,8 @@
           "lat": 60.797806661826996,
           "lng": 11.029775726459755
         }
-      ]
+      ],
+      "shown": true
     }
   }
 ]

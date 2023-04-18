@@ -168,19 +168,20 @@ async function getData(infoWindow) {
   fetch("maps.json")
     .then((response) => response.json())
     .then((data) => {
-      let newData = {};
+      const filterButtons = {};
+      let markers = [];
 
       data.forEach((item) => {
-        Object.keys(item).forEach((key) => {
-          newData[key] = {};
-          newData[key]["shown"] = true;
-          newData[key]["markers"] = [];
+        
+        Object.keys(item).forEach((key, index) => {
 
           let web_location = item[key]["web_location"];
           let color = item[key]["color"];
 
-          const marker = item[key].markers.map((markerData, i) => {
-            const mark = new google.maps.Marker({
+          //getting the markers
+          const marker = item[key].markers.map((markerData) => {
+            //for each marker, do this
+            const marker = new google.maps.Marker({
               position: { lat: markerData.lat, lng: markerData.lng },
               title: markerData.title,
               animation: google.maps.Animation.DROP,
@@ -190,58 +191,51 @@ async function getData(infoWindow) {
                 scaledSize: new google.maps.Size(30, 30),
               },
             });
-            newData[key]["markers"].push(mark);
 
-            mark.addListener("click", () => {
-              map.setZoom(18);
-              map.setCenter(mark.getPosition());
-              infoWindow.close();
-              const str = key;
-              const str2 = str.charAt(0).toUpperCase() + str.slice(1);
+            google.maps.event.addListenerOnce(map, "idle", function () {
+              google.maps.event.addListener(marker, "click", function () {
+                map.setZoom(18);
+                map.setCenter(marker.getPosition());
+                infoWindow.close();
 
-              infoWindow.setContent(
-                `<div id="content">
-                  <div class="parent">
+                const category = key.charAt(0).toUpperCase() + key.slice(1);
+
+                const content = `<div id="content">
+                <div class="parent">
                   <img class="first" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5yBuaQ2kuWg9D11GzBsjcTc9PCxKm3r6Ur5FK3C4HKA&s" alt="cool" width="150" height="100"/>
                   <div class="second">
-                  <span class="tag" style="background-color: ` +
-                  item[key].color +
-                  `">` +
-                  str2 +
-                  `</span>  
-                    <a href="` +
-                  marker.web_location +
-                  `" style="text-decoration: none; font-weight: 600;"><h3>` +
-                  mark.getTitle() +
-                  `</h3></a>
+                    <span class="tag" style="background-color: ${item[key].color}">${category}</span>
+                    <a href="${marker.web_location}" style="text-decoration: none; font-weight: 600;"><h3>${marker.title}</h3></a>
                   </div>
                   <div class="third">
-      
-      
-                  <a href="` +
-                  marker.web_location +
-                  `">
-      
-                    <span class="material-symbols-outlined" id="more" style="font-size: 56px;">
-                    chevron_right
-                    </span>
+                    <a href="${marker.web_location}">
+                      <span class="material-symbols-outlined" id="more" style="font-size: 56px;">
+                        chevron_right
+                      </span>
                     </a>
                   </div>
-                    </div>
-                </div>`
-              );
-              infoWindow.open(mark.getMap(), mark);
+                </div>
+              </div>`;
+
+                const str = key;
+                const str2 = str.charAt(0).toUpperCase() + str.slice(1);
+
+                infoWindow.setContent(content);
+                infoWindow.open(map, marker);
+              });
             });
 
-            map.addListener("click", () => {
-              infoWindow.close();
-            });
-            return mark;
+            markers.push(marker);
+            return marker;
           });
 
-          new MarkerClusterer(map, newData[key]["markers"]);
+          
+          
+          //if we click map, hide the current infoWindow
+          google.maps.event.addListener(map, "click", function () {
+            infoWindow.close();
+          });
 
-          item[key]["markers"].forEach((marker) => {});
           //setup markers
           const filterButton = document.createElement("button");
           const str = key;
@@ -250,29 +244,46 @@ async function getData(infoWindow) {
           filterButton.style.border = "2px solid " + color;
           filterButton.style.backgroundColor = color;
           filterButton.classList.add("filter-button");
-          map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(
-            filterButton
-          );
+
+          filterButtons[key] = { button: filterButton, index: index };
+
           filterButton.addEventListener("click", () => {
-            if (newData[key]["shown"]) {
+            const filterButtonData = filterButtons[key];
+
+            const shown = item[key].shown;
+
+            if (shown) {
               filterButton.classList.add("deactive");
               filterButton.style.backgroundColor = "#F0F0F0";
               infoWindow.close();
-              newData[key]["shown"] = false;
-              newData[key]["markers"].forEach((marker) => {
-                marker.setMap(null);
-              });
+              clusterer.removeMarkers(marker);
+
+              item[key].shown = false;
             } else {
               filterButton.classList.remove("deactive");
               filterButton.style.border = "2px solid " + color;
               filterButton.style.backgroundColor = color;
-              newData[key]["shown"] = true;
-              newData[key]["markers"].forEach((marker) => {
-                marker.setMap(map);
-              });
+              clusterer.addMarkers(marker);
+              item[key].shown = true;
             }
           });
+          map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(
+            filterButton
+          );
+
+          
         });
       });
+
+      console.log(markers);
+
+      const clusterer = new MarkerClusterer(map, markers, {
+        imagePath:
+          "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+        gridSize: 50,
+        minimumClusterSize: 2,
+      });
+
+
     });
 }
