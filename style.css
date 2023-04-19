@@ -44,7 +44,7 @@ body {
     position: fixed;
     transition: height 0.5s, width 0.5s, bottom 0.5s;
   }
-  
+
   .gm-style-iw-tc {
     display: none;
   }
@@ -56,7 +56,6 @@ body {
     bottom: -40.36598493003229vh;
     left: 0.625rem;
     width: auto !important;
-    
   }
 
   #map:focus {
@@ -70,7 +69,9 @@ body {
 }
 
 @media screen and (max-width: 25rem) {
-  
+  .tag {
+    min-width: 15vw;
+  }
 }
 
 .gm-style .gm-style-iw-d::-webkit-scrollbar-track,
@@ -80,7 +81,7 @@ body {
   background: #f0f4df;
 }
 
-.content{
+.content {
   user-select: none;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -127,8 +128,6 @@ body {
   text-align: center;
   margin-left: 2vw;
 }
-
-
 
 .second a {
   color: black;
