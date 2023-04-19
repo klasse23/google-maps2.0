@@ -7,7 +7,6 @@
         {
           "title": "No Mans Land",
           "web_location": "http://program.stoppestedverden.no/utstilling-no-mans-land/",
-          "description": "Fotoutstillingen No man’s land har dokumentert 12 mennesker som bor i Norge.",
           "lat": 60.79769066081008,
           "lng": 11.034259089484898
         }
@@ -166,6 +165,12 @@
         }
       ],
       "shown": true
+    }
+  },
+  {
+    "markers": {
+      "gridSize": 50,
+      "minimumClusterSize": 2
     }
   }
 ]

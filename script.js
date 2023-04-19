@@ -164,34 +164,34 @@ async function getData(infoWindow) {
       const filterButtons = {};
       let markers = [];
 
-      data.forEach((item) => {
-        Object.keys(item).forEach((key, index) => {
-          let web_location = item[key]["web_location"];
-          let color = item[key]["color"];
-          let currentWindowPosition;
+      let item = data[0];
+      Object.keys(item).forEach((key, index) => {
+        let web_location = item[key]["web_location"];
+        let color = item[key]["color"];
+        let currentWindowPosition;
 
-          //getting the markers
-          const marker = item[key].markers.map((markerData) => {
-            //for each marker, do this
-            const marker = new google.maps.Marker({
-              position: { lat: markerData.lat, lng: markerData.lng },
-              title: markerData.title,
-              animation: google.maps.Animation.DROP,
-              map, // assuming you have a `map` variable referencing the Google Map
-              icon: {
-                url: item[key].icon,
-                scaledSize: new google.maps.Size(30, 30),
-              },
-            });
+        //getting the markers
+        const marker = item[key].markers.map((markerData) => {
+          //for each marker, do this
+          const marker = new google.maps.Marker({
+            position: { lat: markerData.lat, lng: markerData.lng },
+            title: markerData.title,
+            animation: google.maps.Animation.DROP,
+            map, // assuming you have a `map` variable referencing the Google Map
+            icon: {
+              url: item[key].icon,
+              scaledSize: new google.maps.Size(30, 30),
+            },
+          });
 
-            google.maps.event.addListenerOnce(map, "idle", function () {
-              google.maps.event.addListener(marker, "click", function () {
-                map.setCenter(marker.getPosition());
-                infoWindow.close();
+          google.maps.event.addListenerOnce(map, "idle", function () {
+            google.maps.event.addListener(marker, "click", function () {
+              map.setCenter(marker.getPosition());
+              infoWindow.close();
 
-                const category = key.charAt(0).toUpperCase() + key.slice(1);
+              const category = key.charAt(0).toUpperCase() + key.slice(1);
 
-                const content = `<div id="content">
+              const content = `<div id="content">
                 <div class="parent">
                 <div class="first">  
                   <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5yBuaQ2kuWg9D11GzBsjcTc9PCxKm3r6Ur5FK3C4HKA&s" alt="cool" width="150" height="100"/>
@@ -210,56 +210,55 @@ async function getData(infoWindow) {
                 </div>
               </div>`;
 
-                const str = key;
-                const str2 = str.charAt(0).toUpperCase() + str.slice(1);
+              const str = key;
+              const str2 = str.charAt(0).toUpperCase() + str.slice(1);
 
-                infoWindow.setContent(content);
-                infoWindow.open(map, marker);
-              });
+              infoWindow.setContent(content);
+              infoWindow.open(map, marker);
             });
-
-            markers.push(marker);
-            return marker;
           });
 
-          google.maps.event.addListener(map, "click", function () {
-            infoWindow.close();
-          });
-
-          const filterButton = document.createElement("button");
-          const str = key;
-          const str2 = str.charAt(0).toUpperCase() + str.slice(1);
-          filterButton.textContent = str2;
-          filterButton.style.border = "2px solid " + color;
-          filterButton.style.backgroundColor = color;
-          filterButton.classList.add("filter-button");
-
-          filterButtons[key] = { button: filterButton, index: index };
-
-          filterButton.addEventListener("click", () => {
-            const filterButtonData = filterButtons[key];
-
-            const shown = item[key].shown;
-
-            if (shown) {
-              filterButton.classList.add("deactive");
-              filterButton.style.backgroundColor = "#F0F0F0";
-              infoWindow.close();
-              clusterer.removeMarkers(marker);
-
-              item[key].shown = false;
-            } else {
-              filterButton.classList.remove("deactive");
-              filterButton.style.border = "2px solid " + color;
-              filterButton.style.backgroundColor = color;
-              clusterer.addMarkers(marker);
-              item[key].shown = true;
-            }
-          });
-          map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(
-            filterButton
-          );
+          markers.push(marker);
+          return marker;
         });
+
+        google.maps.event.addListener(map, "click", function () {
+          infoWindow.close();
+        });
+
+        const filterButton = document.createElement("button");
+        const str = key;
+        const str2 = str.charAt(0).toUpperCase() + str.slice(1);
+        filterButton.textContent = str2;
+        filterButton.style.border = "2px solid " + color;
+        filterButton.style.backgroundColor = color;
+        filterButton.classList.add("filter-button");
+
+        filterButtons[key] = { button: filterButton, index: index };
+
+        filterButton.addEventListener("click", () => {
+          const filterButtonData = filterButtons[key];
+
+          const shown = item[key].shown;
+
+          if (shown) {
+            filterButton.classList.add("deactive");
+            filterButton.style.backgroundColor = "#F0F0F0";
+            infoWindow.close();
+            clusterer.removeMarkers(marker);
+
+            item[key].shown = false;
+          } else {
+            filterButton.classList.remove("deactive");
+            filterButton.style.border = "2px solid " + color;
+            filterButton.style.backgroundColor = color;
+            clusterer.addMarkers(marker);
+            item[key].shown = true;
+          }
+        });
+        map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(
+          filterButton
+        );
       });
 
       //TODO: Fikse problemet når man drar, gjør slik at infoWindow følger etter kartet etter rundt 0.1 sekund
@@ -276,17 +275,16 @@ async function getData(infoWindow) {
             "Map: " + map.getCenter()
           );
           infoWindow.setPosition(map.getCenter());
-        }else{
+        } else {
           infoWindow.close();
         }
       });
 
-      // ? Legge til slik at dette er konfigurerbart i json filen? Slik at vi kan bytte "gridSizen" og "minimumClusterSize". Eventuelt bytte bildet som brukes for clusterer
       const clusterer = new MarkerClusterer(map, markers, {
         imagePath:
           "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-        gridSize: 50,
-        minimumClusterSize: 2,
+        gridSize: data[1]["markers"].gridSize,
+        minimumClusterSize: data[1]["markers"].minimumClusterSize,
       });
     });
 }

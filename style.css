@@ -26,6 +26,8 @@ body {
   border-radius: 1em;
   color: black;
   font-weight: 600;
+  user-select: none;
+  transition: all 0.3s ease-in-out;
 }
 
 @media screen and (max-width: 62.5rem) {
@@ -71,6 +73,12 @@ body {
 @media screen and (max-width: 25rem) {
   .tag {
     min-width: 15vw;
+  }
+}
+
+@media screen and (max-width: 23.063rem) {
+  .first img {
+    display: none;
   }
 }
 
