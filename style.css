@@ -190,6 +190,24 @@ body {
   color: #194836;
 }
 
+.filter-wrapper {
+  margin: 0 1rem;
+  max-width: 600px;
+  margin: auto;
+}
+
+.filterMain {
+  width: 100%;
+  margin: 5vh auto;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
 .filter-button {
   border: none;
   color: white;

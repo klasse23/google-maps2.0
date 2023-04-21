@@ -135,7 +135,7 @@ function playerLocation(icon, size) {
   playerLocationSpan.innerText = "near_me";
 
   playerLocationBtn.appendChild(playerLocationSpan);
-  map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(playerLocationBtn);
+  map.controls[google.maps.ControlPosition.TOP_RIGHT].push(playerLocationBtn);
 
   playerLocationBtn.addEventListener("click", () => {
     // Try HTML5 geolocation.
@@ -195,8 +195,13 @@ async function getData(infoWindow) {
       let markers = [];
 
       let item = data[1];
+      const filterWrapper = document.createElement("div");
+      filterWrapper.classList.add("filter-wrapper");
+
       const filterDiv = document.createElement("div");
       filterDiv.classList.add("filterMain");
+
+      filterWrapper.appendChild(filterDiv);
 
       Object.keys(item).forEach((key, index) => {
         let color = item[key]["color"];
@@ -305,7 +310,9 @@ async function getData(infoWindow) {
         });
       });
 
-      map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(filterDiv);
+      map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(
+        filterWrapper
+      );
 
       //TODO: Legge til slik at vi kan vise hvor spilleren er.
       playerLocation(data[0]["player"].iconPath, data[0]["player"].iconSize);
