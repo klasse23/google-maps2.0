@@ -165,6 +165,9 @@ async function getData(infoWindow) {
       let markers = [];
 
       let item = data[0];
+      const filterDiv = document.createElement("div");
+      filterDiv.classList.add("filterMain");
+
       Object.keys(item).forEach((key, index) => {
         let web_location = item[key]["web_location"];
         let color = item[key]["color"];
@@ -234,6 +237,8 @@ async function getData(infoWindow) {
         filterButton.style.backgroundColor = color;
         filterButton.classList.add("filter-button");
 
+        filterDiv.appendChild(filterButton);
+
         filterButtons[key] = { button: filterButton, index: index };
 
         filterButton.addEventListener("click", () => {
@@ -256,10 +261,9 @@ async function getData(infoWindow) {
             item[key].shown = true;
           }
         });
-        map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(
-          filterButton
-        );
       });
+
+      map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(filterDiv);
 
       //TODO: Fikse problemet når man drar, gjør slik at infoWindow følger etter kartet etter rundt 0.1 sekund
       google.maps.event.addListener(map, "drag", function () {
@@ -281,6 +285,7 @@ async function getData(infoWindow) {
       });
 
       const clusterer = new MarkerClusterer(map, markers, {
+        //TODO: Gjøre slik at de kan endre ikonet her.
         imagePath:
           "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
         gridSize: data[1]["markers"].gridSize,

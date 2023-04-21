@@ -120,6 +120,10 @@ body {
   background: #f0f4df;
 }
 
+.filterMain {
+  overflow-x: scroll;
+}
+
 .content {
   user-select: none;
   -webkit-user-select: none;
