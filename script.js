@@ -2,7 +2,7 @@ let map;
 const { Map } = await google.maps.importLibrary("maps");
 const { Marker } = await google.maps.importLibrary("marker");
 
-const markerSize = 50; // This resizes both x and y
+const markerSize = 50;
 
 async function initMap() {
   const position = { lat: 60.797912, lng: 11.029991 };
@@ -20,7 +20,6 @@ async function initMap() {
 
   let image = "img/uten_bakgrunn.svg";
 
-  // Add the custom overlay to the map
   class USGSOverlay extends google.maps.OverlayView {
     bounds;
     image;
@@ -164,7 +163,7 @@ async function getData(infoWindow) {
       const filterButtons = {};
       let markers = [];
 
-      let item = data[0];
+      let item = data[1];
       const filterDiv = document.createElement("div");
       filterDiv.classList.add("filterMain");
 
@@ -173,9 +172,7 @@ async function getData(infoWindow) {
         let color = item[key]["color"];
         let currentWindowPosition;
 
-        //getting the markers
         const marker = item[key].markers.map((markerData) => {
-          //for each marker, do this
           const marker = new google.maps.Marker({
             position: { lat: markerData.lat, lng: markerData.lng },
             title: markerData.title,
@@ -197,14 +194,24 @@ async function getData(infoWindow) {
               const content = `<div id="content">
                 <div class="parent">
                 <div class="first">  
-                  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5yBuaQ2kuWg9D11GzBsjcTc9PCxKm3r6Ur5FK3C4HKA&s" alt="cool" width="150" height="100"/>
+                ${
+                  markerData.thumbnail
+                    ? `<img src="${markerData.thumbnail}" alt="cool" width="150" height="100"/>`
+                    : ""
+                }
                 </div>
                   <div class="second">
-                    <span class="tag" style="background-color: ${item[key].color}">${category}</span>
-                    <a href="${marker.web_location}" style="text-decoration: none; font-weight: 600;"><h3>${marker.title}</h3></a>
+                    <span class="tag" style="background-color: ${
+                      item[key].color
+                    }">${category}</span>
+                    <a href="${
+                      markerData.web_location
+                    }" style="text-decoration: none; font-weight: 600;"><h3>${
+                marker.title
+              }</h3></a>
                   </div>
                   <div class="third">
-                    <a href="${marker.web_location}">
+                    <a href="${markerData.web_location}">
                       <span class="material-symbols-outlined" id="more" style="font-size: 56px;">
                         chevron_right
                       </span>
@@ -286,10 +293,9 @@ async function getData(infoWindow) {
 
       const clusterer = new MarkerClusterer(map, markers, {
         //TODO: Gjøre slik at de kan endre ikonet her.
-        imagePath:
-          "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
-        gridSize: data[1]["markers"].gridSize,
-        minimumClusterSize: data[1]["markers"].minimumClusterSize,
+        imagePath: data[0]["markers"].imagePath,
+        gridSize: data[0]["markers"].gridSize,
+        minimumClusterSize: data[0]["markers"].minimumClusterSize,
       });
     });
 }
