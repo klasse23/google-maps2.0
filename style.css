@@ -197,15 +197,16 @@ body {
 }
 
 .filterMain {
-  width: 100%;
-  margin: 5vh auto;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  color: white;
-
-  display: flex;
-  align-items: center;
   position: relative;
+  width: 100%;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  transition: all 0.2s;
+  transform: scale(0.98);
+  will-change: transform;
+  user-select: none;
+  cursor: pointer;
 }
 
 .filter-button {
