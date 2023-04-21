@@ -11,6 +11,7 @@ async function initMap() {
   map = new Map(document.getElementById("map"), {
     zoom: 17,
     center: position,
+    fullscreenControl: false,
   });
 
   const bounds = new google.maps.LatLngBounds(
@@ -122,9 +123,23 @@ async function initMap() {
   } catch (err) {
     console.log("Error when fetching overlay json: ", err);
   }
+}
 
-  document.addEventListener("DOMContentLoaded", () => {
+function playerLocation(icon, size) {
+  let infoWindow = new google.maps.InfoWindow();
+  const playerLocationBtn = document.createElement("button");
+  playerLocationBtn.classList.add("playerLocationBtn");
+
+  const playerLocationSpan = document.createElement("span");
+  playerLocationSpan.classList.add("material-symbols-outlined");
+  playerLocationSpan.innerText = "near_me";
+
+  playerLocationBtn.appendChild(playerLocationSpan);
+  map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(playerLocationBtn);
+
+  playerLocationBtn.addEventListener("click", () => {
     // Try HTML5 geolocation.
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -132,6 +147,22 @@ async function initMap() {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           };
+
+          let marker = new google.maps.Marker({
+            position: pos,
+            map,
+            icon: {
+              url: icon,
+              scaledSize: new google.maps.Size(size, size),
+            },
+          });
+
+          marker.addListener("click", function () {
+            infoWindow.setContent("You are here");
+            infoWindow.open(map, marker);
+          });
+
+          map.setCenter(pos);
         },
         () => {
           handleLocationError(true, infoWindow, map.getCenter());
@@ -275,6 +306,9 @@ async function getData(infoWindow) {
       });
 
       map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(filterDiv);
+
+      //TODO: Legge til slik at vi kan vise hvor spilleren er.
+      playerLocation(data[0]["player"].iconPath, data[0]["player"].iconSize);
 
       //TODO: Fikse problemet når man drar, gjør slik at infoWindow følger etter kartet etter rundt 0.1 sekund
       google.maps.event.addListener(map, "drag", function () {

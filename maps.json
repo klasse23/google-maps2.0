@@ -4,6 +4,10 @@
       "gridSize": 50,
       "minimumClusterSize": 2,
       "imagePath": "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
+    },
+    "player": {
+      "iconPath": "img/points/utstilling.svg",
+      "iconSize": 25
     }
   },
   {
