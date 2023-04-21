@@ -168,7 +168,6 @@ async function getData(infoWindow) {
       filterDiv.classList.add("filterMain");
 
       Object.keys(item).forEach((key, index) => {
-        let web_location = item[key]["web_location"];
         let color = item[key]["color"];
         let currentWindowPosition;
 
@@ -204,24 +203,29 @@ async function getData(infoWindow) {
                     <span class="tag" style="background-color: ${
                       item[key].color
                     }">${category}</span>
-                    <a href="${
+                    ${
                       markerData.web_location
-                    }" style="text-decoration: none; font-weight: 600;"><h3>${
-                marker.title
-              }</h3></a>
+                        ? `<a href="${markerData.web_location}" style="text-decoration: none; font-weight: 600;"><h3>${marker.title}</h3></a>`
+                        : `<h3>${marker.title}</h3>`
+                    }
                   </div>
                   <div class="third">
-                    <a href="${markerData.web_location}">
+                  ${
+                    markerData.web_location
+                      ? `<a href="${markerData.web_location}">
                       <span class="material-symbols-outlined" id="more" style="font-size: 56px;">
                         chevron_right
                       </span>
-                    </a>
+                    </a>`
+                      : `<span class="material-symbols-outlined" id="more" style="font-size: 56px;">
+                      chevron_right
+                    </span>`
+                  }  
+                  
+                  
                   </div>
                 </div>
               </div>`;
-
-              const str = key;
-              const str2 = str.charAt(0).toUpperCase() + str.slice(1);
 
               infoWindow.setContent(content);
               infoWindow.open(map, marker);
@@ -292,7 +296,6 @@ async function getData(infoWindow) {
       });
 
       const clusterer = new MarkerClusterer(map, markers, {
-        //TODO: Gjøre slik at de kan endre ikonet her.
         imagePath: data[0]["markers"].imagePath,
         gridSize: data[0]["markers"].gridSize,
         minimumClusterSize: data[0]["markers"].minimumClusterSize,

@@ -76,7 +76,7 @@ body {
 
 @media screen and (max-width: 29.875rem) {
   .gm-style .gm-style-iw-c {
-    bottom: -46.36598493003229vh;
+    bottom: -38.36598493003229vh;
   }
 }
 
@@ -96,7 +96,7 @@ body {
   }
 
   .gm-style .gm-style-iw-c {
-    bottom: -44.36598493003229vh;
+    bottom: -37.36598493003229vh;
   }
 }
 
@@ -118,10 +118,6 @@ body {
 .gm-style .gm-style-iw-c,
 .gm-style .gm-style-iw-t::after {
   background: #f0f4df;
-}
-
-.filterMain {
-  overflow-x: scroll;
 }
 
 .content {
