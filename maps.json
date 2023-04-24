@@ -1,0 +1,187 @@
+[
+  {
+    "markers": {
+      "gridSize": 50,
+      "minimumClusterSize": 2,
+      "imagePath": "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
+    },
+    "player": {
+      "iconPath": "img/points/utstilling.svg",
+      "iconSize": 25
+    }
+  },
+  {
+    "utstilling": {
+      "icon": "img/points/utstilling.svg",
+      "color": "#27AAE1",
+      "markers": [
+        {
+          "title": "No Mans Land",
+
+          "web_location": "http://program.stoppestedverden.no/utstilling-no-mans-land/",
+
+          "lat": 60.79769066081008,
+          "lng": 11.034259089484898
+        }
+      ],
+      "shown": true
+    },
+    "konsert": {
+      "icon": "img/points/konsert.svg",
+      "color": "#262262",
+      "markers": [
+        {
+          "title": "KOTO",
+          "thumbnail": "https://uca8931e6482bb572125751e9511.previews.dropboxusercontent.com/p/thumb/AB7lcFEV7Vt2Td70Ma7hUhgYrKoT2Xt0Yrpjc72yDapNExWK7686rapcSrahf_yW_EVOjjmH6CmOz7Wmc6fhsDmPjDwTJeticbomtyvAvQL8IvVcDq6Vv_PMeFKs9CWVNa79zR5zoUK9_8mVaxABmx-uC4HSlyxZ-mJzo12BD9IvzKoHo6Me9iV1I5qj9hwRSkl2Av48JdQ9u756zJQFOJfiEAdbw1sulOXRm_HaE_EPBcwNCajMmpFDP0gSFVJMZCAmj0gw9PkjTAjtCY7mgfw8I1jj2qAl427JCF0OPsPm94A0DJNHCjpQIsqzua1LhCGAxrBwMzXc9864XEJwrlHhWoldg0SDmQ_msBdAjBh97DkjU5LMQ0LPF0vbbXQneHQ/p.jpeg",
+
+          "web_location": "http://program.stoppestedverden.no/41-konsert-koto-japan/",
+
+          "lat": 60.79731023370046,
+          "lng": 11.0339278431458
+        }
+      ],
+      "shown": true
+    },
+    "verksted": {
+      "icon": "img/points/verksted.svg",
+
+      "color": "#39B54A",
+      "markers": [
+        {
+          "title": "Verdenskappe | SY-DEN",
+
+          "lat": 60.797686653169954,
+          "lng": 11.033716991795927
+        },
+        {
+          "title": "HÅP I EN TRÅD",
+
+          "web_location": "http://program.stoppestedverden.no/hap-i-en-trad/",
+
+          "lat": 60.79752529365576,
+          "lng": 11.034208346834637
+        },
+        {
+          "title": "KABUKI",
+
+          "web_location": "http://program.stoppestedverden.no/verksted-dans-kabuki-japan/",
+
+          "lat": 60.79734654264593,
+          "lng": 11.033733209655681
+        },
+        {
+          "title": "GAMELAN",
+
+          "lat": 60.7973846076765,
+          "lng": 11.033376991440957
+        },
+        {
+          "title": "GIGANTAR",
+
+          "lat": 60.797356264095534,
+          "lng": 11.032703871047845
+        },
+        {
+          "title": "NYSIRKUS",
+
+          "lat": 60.797219901142924,
+          "lng": 11.032877029628875
+        },
+        {
+          "title": "WORLD OF DRAG",
+
+          "lat": 60.79758779402644,
+          "lng": 11.032096698315874
+        },
+        {
+          "title": "WAACKING",
+
+          "lat": 60.797514827760395,
+          "lng": 11.032149042119844
+        },
+        {
+          "title": "DET KOMMER AN PÅ ØYET SOM SER",
+
+          "lat": 60.79763157342137,
+          "lng": 11.031902279024694
+        },
+        {
+          "title": "DANCE HALL",
+
+          "lat": 60.79807490897996,
+          "lng": 11.030405161546172
+        },
+        {
+          "title": "LØVE OG VENNER",
+
+          "lat": 60.79804567493395,
+          "lng": 11.029238908923512
+        },
+        {
+          "title": "NYSIRKUS",
+
+          "lat": 60.79858473779487,
+          "lng": 11.028691679093619
+        },
+        {
+          "title": "MASKER",
+
+          "lat": 60.7988135791248,
+          "lng": 11.028347698779438
+        }
+      ],
+      "shown": true
+    },
+    "aktivitet": {
+      "icon": "img/points/aktivitet.svg",
+      "color": "#FFDE17",
+      "markers": [
+        {
+          "title": "BARONG",
+
+          "lat": 60.79731842255215,
+          "lng": 11.033568504767405
+        },
+        {
+          "title": "KULTURBONAZA",
+
+          "lat": 60.79858473963807,
+          "lng": 11.02898874960596
+        }
+      ],
+      "shown": true
+    },
+    "forestilling": {
+      "icon": "img/points/forestilling.svg",
+      "color": "#EE2A7B",
+      "markers": [
+        {
+          "title": "SULTANENS SØNN",
+
+          "lat": 60.79862796612849,
+          "lng": 11.029035654545087
+        }
+      ],
+      "shown": true
+    },
+    "toalett": {
+      "icon": "img/points/toalett.svg",
+      "color": "#27FFE1",
+      "markers": [
+        {
+          "title": "Toalett",
+
+          "lat": 60.79756175056132,
+          "lng": 11.034861218111066
+        },
+        {
+          "title": "Toalett",
+
+          "lat": 60.797806661826996,
+          "lng": 11.029775726459755
+        }
+      ],
+      "shown": true
+    }
+  }
+]
