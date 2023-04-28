@@ -33,7 +33,7 @@ body {
 @media screen and (max-width: 62.5rem) {
   #map {
     height: 85vh;
-    width: 85vw;
+    width: 100%;
     border-radius: 1em;
   }
 }
