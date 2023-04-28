@@ -22,7 +22,7 @@ body {
 
 #map {
   height: 85vh;
-  width: 75vw;
+  width: 100%;
   border-radius: 1em;
   color: black;
   font-weight: 600;
