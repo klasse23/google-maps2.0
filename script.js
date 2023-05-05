@@ -296,6 +296,7 @@ async function getData(infoWindow) {
           if (shown) {
             filterButton.classList.add("deactive");
             filterButton.style.backgroundColor = "#F0F0F0";
+            filterButton.style.color = "black"
             infoWindow.close();
             clusterer.removeMarkers(marker);
 
@@ -304,13 +305,14 @@ async function getData(infoWindow) {
             filterButton.classList.remove("deactive");
             filterButton.style.border = "2px solid " + color;
             filterButton.style.backgroundColor = color;
+            filterButton.style.color = "white";
             clusterer.addMarkers(marker);
             item[key].shown = true;
           }
         });
       });
 
-      map.controls[google.maps.ControlPosition.BOTTOM_CENTER].push(
+      map.controls[google.maps.ControlPosition.LEFT_CENTER].push(
         filterWrapper
       );
 

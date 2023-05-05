@@ -191,15 +191,13 @@ body {
 }
 
 .filter-wrapper {
-  margin: 0 1rem;
   max-width: 600px;
-  margin: auto;
 }
 
 .filterMain {
   position: relative;
   width: 100%;
-  overflow-x: scroll;
+  overflow-x: hidden;
   overflow-y: hidden;
   white-space: nowrap;
   transition: all 0.2s;
@@ -208,14 +206,23 @@ body {
   user-select: none;
   cursor: pointer;
 }
+@media screen and (max-width: 215px) {
+  .filterMain {
+      display: none;
+  }
+  .playerLocationBtn {
+      display: none;
+  }
+}
 
 .filter-button {
   border: none;
   color: white;
-  padding: 0.375rem 0.625rem;
+  padding: 0.015rem 0.625rem;
+  min-width: 103px;
   text-align: center;
   text-decoration: none;
-  display: inline-block;
+  display: block;
   font-size: 1rem;
   margin: 0.25rem 0.125rem;
   cursor: pointer;
