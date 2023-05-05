@@ -1,8 +1,6 @@
 body {
   background: #333;
   color: white;
-  font-family: "Roboto", sans-serif !important;
-  overflow: hidden;
   margin: 0;
   padding: 0;
 }
@@ -208,10 +206,10 @@ body {
 }
 @media screen and (max-width: 215px) {
   .filterMain {
-      display: none;
+    display: none;
   }
   .playerLocationBtn {
-      display: none;
+    display: none;
   }
 }
 

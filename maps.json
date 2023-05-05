@@ -1,8 +1,8 @@
 [
   {
     "markers": {
-      "gridSize": 50,
-      "minimumClusterSize": 2,
+      "gridSize": 40,
+      "minimumClusterSize": 3,
       "imagePath": "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
     },
     "player": {
