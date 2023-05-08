@@ -17,6 +17,7 @@
       "markers": [
         {
           "title": "No Mans Land",
+          "description": "Hallooo",
 
           "web_location": "http://program.stoppestedverden.no/utstilling-no-mans-land/",
 
@@ -32,6 +33,8 @@
       "markers": [
         {
           "title": "KOTO",
+          "description": "Hallooo",
+
           "thumbnail": "https://uca8931e6482bb572125751e9511.previews.dropboxusercontent.com/p/thumb/AB7lcFEV7Vt2Td70Ma7hUhgYrKoT2Xt0Yrpjc72yDapNExWK7686rapcSrahf_yW_EVOjjmH6CmOz7Wmc6fhsDmPjDwTJeticbomtyvAvQL8IvVcDq6Vv_PMeFKs9CWVNa79zR5zoUK9_8mVaxABmx-uC4HSlyxZ-mJzo12BD9IvzKoHo6Me9iV1I5qj9hwRSkl2Av48JdQ9u756zJQFOJfiEAdbw1sulOXRm_HaE_EPBcwNCajMmpFDP0gSFVJMZCAmj0gw9PkjTAjtCY7mgfw8I1jj2qAl427JCF0OPsPm94A0DJNHCjpQIsqzua1LhCGAxrBwMzXc9864XEJwrlHhWoldg0SDmQ_msBdAjBh97DkjU5LMQ0LPF0vbbXQneHQ/p.jpeg",
 
           "web_location": "http://program.stoppestedverden.no/41-konsert-koto-japan/",
@@ -49,12 +52,14 @@
       "markers": [
         {
           "title": "Verdenskappe | SY-DEN",
+          "description": "Hallooo",
 
           "lat": 60.797686653169954,
           "lng": 11.033716991795927
         },
         {
           "title": "HÅP I EN TRÅD",
+          "description": "Hallooo",
 
           "web_location": "http://program.stoppestedverden.no/hap-i-en-trad/",
 
@@ -63,6 +68,7 @@
         },
         {
           "title": "KABUKI",
+          "description": "Hallooo",
 
           "web_location": "http://program.stoppestedverden.no/verksted-dans-kabuki-japan/",
 
@@ -71,60 +77,70 @@
         },
         {
           "title": "GAMELAN",
+          "description": "Hallooo",
 
           "lat": 60.7973846076765,
           "lng": 11.033376991440957
         },
         {
           "title": "GIGANTAR",
+          "description": "Hallooo",
 
           "lat": 60.797356264095534,
           "lng": 11.032703871047845
         },
         {
           "title": "NYSIRKUS",
+          "description": "Hallooo",
 
           "lat": 60.797219901142924,
           "lng": 11.032877029628875
         },
         {
           "title": "WORLD OF DRAG",
+          "description": "Hallooo",
 
           "lat": 60.79758779402644,
           "lng": 11.032096698315874
         },
         {
           "title": "WAACKING",
+          "description": "Hallooo",
 
           "lat": 60.797514827760395,
           "lng": 11.032149042119844
         },
         {
           "title": "DET KOMMER AN PÅ ØYET SOM SER",
+          "description": "Hallooo",
 
           "lat": 60.79763157342137,
           "lng": 11.031902279024694
         },
         {
           "title": "DANCE HALL",
+          "description": "Hallooo",
 
           "lat": 60.79807490897996,
           "lng": 11.030405161546172
         },
         {
           "title": "LØVE OG VENNER",
+          "description": "Hallooo",
 
           "lat": 60.79804567493395,
           "lng": 11.029238908923512
         },
         {
           "title": "NYSIRKUS",
+          "description": "Hallooo",
 
           "lat": 60.79858473779487,
           "lng": 11.028691679093619
         },
         {
           "title": "MASKER",
+          "description": "Hallooo",
 
           "lat": 60.7988135791248,
           "lng": 11.028347698779438
@@ -138,12 +154,14 @@
       "markers": [
         {
           "title": "BARONG",
+          "description": "Hallooo",
 
           "lat": 60.79731842255215,
           "lng": 11.033568504767405
         },
         {
           "title": "KULTURBONAZA",
+          "description": "Hallooo",
 
           "lat": 60.79858473963807,
           "lng": 11.02898874960596
@@ -157,6 +175,7 @@
       "markers": [
         {
           "title": "SULTANENS SØNN",
+          "description": "Hallooo",
 
           "lat": 60.79862796612849,
           "lng": 11.029035654545087
@@ -166,16 +185,19 @@
     },
     "toalett": {
       "icon": "img/points/toalett.svg",
+
       "color": "#27FFE1",
       "markers": [
         {
           "title": "Toalett",
+          "description": "Hallooo",
 
           "lat": 60.79756175056132,
           "lng": 11.034861218111066
         },
         {
           "title": "Toalett",
+          "description": "Hallooo",
 
           "lat": 60.797806661826996,
           "lng": 11.029775726459755
