@@ -222,49 +222,19 @@ async function getData(infoWindow) {
           google.maps.event.addListenerOnce(map, "idle", function () {
             google.maps.event.addListener(marker, "click", function () {
               map.setCenter(marker.getPosition());
-              infoWindow.close();
 
               const category = key.charAt(0).toUpperCase() + key.slice(1);
 
-              const content = `<div id="content">
-                <div class="parent">
-                <div class="first">  
-                ${
-                  markerData.thumbnail
-                    ? `<img src="${markerData.thumbnail}" alt="cool" width="150" height="100"/>`
-                    : ""
-                }
-                </div>
-                  <div class="second">
-                    <span class="tag" style="background-color: ${
-                      item[key].color
-                    }">${category}</span>
-                    ${
-                      markerData.web_location
-                        ? `<a href="${markerData.web_location}" style="text-decoration: none; font-weight: 600;"><h3>${marker.title}</h3></a>`
-                        : `<h3>${marker.title}</h3>`
-                    }
-                  </div>
-                  <div class="third">
-                  ${
-                    markerData.web_location
-                      ? `<a href="${markerData.web_location}">
-                      <span class="material-symbols-outlined" id="more" style="font-size: 56px;">
-                        chevron_right
-                      </span>
-                    </a>`
-                      : `<span class="material-symbols-outlined" id="more" style="font-size: 56px;">
-                      chevron_right
-                    </span>`
-                  }  
-                  
-                  
-                  </div>
-                </div>
-              </div>`;
+              document
+                .getElementById("infoWindowCustom")
+                .classList.remove("hidden");
+              document.getElementById("infoWindowTitle").innerText =
+                markerData.title;
+              document.getElementById("infoWindowDescription").innerText =
+                markerData.description;
 
-              infoWindow.setContent(content);
-              infoWindow.open(map, marker);
+              document.getElementById("infoWindowReadMore").href =
+                markerData.web_location ? markerData.web_location : "#";
             });
           });
 
@@ -273,7 +243,7 @@ async function getData(infoWindow) {
         });
 
         google.maps.event.addListener(map, "click", function () {
-          infoWindow.close();
+          document.getElementById("infoWindowCustom").classList.add("hidden");
         });
 
         const filterButton = document.createElement("button");
@@ -296,8 +266,7 @@ async function getData(infoWindow) {
           if (shown) {
             filterButton.classList.add("deactive");
             filterButton.style.backgroundColor = "#F0F0F0";
-            filterButton.style.color = "black"
-            infoWindow.close();
+            filterButton.style.color = "black";
             clusterer.removeMarkers(marker);
 
             item[key].shown = false;
@@ -312,36 +281,20 @@ async function getData(infoWindow) {
         });
       });
 
-      map.controls[google.maps.ControlPosition.LEFT_CENTER].push(
-        filterWrapper
-      );
+      map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterWrapper);
 
       //TODO: Legge til slik at vi kan vise hvor spilleren er.
       playerLocation(data[0]["player"].iconPath, data[0]["player"].iconSize);
 
       //TODO: Fikse problemet når man drar, gjør slik at infoWindow følger etter kartet etter rundt 0.1 sekund
       google.maps.event.addListener(map, "drag", function () {
-        if (
-          infoWindow &&
-          infoWindow.getMap() !== null &&
-          window.innerWidth <= 750 &&
-          infoWindow.getPosition() !== undefined &&
-          infoWindow.getPosition() !== null
-        ) {
-          console.log(
-            "InfoWindow: " + infoWindow.getPosition(),
-            "Map: " + map.getCenter()
-          );
-          infoWindow.setPosition(map.getCenter());
-        } else {
-          infoWindow.close();
-        }
-      });
+        document.getElementById("infoWindowCustom").classList.add("hidden");
 
-      const clusterer = new MarkerClusterer(map, markers, {
-        imagePath: data[0]["markers"].imagePath,
-        gridSize: data[0]["markers"].gridSize,
-        minimumClusterSize: data[0]["markers"].minimumClusterSize,
+        const clusterer = new MarkerClusterer(map, markers, {
+          imagePath: data[0]["markers"].imagePath,
+          gridSize: data[0]["markers"].gridSize,
+          minimumClusterSize: data[0]["markers"].minimumClusterSize,
+        });
       });
     });
 }
@@ -379,3 +332,90 @@ function sliderMain() {
     });
   }, 1000);
 }
+
+function createInfoWindow() {
+  const infoWindow = document.createElement("div");
+  infoWindow.setAttribute("id", "infoWindowCustom");
+  infoWindow.classList.add("infoWindow");
+  infoWindow.classList.add("hidden");
+
+  const infoWindowContent = document.createElement("div");
+  infoWindowContent.classList.add("infoWindowContent");
+
+  const infoWindowDropdown = document.createElement("button");
+  infoWindowDropdown.classList.add("infoWindowDropdown");
+
+  const infoWindowDropdownIcon = document.createElement("span");
+  infoWindowDropdownIcon.classList.add("material-symbols-outlined");
+  infoWindowDropdownIcon.innerText = "expand_more";
+
+  infoWindowDropdown.appendChild(infoWindowDropdownIcon);
+
+  const infoWindowHeader = document.createElement("div");
+  infoWindowHeader.classList.add("infoWindowHeader");
+
+  const infoWindowBody = document.createElement("div");
+  infoWindowBody.classList.add("infoWindowBody");
+
+  const infoWindowTitle = document.createElement("h3");
+  infoWindowTitle.classList.add("infoWindowTitle");
+  infoWindowTitle.setAttribute("id", "infoWindowTitle");
+  infoWindowTitle.innerText = "Hello World";
+
+  const infoWindowDescription = document.createElement("p");
+  infoWindowDescription.setAttribute("id", "infoWindowDescription");
+  infoWindowDescription.classList.add("infoWindowDescription");
+  infoWindowDescription.innerText = "This is just a description.";
+
+  const images = document.createElement("div");
+  images.classList.add("images");
+
+  const image1 = document.createElement("img");
+  image1.src = "https://www.w3schools.com/howto/img_snow_wide.jpg";
+
+  const image2 = document.createElement("img");
+  image2.src = "https://www.w3schools.com/howto/img_snow_wide.jpg";
+
+  const image3 = document.createElement("img");
+  image3.src = "https://www.w3schools.com/howto/img_snow_wide.jpg";
+
+  images.appendChild(image1);
+  images.appendChild(image2);
+  images.appendChild(image3);
+
+  const infoWindowReadMore = document.createElement("a");
+  infoWindowReadMore.setAttribute("id", "infoWindowReadMore");
+  infoWindowReadMore.classList.add("infoWindowReadMore");
+  infoWindowReadMore.innerText = "Les mer";
+
+  const infoWindowReadMoreIcon = document.createElement("span");
+  infoWindowReadMoreIcon.classList.add("material-symbols-outlined");
+  infoWindowReadMoreIcon.innerText = "arrow_forward";
+
+  infoWindowReadMore.appendChild(infoWindowReadMoreIcon);
+
+  infoWindow.appendChild(infoWindowContent);
+  infoWindowContent.appendChild(infoWindowDropdown);
+  infoWindowContent.appendChild(infoWindowHeader);
+  infoWindowContent.appendChild(infoWindowBody);
+
+  infoWindowHeader.appendChild(infoWindowTitle);
+  infoWindowHeader.appendChild(infoWindowDescription);
+  infoWindowHeader.appendChild(images);
+
+  infoWindowBody.appendChild(infoWindowReadMore);
+
+  document.getElementById("map").appendChild(infoWindow);
+
+  infoWindowDropdown.addEventListener("click", function () {
+    if (infoWindowBody.classList.contains("hidden")) {
+      infoWindowBody.classList.remove("hidden");
+      infoWindowDropdownIcon.innerText = "expand_less";
+    } else {
+      infoWindowBody.classList.add("hidden");
+      infoWindowDropdownIcon.innerText = "expand_more";
+    }
+  });
+}
+
+createInfoWindow();
