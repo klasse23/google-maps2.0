@@ -5,6 +5,7 @@ const { Marker } = await google.maps.importLibrary("marker");
 const markerSize = 50;
 
 async function initMap() {
+  console.log("This is a test")
   const position = { lat: 60.797912, lng: 11.029991 };
   const infoWindow = new google.maps.InfoWindow();
 
