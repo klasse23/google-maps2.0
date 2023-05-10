@@ -176,6 +176,7 @@ body {
   border-radius: 0.313rem;
   font-weight: 500;
   max-width: 9vw;
+  max-width: 600px;
 }
 .third {
   grid-area: 3 / 4 / 4 / 5;
@@ -352,4 +353,38 @@ body {
 
 .material-symbols-outlined {
   margin-left: 0px;
+}
+.Kategori-knapp {
+ color:black;
+  border:1px solid black;
+    
+}
+
+@media screen and (max-width: 1000px) {
+  
+
+.Kategori-knapp {
+  position: relative;
+  top: -25px;
+  left: 30px;
+    
+}
+
+.Land {
+  position: relative;
+  float: right;
+  margin-right: 16px;
+  color:black;
+
+
+}
+
+.Side-Tittel {
+  color:black;
+  position:relative;
+  margin-left:15px;
+  top:-10px;
+}
+
+  
 }
