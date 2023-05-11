@@ -1,4 +1,24 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+:root {
+  --temp-bg: #333; /* bg for testing version */
+
+  --maps-color: #fff;
+
+  --map-height: 100vh;
+  --map-width: 100%;
+  --map-border-radius: 1rem;
+
+  --locationSwapper-color: #1b8900;
+  --infoWindow-bg: #f9e36b;
+  --infoWindow-bgQuestion: #eeda6d;
+
+  --infoWindow-readMore: #204dee;
+  --infoWindow-readMoreHover: #193bb7;
+}
+
+/* --------------------- */
+/* Default styles (Activated just from start) */
+/* --------------------- */
 
 body {
   background: #333;
@@ -251,7 +271,7 @@ body {
   height: calc(100% - 55%);
   /*242px*/
 
-  background-color: #f9e36b;
+  background-color: var(--infoWindow-bg);
   color: black;
 }
 
@@ -329,7 +349,7 @@ body {
 .infoWindowReadMore {
   color: black;
   cursor: pointer;
-  background-color: #204dee;
+  background-color: var(--infoWindow-readMore);
   border: 0;
   border-radius: 16px;
   padding: 10px;
@@ -350,11 +370,17 @@ body {
 }
 
 .infoWindowReadMore:hover {
-  background-color: #193bb7;
+  background-color: var(--infoWindow-readMoreHover);
 }
 
 .material-symbols-outlined {
   margin-left: 0px;
+}
+.infoWindowDetailsDiv {
+  background-color: var(--infoWindow-bgQuestion);
+  height: 200px;
+  width: 200px;
+  padding: 5px;
 }
 .Kategori-knapp {
  color:black;
@@ -401,4 +427,14 @@ p {
 #content{
   margin:0;
   padding:0;
+}
+
+.premium-gallery-img-name {
+  color: #fff !important;
+  font-size: 21px;
+  text-shadow: 2px 2px 3px #000;
+  padding: 5px 15px;
+  border-radius: 1000px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  user-select: none;
 }
