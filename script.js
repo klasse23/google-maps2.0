@@ -1,13 +1,16 @@
 let map;
 const { Map } = await google.maps.importLibrary("maps");
 const { Marker } = await google.maps.importLibrary("marker");
+const infoWindow = new InfoWindow();
 
 const markerSize = 50;
 
+/**
+ * Sette opp kartet, overlay, markers, og mer
+ */
 async function initMap() {
   console.log("This is a test");
   const position = { lat: 60.797912, lng: 11.029991 };
-  const infoWindow = new google.maps.InfoWindow();
 
   map = new Map(document.getElementById("map"), {
     zoom: 17,
@@ -118,6 +121,7 @@ async function initMap() {
 
   const overlay = new USGSOverlay(bounds, image);
   overlay.setMap(map);
+  infoWindow.createInfoWindow();
 
   try {
     getData(infoWindow);
@@ -300,181 +304,155 @@ async function getData(infoWindow) {
     });
 }
 
-//TODO: Slider funksjon
-function sliderMain() {
-  //wait 1 second before launch
-  setTimeout(() => {
-    const slider = document.querySelector(".filterMain");
-    let isDown = false;
-    let startX;
-    let scrollLeft;
+//TODO Fikse feil.
+class InfoWindow {
+  constructor() {}
 
-    slider.addEventListener("mousedown", (e) => {
-      isDown = true;
-      slider.classList.add("active");
-      startX = e.pageX - slider.offsetLeft;
-      scrollLeft = slider.scrollLeft;
+  async createInfoWindow() {
+    const infoWindow = document.createElement("div");
+    infoWindow.setAttribute("id", "infoWindowCustom");
+    infoWindow.classList.add("infoWindow");
+    infoWindow.classList.add("hidden");
+
+    const infoWindowContent = document.createElement("div");
+    infoWindowContent.classList.add("infoWindowContent");
+
+    const infoWindowDropdown = document.createElement("button");
+    infoWindowDropdown.classList.add("infoWindowDropdown");
+
+    const infoWindowDropdownIcon = document.createElement("span");
+    infoWindowDropdownIcon.classList.add("material-symbols-outlined");
+    infoWindowDropdownIcon.innerText = "expand_more";
+    infoWindowDropdownIcon.setAttribute("id", "infoWindowIcon");
+
+    infoWindowDropdown.appendChild(infoWindowDropdownIcon);
+
+    const infoWindowHeader = document.createElement("div");
+    infoWindowHeader.classList.add("infoWindowHeader");
+
+    const infoWindowBody = document.createElement("div");
+    infoWindowBody.classList.add("infoWindowBody");
+
+    const infoWindowTitle = document.createElement("h3");
+    infoWindowTitle.classList.add("infoWindowTitle");
+    infoWindowTitle.setAttribute("id", "infoWindowTitle");
+    infoWindowTitle.innerText = "Hello World";
+
+    const infoWindowCategory = document.createElement("p");
+    infoWindowCategory.setAttribute("id", "infoWindowCategory");
+    infoWindowCategory.classList.add("infoWindowCategory");
+    infoWindowCategory.innerText = "This is just a description.";
+
+    const images = document.createElement("div");
+    images.classList.add("images");
+
+    const image1 = document.createElement("img");
+    image1.src = "https://www.w3schools.com/howto/img_snow_wide.jpg";
+
+    const image2 = document.createElement("img");
+    image2.src = "https://www.w3schools.com/howto/img_snow_wide.jpg";
+
+    const image3 = document.createElement("img");
+    image3.src = "https://www.w3schools.com/howto/img_snow_wide.jpg";
+
+    images.appendChild(image1);
+    images.appendChild(image2);
+    images.appendChild(image3);
+
+    const infoWindowReadMore = document.createElement("a");
+    infoWindowReadMore.setAttribute("id", "infoWindowReadMore");
+    infoWindowReadMore.classList.add("infoWindowReadMore");
+    infoWindowReadMore.innerText = "Les mer";
+
+    const infoWindowReadMoreIcon = document.createElement("span");
+
+    infoWindowReadMoreIcon.classList.add("material-symbols-outlined");
+    infoWindowReadMoreIcon.innerText = "arrow_forward";
+    infoWindowReadMoreIcon.setAttribute("id", "infoWindowNextIcon");
+
+    infoWindowReadMore.appendChild(infoWindowReadMoreIcon);
+
+    const details = document.createElement("h4");
+    details.classList.add("infoWindowDetails");
+    details.innerText = "Detaljer";
+
+    const infoWindowDetails = document.createElement("div");
+    infoWindowDetails.classList.add("infoWindowDetailsDiv");
+
+    const infoWindowDetailsHead = document.createElement("h5");
+    infoWindowDetailsHead.classList.add("infoWindowDetailsHead");
+    infoWindowDetailsHead.innerText = "Tidstider";
+
+    const infoWindowDetailsStatus = document.createElement("h4");
+    infoWindowDetailsStatus.classList.add("infoWindowDetailsStatus");
+    infoWindowDetailsStatus.innerText = "Åpent";
+
+    const infoWindowDetailsList = document.createElement("ul");
+    infoWindowDetailsList.classList.add("infoWindowDetailsList");
+
+    const infoWindowDetailsListItem = document.createElement("li");
+    infoWindowDetailsListItem.classList.add("infoWindowDetailsListItem");
+    infoWindowDetailsListItem.innerText = "hello world";
+
+    const infoWindowDetailsListItemTime = document.createElement("span");
+    infoWindowDetailsListItemTime.classList.add(
+      "infoWindowDetailsListItemTime"
+    );
+    infoWindowDetailsListItemTime.innerText = "23:00";
+    infoWindowDetailsListItem.appendChild(infoWindowDetailsListItemTime);
+
+    const infoWindowDetailsListItem2 = document.createElement("li");
+    infoWindowDetailsListItem2.classList.add("infoWindowDetailsListItem");
+    infoWindowDetailsListItem2.innerText = "hello world";
+
+    const infoWindowDetailsListItemTime2 = document.createElement("span");
+    infoWindowDetailsListItemTime2.classList.add(
+      "infoWindowDetailsListItemTime"
+    );
+    infoWindowDetailsListItemTime2.innerText = "12:00";
+    infoWindowDetailsListItem2.appendChild(infoWindowDetailsListItemTime2);
+
+    infoWindow.appendChild(infoWindowContent);
+    infoWindowContent.appendChild(infoWindowDropdown);
+    infoWindowContent.appendChild(infoWindowHeader);
+    infoWindowContent.appendChild(infoWindowBody);
+
+    infoWindowHeader.appendChild(infoWindowTitle);
+    infoWindowHeader.appendChild(infoWindowCategory);
+    infoWindowHeader.appendChild(infoWindowReadMore);
+    infoWindowHeader.appendChild(details);
+    infoWindowHeader.appendChild(infoWindowDetails);
+    infoWindowDetails.appendChild(infoWindowDetailsHead);
+    infoWindowDetails.appendChild(infoWindowDetailsStatus);
+    infoWindowDetails.appendChild(infoWindowDetailsList);
+    infoWindowDetails.appendChild(infoWindowDetailsListItem);
+    infoWindowDetails.appendChild(infoWindowDetailsListItem2);
+
+    document.getElementById("map").appendChild(infoWindow);
+
+    infoWindowDropdown.addEventListener("click", function () {
+      this.toggleInfoWindow();
     });
-    slider.addEventListener("mouseleave", () => {
-      isDown = false;
-      slider.classList.remove("active");
-    });
-    slider.addEventListener("mouseup", () => {
-      isDown = false;
-      slider.classList.remove("active");
-    });
-    slider.addEventListener("mousemove", (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - slider.offsetLeft;
-      const walk = (x - startX) * 3; //scroll-fast
-      slider.scrollLeft = scrollLeft - walk;
-      console.log(walk);
-    });
-  }, 1000);
+  }
+
+  async toggleInfoWindow() {
+    const infoWIndow = document.querySelector(".infoWindow");
+    infoWIndow.classList.toggle("small");
+    document.querySelector(".infoWindowDropdown span").innerText =
+      infoWIndow.classList.contains("small") ? "expand_less" : "expand_more";
+  }
+
+  async makeInfoWindowBigger() {
+    const infoWIndow = document.querySelector(".infoWindow");
+    infoWIndow.classList.remove("small");
+    document.querySelector(".infoWindowDropdown span").innerText =
+      "expand_more";
+  }
+
+  async makeInfoWindowSmaller() {
+    const infoWIndow = document.querySelector(".infoWindow");
+    infoWIndow.classList.add("small");
+    document.querySelector(".infoWindowDropdown span").innerText =
+      "expand_less";
+  }
 }
-
-//TODO: Fikse litt i koden, renske litt
-function createInfoWindow() {
-  const infoWindow = document.createElement("div");
-  infoWindow.setAttribute("id", "infoWindowCustom");
-  infoWindow.classList.add("infoWindow");
-  infoWindow.classList.add("hidden");
-
-  const infoWindowContent = document.createElement("div");
-  infoWindowContent.classList.add("infoWindowContent");
-
-  const infoWindowDropdown = document.createElement("button");
-  infoWindowDropdown.classList.add("infoWindowDropdown");
-
-  const infoWindowDropdownIcon = document.createElement("span");
-  infoWindowDropdownIcon.classList.add("material-symbols-outlined");
-  infoWindowDropdownIcon.innerText = "expand_more";
-  infoWindowDropdownIcon.setAttribute("id", "infoWindowIcon");
-
-  infoWindowDropdown.appendChild(infoWindowDropdownIcon);
-
-  const infoWindowHeader = document.createElement("div");
-  infoWindowHeader.classList.add("infoWindowHeader");
-
-  const infoWindowBody = document.createElement("div");
-  infoWindowBody.classList.add("infoWindowBody");
-
-  const infoWindowTitle = document.createElement("h3");
-  infoWindowTitle.classList.add("infoWindowTitle");
-  infoWindowTitle.setAttribute("id", "infoWindowTitle");
-  infoWindowTitle.innerText = "Hello World";
-
-  const infoWindowCategory = document.createElement("p");
-  infoWindowCategory.setAttribute("id", "infoWindowCategory");
-  infoWindowCategory.classList.add("infoWindowCategory");
-  infoWindowCategory.innerText = "This is just a description.";
-
-  const images = document.createElement("div");
-  images.classList.add("images");
-
-  const image1 = document.createElement("img");
-  image1.src = "https://www.w3schools.com/howto/img_snow_wide.jpg";
-
-  const image2 = document.createElement("img");
-  image2.src = "https://www.w3schools.com/howto/img_snow_wide.jpg";
-
-  const image3 = document.createElement("img");
-  image3.src = "https://www.w3schools.com/howto/img_snow_wide.jpg";
-
-  images.appendChild(image1);
-  images.appendChild(image2);
-  images.appendChild(image3);
-
-  const infoWindowReadMore = document.createElement("a");
-  infoWindowReadMore.setAttribute("id", "infoWindowReadMore");
-  infoWindowReadMore.classList.add("infoWindowReadMore");
-  infoWindowReadMore.innerText = "Les mer";
-
-  const infoWindowReadMoreIcon = document.createElement("span");
-
-  infoWindowReadMoreIcon.classList.add("material-symbols-outlined");
-  infoWindowReadMoreIcon.innerText = "arrow_forward";
-  infoWindowReadMoreIcon.setAttribute("id", "infoWindowNextIcon");
-
-  infoWindowReadMore.appendChild(infoWindowReadMoreIcon);
-
-  const details = document.createElement("h4");
-  details.classList.add("infoWindowDetails");
-  details.innerText = "Detaljer";
-
-  const infoWindowDetails = document.createElement("div");
-  infoWindowDetails.classList.add("infoWindowDetailsDiv");
-
-  const infoWindowDetailsHead = document.createElement("h5");
-  infoWindowDetailsHead.classList.add("infoWindowDetailsHead");
-  infoWindowDetailsHead.innerText = "Tidstider";
-
-  const infoWindowDetailsStatus = document.createElement("h4");
-  infoWindowDetailsStatus.classList.add("infoWindowDetailsStatus");
-  infoWindowDetailsStatus.innerText = "Åpent";
-
-  const infoWindowDetailsList = document.createElement("ul");
-  infoWindowDetailsList.classList.add("infoWindowDetailsList");
-
-  const infoWindowDetailsListItem = document.createElement("li");
-  infoWindowDetailsListItem.classList.add("infoWindowDetailsListItem");
-  infoWindowDetailsListItem.innerText = "hello world";
-
-  const infoWindowDetailsListItemTime = document.createElement("span");
-  infoWindowDetailsListItemTime.classList.add("infoWindowDetailsListItemTime");
-  infoWindowDetailsListItemTime.innerText = "23:00";
-  infoWindowDetailsListItem.appendChild(infoWindowDetailsListItemTime);
-
-  const infoWindowDetailsListItem2 = document.createElement("li");
-  infoWindowDetailsListItem2.classList.add("infoWindowDetailsListItem");
-  infoWindowDetailsListItem2.innerText = "hello world";
-
-  const infoWindowDetailsListItemTime2 = document.createElement("span");
-  infoWindowDetailsListItemTime2.classList.add("infoWindowDetailsListItemTime");
-  infoWindowDetailsListItemTime2.innerText = "12:00";
-  infoWindowDetailsListItem2.appendChild(infoWindowDetailsListItemTime2);
-
-  infoWindow.appendChild(infoWindowContent);
-  infoWindowContent.appendChild(infoWindowDropdown);
-  infoWindowContent.appendChild(infoWindowHeader);
-  infoWindowContent.appendChild(infoWindowBody);
-
-  infoWindowHeader.appendChild(infoWindowTitle);
-  infoWindowHeader.appendChild(infoWindowCategory);
-  infoWindowHeader.appendChild(infoWindowReadMore);
-  infoWindowHeader.appendChild(details);
-  infoWindowHeader.appendChild(infoWindowDetails);
-  infoWindowDetails.appendChild(infoWindowDetailsHead);
-  infoWindowDetails.appendChild(infoWindowDetailsStatus);
-  infoWindowDetails.appendChild(infoWindowDetailsList);
-  infoWindowDetails.appendChild(infoWindowDetailsListItem);
-  infoWindowDetails.appendChild(infoWindowDetailsListItem2);
-
-  document.getElementById("map").appendChild(infoWindow);
-
-  infoWindowDropdown.addEventListener("click", function () {
-    toggleInfoWindow();
-  });
-}
-
-function toggleInfoWindow() {
-  const infoWIndow = document.querySelector(".infoWindow");
-  infoWIndow.classList.toggle("small");
-  document.querySelector(".infoWindowDropdown span").innerText =
-    infoWIndow.classList.contains("small") ? "expand_less" : "expand_more";
-}
-
-function makeInfoWindowBigger() {
-  const infoWIndow = document.querySelector(".infoWindow");
-  infoWIndow.classList.remove("small");
-  document.querySelector(".infoWindowDropdown span").innerText = "expand_more";
-}
-
-function makeInfoWindowSmaller() {
-  const infoWIndow = document.querySelector(".infoWindow");
-  infoWIndow.classList.add("small");
-  document.querySelector(".infoWindowDropdown span").innerText = "expand_less";
-}
-
-createInfoWindow();
