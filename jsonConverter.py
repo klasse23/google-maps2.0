@@ -25,7 +25,7 @@ complete = {
 
 
 
-count = 0
+
 for idx, row in df.iterrows():
     print(idx, row)
     try: 
@@ -41,11 +41,10 @@ for idx, row in df.iterrows():
 
     complete["category"][row["Kategori"]]["pages"][row["Tittel"]] = {
             "URL": row["URL"],
-            "country":row["country"],
-            "img":row["img"],
+            "Land":row["Land"],
             "lat": row["Latitude"],
             "lng": row["Longitude"],
-            "textLocation":"",
+            "textLocation":row['Tittel']+".txt",
             "1280x844":row["1280x844"],
             "1024x1024":row["1024x1024"]
         }
