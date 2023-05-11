@@ -128,6 +128,11 @@ async function initMap() {
   }
 }
 
+/**
+ * Finne hvor spilleren er.
+ * @param {*} icon
+ * @param {*} size
+ */
 function playerLocation(icon, size) {
   let infoWindow = new google.maps.InfoWindow();
   const playerLocationBtn = document.createElement("button");
@@ -190,6 +195,10 @@ function playerLocation(icon, size) {
 
 initMap();
 
+/**
+ * Get data from pages.json
+ * @param {*} infoWindow
+ */
 async function getData(infoWindow) {
   fetch("pages.json")
     .then((response) => response.json())
@@ -215,7 +224,7 @@ async function getData(infoWindow) {
             position: { lat: markerData.lat, lng: markerData.lng },
             title: markerData.title,
             animation: google.maps.Animation.DROP,
-            map, // assuming you have a `map` variable referencing the Google Map
+            map,
             icon: {
               url: item[key].icon,
               scaledSize: new google.maps.Size(30, 30),
@@ -289,7 +298,6 @@ async function getData(infoWindow) {
       //TODO: Legge til slik at vi kan vise hvor spilleren er.
       playerLocation(data[0]["player"].iconPath, data[0]["player"].iconSize);
 
-      //TODO: Fikse problemet når man drar, gjør slik at infoWindow følger etter kartet etter rundt 0.1 sekund
       google.maps.event.addListener(map, "drag", function () {
         document.getElementById("infoWindowCustom").classList.add("hidden");
 
@@ -303,6 +311,9 @@ async function getData(infoWindow) {
 }
 
 //TODO Fikse feil.
+/**
+ * InfoWindow, en klasse som har funksjoner som å sette opp vindu får info.
+ */
 class InfoWindow {
   constructor() {}
 
