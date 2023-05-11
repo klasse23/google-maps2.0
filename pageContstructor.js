@@ -21,7 +21,7 @@ getPageData()
 
 function createPage(category, pageData, color) {
     let pathi = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
-    console.log(pageData["Land"],category, pageData)
+    
     const newContainer = document.createElement("div");
     newContainer.style = "display:block;"
     newContainer.innerHTML = 
@@ -58,7 +58,7 @@ function addText(textLocation){
     fetch(`https://program.stoppestedverden.no/wp-content/plugins/Klasse23/Text/${textLocation}`)
     .then((response) => response.text())
     .then((data)=> {
-        console.log(data)
+        
          document.getElementById("page-conent").innerHTML = data
          //Something is breaking
     })
