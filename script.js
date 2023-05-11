@@ -1,7 +1,6 @@
 let map;
 const { Map } = await google.maps.importLibrary("maps");
 const { Marker } = await google.maps.importLibrary("marker");
-const infoWindow = new InfoWindow();
 
 const markerSize = 50;
 
@@ -121,7 +120,6 @@ async function initMap() {
 
   const overlay = new USGSOverlay(bounds, image);
   overlay.setMap(map);
-  infoWindow.createInfoWindow();
 
   try {
     getData(infoWindow);
@@ -193,7 +191,7 @@ function playerLocation(icon, size) {
 initMap();
 
 async function getData(infoWindow) {
-  fetch("maps.json")
+  fetch("pages.json")
     .then((response) => response.json())
     .then((data) => {
       const filterButtons = {};
@@ -456,3 +454,5 @@ class InfoWindow {
       "expand_less";
   }
 }
+const infoWindow = new InfoWindow();
+infoWindow.createInfoWindow();
