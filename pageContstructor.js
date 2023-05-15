@@ -21,9 +21,9 @@ getPageData()
 
 function createPage(category, pageData, color) {
     let pathi = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
-    
+    console.log(pageData["Land"],category, pageData)
     const newContainer = document.createElement("div");
-    newContainer.style = "display:block;"
+    newContainer.classList.add("custom-page-container")
     newContainer.innerHTML = 
     `
     <img src="${pageData["1280x844"]}" class="cover-bilde">
@@ -31,7 +31,7 @@ function createPage(category, pageData, color) {
     <div id="middle-info">
         <h4 class="Land">${pageData.Land}</h4>
         <h1 class="Side-Tittel">${title}</h1>
-        <audio controls>
+        <audio controls class="Lyd-avspiller">
             <source src="${pathi}/Lydfiler/mp3/${pageData.Land + " " + title}.mp3" type="audio/mpeg" />
             <source src="${pathi}/Lydfiler/ogg/${pageData.Land + " " + title}.ogg" type="audio/ogg" />
 
@@ -42,7 +42,7 @@ function createPage(category, pageData, color) {
             </p>
         </audio>
     
-        <p id="page-conent">Fikk ikke lastet inn tekst :( </p>
+        <p id="page-content"></p>
     </div>
     <link rel="stylesheet" type="text/css" href="https://program.stoppestedverden.no/wp-content/plugins/Klasse23/style.css" />`
     attachmentPoint[0].appendChild(newContainer);
@@ -58,8 +58,8 @@ function addText(textLocation){
     fetch(`https://program.stoppestedverden.no/wp-content/plugins/Klasse23/Text/${textLocation}`)
     .then((response) => response.text())
     .then((data)=> {
-        
-         document.getElementById("page-conent").innerHTML = data
+        console.log(data)
+         document.getElementById("page-content").innerHTML = data
          //Something is breaking
     })
     
