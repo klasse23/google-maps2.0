@@ -10,6 +10,7 @@ const markerSize = 50;
 async function initMap() {
   console.log("This is a test");
   const position = { lat: 60.797912, lng: 11.029991 };
+  const infoWindow = new InfoWindow();
 
   map = new Map(document.getElementById("map"), {
     zoom: 17,
@@ -193,8 +194,6 @@ function playerLocation(icon, size) {
   }
 }
 
-initMap();
-
 /**
  * Get data from pages.json
  * @param {*} infoWindow
@@ -206,7 +205,8 @@ async function getData(infoWindow) {
       const filterButtons = {};
       let markers = [];
 
-      let item = data[1];
+      let item = data["category"];
+      console.log(item);
       const filterWrapper = document.createElement("div");
       filterWrapper.classList.add("filter-wrapper");
 
@@ -218,41 +218,44 @@ async function getData(infoWindow) {
       Object.keys(item).forEach((key, index) => {
         let color = item[key]["color"];
         let currentWindowPosition;
+        console.log(item[key]);
 
-        const marker = item[key].markers.map((markerData) => {
-          const marker = new google.maps.Marker({
-            position: { lat: markerData.lat, lng: markerData.lng },
-            title: markerData.title,
-            animation: google.maps.Animation.DROP,
-            map,
-            icon: {
-              url: item[key].icon,
-              scaledSize: new google.maps.Size(30, 30),
-            },
-          });
-
-          google.maps.event.addListenerOnce(map, "idle", function () {
-            google.maps.event.addListener(marker, "click", function () {
-              map.setCenter(marker.getPosition());
-
-              const category = key.charAt(0).toUpperCase() + key.slice(1);
-
-              document
-                .getElementById("infoWindowCustom")
-                .classList.remove("hidden");
-              document.getElementById("infoWindowTitle").innerText =
-                markerData.title;
-              document.getElementById("infoWindowDescription").innerText =
-                markerData.description;
-
-              document.getElementById("infoWindowReadMore").href =
-                markerData.web_location ? markerData.web_location : "#";
+        const marker = Object.values(item[key]["pages"]).forEach(
+          (markerData) => {
+            const marker = new google.maps.Marker({
+              position: { lat: markerData.lat, lng: markerData.lng },
+              title: markerData.title,
+              animation: google.maps.Animation.DROP,
+              map,
+              icon: {
+                url: item[key].icon,
+                scaledSize: new google.maps.Size(30, 30),
+              },
             });
-          });
 
-          markers.push(marker);
-          return marker;
-        });
+            google.maps.event.addListenerOnce(map, "idle", function () {
+              google.maps.event.addListener(marker, "click", function () {
+                map.setCenter(marker.getPosition());
+
+                const category = key.charAt(0).toUpperCase() + key.slice(1);
+
+                document
+                  .getElementById("infoWindowCustom")
+                  .classList.remove("hidden");
+                document.getElementById("infoWindowTitle").innerText =
+                  markerData.title;
+                document.getElementById("infoWindowDescription").innerText =
+                  markerData.description;
+
+                document.getElementById("infoWindowReadMore").href =
+                  markerData.web_location ? markerData.web_location : "#";
+              });
+            });
+
+            markers.push(marker);
+            return marker;
+          }
+        );
 
         google.maps.event.addListener(map, "click", function () {
           document.getElementById("infoWindowCustom").classList.add("hidden");
@@ -296,7 +299,7 @@ async function getData(infoWindow) {
       map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterWrapper);
 
       //TODO: Legge til slik at vi kan vise hvor spilleren er.
-      playerLocation(data[0]["player"].iconPath, data[0]["player"].iconSize);
+      playerLocation(data["user"].iconPath, data[0]["player"].iconSize);
 
       google.maps.event.addListener(map, "drag", function () {
         document.getElementById("infoWindowCustom").classList.add("hidden");
@@ -465,5 +468,5 @@ class InfoWindow {
       "expand_less";
   }
 }
-const infoWindow = new InfoWindow();
-infoWindow.createInfoWindow();
+
+initMap();
