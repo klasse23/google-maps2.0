@@ -1,5 +1,9 @@
 const title = document.title.replace(" – Program Stoppested verden", "")
 const attachmentPoint = document.getElementsByClassName("page-content")
+
+const regexPattern = /\[(.*?)\]\((.*?)\)/g
+const regexStraightLink = /(?<!href=[\'\"])(https?:\/\/[^\s]+)/g
+
 function getPageData(){
     console.log("Starting")
     fetch("https://program.stoppestedverden.no/wp-content/plugins/Klasse23/pages.json")
@@ -58,8 +62,8 @@ function addText(textLocation){
     fetch(`https://program.stoppestedverden.no/wp-content/plugins/Klasse23/Text/${textLocation}`)
     .then((response) => response.text())
     .then((data)=> {
-        console.log(data)
-         document.getElementById("page-content").innerHTML = data
+        console.log(data.replace(regexPattern, "<a class'textlinks' href='$1'>$2</a>"))
+         document.getElementById("page-content").innerHTML = data.replace(regexPattern, "<a class'textlinks' href='$1'>$2</a>").replace(regexStraightLink, "<a class'textLinks' href='$1'>$1</a>")
          //Something is breaking
     })
     
