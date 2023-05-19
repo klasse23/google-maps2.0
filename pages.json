@@ -14,91 +14,91 @@
          "pages":{
             "Magedans":{
                "URL":"https://program.stoppestedverden.no/magedans/",
-               "Land":"Egypt",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
+               "Land":"EGYPT",
+               "lat":60.79739623598074,
+               "lng":"11.032570624262913",
+               "textLocation":"Magedans.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/EGYPT_Magedans_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/EGYPT_Magedans_tmb_1024x1024.png"
             },
+            "Akrobatikk":{
+               "URL":"https://program.stoppestedverden.no/akrobatikk/",
+               "Land":"KENYA",
+               "lat":60.79745473161683,
+               "lng":"11.030407078548276",
+               "textLocation":"Akrobatikk.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/KENYA_Akrobatikk_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/KENYA_Akrobatikk_tmb_1024x1024.png"
+            },
             "Folkedans":{
                "URL":"https://program.stoppestedverden.no/folkedans/",
-               "Land":"Mexico",
+               "Land":"MEXICO",
                "lat":"nan",
                "lng":"nan",
-               "textLocation":"",
+               "textLocation":"Folkedans.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/MEXICO_Folkedans_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/MEXICO_Folkedans_tmb_1024x1024.png"
             },
-            "BHARATANATYAM ":{
+            "Ukulele":{
+               "URL":"https://program.stoppestedverden.no/ukulele/",
+               "Land":"HAWAII",
+               "lat":60.79941928230036,
+               "lng":"11.027414594577793",
+               "textLocation":"Ukulele.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/HAWAII_Ukulele_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/HAWAII_Ukulele_tmb_1024x1024.png"
+            },
+            "Bharatanatyam":{
                "URL":"https://program.stoppestedverden.no/bharatanatyam/",
-               "Land":"Sri Lanka",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
+               "Land":"SRI LANKA",
+               "lat":60.797311,
+               "lng":"11.033853",
+               "textLocation":"Bharatanatyam.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/SRI-LANKA_Bharatanatyam_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/SRI-LANKA_Bharatanatyam_tmb_1024x1024.png"
             },
-            "Akrobatikk":{
-               "URL":"https://program.stoppestedverden.no/akrobatikk/",
-               "Land":"Kenya",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
-               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/KENYA_Streetwise-Afrobatics-2_tmb_1280x844.png",
-               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/KENYA_Streetwise-Afrobatics-2_tmb_1024x1024.png"
-            },
             "Relampago drawing club":{
                "URL":"https://program.stoppestedverden.no/relampago-drawing-club/",
-               "Land":"Columbia/Mexico",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
+               "Land":"COLOMBIA",
+               "lat":60.797695,
+               "lng":"11.033233",
+               "textLocation":"Relampago drawing club.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/COLOMBIA_Relampago_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/COLOMBIA_Relampago_tmb_1024x1024.png"
             },
             "Komagbånd":{
                "URL":"https://program.stoppestedverden.no/komagband/",
-               "Land":"Kvenland",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
+               "Land":"RUIJA",
+               "lat":60.7977732118848,
+               "lng":"11.031236794865036",
+               "textLocation":"Komagbånd.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/KVENLAND_Komagband_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/KVENLAND_Komagband_tmb_1024x1024.png"
             },
             "Torader":{
                "URL":"https://program.stoppestedverden.no/torader/",
-               "Land":"Norge",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
-               "1280x844":"nan",
-               "1024x1024":"nan"
-            },
-            "Ukulele":{
-               "URL":"https://program.stoppestedverden.no/ukulele/",
-               "Land":"Hawaii",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
-               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/HAWAII_Ukulele_tmb_1280x844.png",
-               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/HAWAII_Ukulele_tmb_1024x1024.png"
+               "Land":"NORGE",
+               "lat":60.7980456443033,
+               "lng":"11.030497521560092",
+               "textLocation":"Torader.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Torader_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Torader_tmb_1024x1024.png"
             },
             "Kaffekunst":{
                "URL":"https://program.stoppestedverden.no/kaffekunst/",
-               "Land":"Brasil",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
+               "Land":"BRASIL",
+               "lat":60.79855980620673,
+               "lng":"11.028956058067857",
+               "textLocation":"Kaffekunst.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/BRASIL_Kaffekunst_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/BRASIL_Kaffekunst_tmb_1024x1024.png"
             },
             "Takiya":{
                "URL":"https://program.stoppestedverden.no/takiya/",
-               "Land":"Kasakhstan",
+               "Land":"KASAKHSTAN",
                "lat":"nan",
                "lng":"nan",
-               "textLocation":"",
+               "textLocation":"Takiya.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/KASAKHSTAN_Takiya_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/KASAKHSTAN_Takiya_tmb_1024x1024.png"
             }
@@ -107,77 +107,104 @@
       "Aktivitet":{
          "color":"#f6d109",
          "pages":{
-            "African Nights":{
-               "URL":"https://program.stoppestedverden.no/african-nights/",
-               "Land":"African Nights",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
-               "1280x844":"nan",
-               "1024x1024":"nan"
-            },
-            "Søppelsafari":{
-               "URL":"https://program.stoppestedverden.no/soppelsafari/",
-               "Land":"Sirkula",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
-               "1280x844":"nan",
-               "1024x1024":"nan"
-            },
-            "Passtilas":{
-               "URL":"https://program.stoppestedverden.no/passtilas/",
-               "Land":"Fillipinene",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
-               "1280x844":"nan",
-               "1024x1024":"nan"
-            },
-            "Klong Yao":{
-               "URL":"https://program.stoppestedverden.no/klong-yao/",
-               "Land":"Thailand",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
-               "1280x844":"nan",
-               "1024x1024":"nan"
-            },
-            "Italmalal":{
-               "URL":"https://program.stoppestedverden.no/italmalal/",
-               "Land":"Chile",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
-               "1280x844":"nan",
-               "1024x1024":"nan"
-            },
-            "Circus Raj":{
-               "URL":"https://program.stoppestedverden.no/circus-raj/",
-               "Land":"India",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
-               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/INDIA_CircusRaj_tmb_1280.png",
-               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/INDIA_CircusRaj_tmb_1024.png"
-            },
-            "Cabezones":{
+            "Cabezonas":{
                "URL":"https://program.stoppestedverden.no/cabezones/",
-               "Land":"Storbritannia",
+               "Land":"STORBRITANNIA",
                "lat":"nan",
                "lng":"x",
-               "textLocation":"",
+               "textLocation":"Cabezonas.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/STORBRITANNIA_Cabez_tmb_1280.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/STORBRITANNIA_Cabez_tmb_1024.png"
             },
-            "Slangemennesket":{
-               "URL":"https://program.stoppestedverden.no/slangemennesket/",
-               "Land":"Norge",
+            "Circus Raj":{
+               "URL":"https://program.stoppestedverden.no/circus-raj/",
+               "Land":"INDIA",
+               "lat":60.79917180159801,
+               "lng":"11.027870741939056",
+               "textLocation":"Circus Raj.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/INDIA_CircusRaj_tmb_1280-1.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/INDIA_CircusRaj_tmb_1024.png"
+            },
+            "Afro beat":{
+               "URL":"https://program.stoppestedverden.no/afro-beat/",
+               "Land":"AFRIKA",
+               "lat":60.7988629276354,
+               "lng":"11.02845665535337",
+               "textLocation":"Afro beat.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/AFRIKA_Afro-Beat_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/AFRIKA_Afro-Beat_tmb_1024x1024.png"
+            },
+            "Italmalal":{
+               "URL":"https://program.stoppestedverden.no/italmalal/",
+               "Land":"CHILE",
+               "lat":60.7980456443033,
+               "lng":"11.030261583269784",
+               "textLocation":"Italmalal.txt",
+               "1280x844":"nan",
+               "1024x1024":"nan"
+            },
+            "Sirkus":{
+               "URL":"https://program.stoppestedverden.no/sirkus/",
+               "Land":"BRASIL",
+               "lat":60.79855980620673,
+               "lng":"11.028956058067857",
+               "textLocation":"Sirkus.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/BRASIL_Sirkus_tmb_1280x1280.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/BRASIL_Sirkus_tmb_1024x1024.png"
+            },
+            "Hjelp mor Gaia":{
+               "URL":"https://program.stoppestedverden.no/gaia-hjelp-mamma-gaia/",
+               "Land":"SIRKULA",
+               "lat":60.797238160303216,
+               "lng":"11.033068310878821",
+               "textLocation":"Hjelp mor Gaia.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/GAIA_Hjelp_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/GAIA_Hjelp_tmb_1024x1024.png"
+            },
+            "Pastillas":{
+               "URL":"https://program.stoppestedverden.no/passtilas/",
+               "Land":"FILIPPINENE",
                "lat":"nan",
                "lng":"nan",
-               "textLocation":"",
-               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Slandemennesket2_tmb_1280.png",
-               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Slandemennesket2_tmb_1024.png"
+               "textLocation":"Pastillas.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/FILIPPINENE_Pastillas_foto-Tuva-Kleven_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/FILIPPINENE_Pastillas_foto-Tuva-Kleven_tmb_1024x1024.png"
+            },
+            "Klong Yao":{
+               "URL":"https://program.stoppestedverden.no/klong-yao/",
+               "Land":"THAILAND",
+               "lat":"nan",
+               "lng":"nan",
+               "textLocation":"Klong Yao.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/THAILAND_Klong-Yao_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/THAILAND_Klong-Yao_tmb_1024x1024.png"
+            },
+            "Judo":{
+               "URL":"https://program.stoppestedverden.no/judo/",
+               "Land":"JAPAN",
+               "lat":"nan",
+               "lng":"nan",
+               "textLocation":"Judo.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/JAPAN_Judo_MarkusSogard_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/JAPAN_Judo_MarkusSogard_tmb_1024x1024.png"
+            },
+            "Minitoget Knertitten":{
+               "URL":"https://program.stoppestedverden.no/minitoget-knertitten/",
+               "Land":"NORGE",
+               "lat":60.7980456443033,
+               "lng":"11.030497521560092",
+               "textLocation":"Minitoget Knertitten.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Minitoget-Knertitten_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Minitoget-Knertitten_tmb_1024x1024.png"
+            },
+            "Tertittoget":{
+               "URL":"https://program.stoppestedverden.no/tertittoget/",
+               "Land":"NORGE",
+               "lat":60.7980456443033,
+               "lng":"11.030497521560092",
+               "textLocation":"Tertittoget.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Tertittoget_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Tertittoget_tmb_1024x1024.png"
             }
          }
       },
@@ -186,37 +213,46 @@
          "pages":{
             "La Caixeta":{
                "URL":"https://program.stoppestedverden.no/la-caixeta/",
-               "Land":"Spania",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
+               "Land":"SPANIA",
+               "lat":60.79970028845114,
+               "lng":"11.026986533572648",
+               "textLocation":"La Caixeta.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/SPANIA_La-Caixeta_tmb_1280.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/SPANIA_La-Caixeta_tmb_1024.png"
             },
             "Sulky M1":{
                "URL":"https://program.stoppestedverden.no/sulky-m1/",
-               "Land":"Nederland",
+               "Land":"NEDERLAND",
                "lat":"nan",
                "lng":"nan",
-               "textLocation":"",
+               "textLocation":"Sulky M1.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NEDERLAND_Sulky_tmb_1280.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NEDERLAND_Sulky_tmb_1024.png"
             },
             "Den lille store reisen":{
                "URL":"https://program.stoppestedverden.no/den-lille-store-reisen/",
-               "Land":"Norge",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
+               "Land":"NORGE",
+               "lat":60.79737954696289,
+               "lng":"11.03338145801092",
+               "textLocation":"Den lille store reisen.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Den-Lille-Store-Reisen_tmb_1280.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Den-Lille-Store-Reisen_tmb_1024.png"
             },
+            "Slangemennesket":{
+               "URL":"https://program.stoppestedverden.no/slangemennesket/",
+               "Land":"NORGE",
+               "lat":60.79753135691837,
+               "lng":"11.034202213252552",
+               "textLocation":"Slangemennesket.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Slandemennesket2_tmb_1280.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Slandemennesket2_tmb_1024.png"
+            },
             "Fabelflakseren":{
                "URL":"https://program.stoppestedverden.no/fabelflakseren/",
-               "Land":"Norge",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
+               "Land":"NORGE",
+               "lat":60.7980456443033,
+               "lng":"11.030497521560092",
+               "textLocation":"Fabelflakseren.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Fabelflakseren_tmb_1280.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Fabelflakseren_tmb_1024.png"
             }
@@ -225,53 +261,85 @@
       "Konsert":{
          "color":"#4d4084",
          "pages":{
-            "Mariachi del sol":{
-               "URL":"https://program.stoppestedverden.no/mariachi-del-sol/",
-               "Land":"Mexico",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
-               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/MEXICO_Mariachi-Del-Sol_tmb_1280x844.png",
-               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/MEXICO_Mariachi-Del-Sol_tmb_1024x1024.png"
-            },
             "Yagody":{
                "URL":"https://program.stoppestedverden.no/yagody/",
-               "Land":"Ukraina",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
+               "Land":"UKRAINA",
+               "lat":60.79744467714585,
+               "lng":"11.033924462799295",
+               "textLocation":"Yagody.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/UKRAINA_Yagody_foto-Sofia-Lupul_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/UKRAINA_Yagody_foto-Sofia-Lupul_tmb_1024x1024.png"
             },
-            "Male med jord og hjerte":{
-               "URL":"https://program.stoppestedverden.no/male-med-jord-og-hjerte/",
-               "Land":"India",
+            "Mariachi del sol":{
+               "URL":"https://program.stoppestedverden.no/mariachi-del-sol/",
+               "Land":"MEXICO",
                "lat":"nan",
                "lng":"nan",
-               "textLocation":"",
-               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/INDIA_Male-med-jord-og-hjerte_foto-EWA-Norge_tmb_1280x844.png",
-               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/INDIA_Male-med-jord-og-hjerte_foto-EWA-Norge_tmb_1024x1024.png"
+               "textLocation":"Mariachi del sol.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/MEXICO_Mariachi-Del-Sol_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/MEXICO_Mariachi-Del-Sol_tmb_1024x1024.png"
+            },
+            "Swing’it":{
+               "URL":"https://program.stoppestedverden.no/swingit/",
+               "Land":"NORGE",
+               "lat":60.7980456443033,
+               "lng":"11.030497521560092",
+               "textLocation":"Swing’it.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Swing-it_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Swing-it_tmb_1024x1024.png"
             }
          }
       },
       "Utstilling":{
          "color":"#65b3cc",
          "pages":{
+            "Male med jord og hjerte":{
+               "URL":"https://program.stoppestedverden.no/male-med-jord-og-hjerte/",
+               "Land":"INDIA",
+               "lat":60.7976639398414,
+               "lng":"11.033981340553646",
+               "textLocation":"Male med jord og hjerte.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/INDIA_Male-med-jord-og-hjerte_foto-EWA-Norge_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/INDIA_Male-med-jord-og-hjerte_foto-EWA-Norge_tmb_1024x1024.png"
+            },
             "Vastavirthaan":{
                "URL":"https://program.stoppestedverden.no/vastavirthaan/",
-               "Land":"Norge",
-               "lat":"nan",
-               "lng":"nan",
-               "textLocation":"",
-               "1280x844":"nan",
-               "1024x1024":"nan"
+               "Land":"NORGE",
+               "lat":60.7980456443033,
+               "lng":"11.030497521560092",
+               "textLocation":"Vastavirthaan.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Utstilling_NORGE_Vastavirthaan_foto-Oystein-Thorvaldsen_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Utstilling_NORGE_Vastavirthaan_foto-Oystein-Thorvaldsen_tmb_1024x1024.png"
             },
             "Årets kunstprosjekt i regionens barnehager":{
                "URL":"https://program.stoppestedverden.no/arets-kunstprosjekt-i-regionens-barnehager/",
-               "Land":"Norge",
+               "Land":"NORGE",
+               "lat":60.7980456443033,
+               "lng":"11.030497521560092",
+               "textLocation":"Årets kunstprosjekt i regionens barnehager.txt",
+               "1280x844":"nan",
+               "1024x1024":"nan"
+            }
+         }
+      },
+      "nan":{
+         "color":"nan",
+         "pages":{
+            "Toalett":{
+               "URL":"nan",
+               "Land":"nan",
+               "lat":60.80052985779683,
+               "lng":"11.027015851370997",
+               "textLocation":"Toalett.txt",
+               "1280x844":"nan",
+               "1024x1024":"nan"
+            },
+            "Førstehjelp":{
+               "URL":"nan",
+               "Land":"nan",
                "lat":"nan",
                "lng":"nan",
-               "textLocation":"",
+               "textLocation":"Førstehjelp.txt",
                "1280x844":"nan",
                "1024x1024":"nan"
             }

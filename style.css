@@ -380,8 +380,9 @@ body {
 
 .Land {
   color:black;
-  float:right;
+  float:Left;
   bottom:1rem;
+  font-size: 2.5rem;
   position:relative;
   font-family: "Open Sans", sans-serif;
 
@@ -438,9 +439,11 @@ p {
 .Land {
   color:black;
   position:relative;
-  margin:0 0 0 auto;
+  float:left;
+  margin:0 auto 0 0;
+  font-size: 2.5rem;
   font-family: "Open Sans", sans-serif;
-
+  
 
 }
 
