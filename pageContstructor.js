@@ -3,6 +3,8 @@ const attachmentPoint = document.getElementsByClassName("page-content")
 
 const regexPattern = /\[(.*?)\]\((.*?)\)/g
 const regexStraightLink = /(?<!href=[\'\"])(https?:\/\/[^\s]+)/g
+const defaultPath = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
+
 
 function getPageData(){
     console.log("Starting")
@@ -24,10 +26,14 @@ getPageData()
 
 
 function createPage(category, pageData, color) {
-    let pathi = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
+    
     console.log(pageData["Land"],category, pageData)
     const newContainer = document.createElement("div");
     newContainer.classList.add("custom-page-container")
+    
+    
+    
+    let Land = pageData.Land.toLowerCase()
     newContainer.innerHTML = 
     `
     <img src="${pageData["1280x844"]}" class="cover-bilde">
@@ -35,26 +41,37 @@ function createPage(category, pageData, color) {
     <div id="middle-info">
         <h4 class="Land">${pageData.Land}</h4>
         <h1 class="Side-Tittel">${title}</h1>
-        <audio controls class="Lyd-avspiller">
-            <source src="${pathi}/Lydfiler/mp3/${pageData.Land + " " + title}.mp3" type="audio/mpeg" />
-            <source src="${pathi}/Lydfiler/ogg/${pageData.Land + " " + title}.ogg" type="audio/ogg" />
-
-            <!-- fallback for non-supporting browsers goes here -->
-            <p>
-                Hmmm.. Fikk ikke spilt av lyd, men du kan laste det ned her!
-                <a href="${pathi}/Lydfiler/mp3/${pageData.Land + " " + title}.mp3">download the music</a>.
-            </p>
-        </audio>
-    
+         <audio controls class="Lyd-avspiller" style="visibility: hidden;"">
+          Browser does not support this audio!
+         </audio>
         <p id="page-content"></p>
     </div>
     <link rel="stylesheet" type="text/css" href="https://program.stoppestedverden.no/wp-content/plugins/Klasse23/style.css" />`
     attachmentPoint[0].appendChild(newContainer);
     
-    
+    addAudio(Land)
     addText(title+".txt");
 }
+async function getAudio(Land, fileType, format, audioController){
+    return fetch(defaultPath+`Lydfiler/${fileType}/${Land.charAt(0).toUpperCase() + Land.slice(1) + " " + title}.${fileType}`)
+        .then(e=>{
+        if(e.status=="200"){
+            console.log("eeeeee", audioController)
+            audioController.style.visibility = "visible"
+            let audioString = `<source src="${defaultPath}Lydfiler/${fileType}/${Land.charAt(0).toUpperCase() + Land.slice(1) + " " + title}.${fileType}" type="${format}" />`
+            return audioString
+        }})
+}
 
+async function addAudio(Land){
+    let controller = document.getElementsByClassName("Lyd-avspiller")
+    
+    controller[0].innerHTML = `
+    ${await getAudio(Land, "mp3", "audio/mpeg", controller[0])}
+    ${await getAudio(Land, "ogg", "audio/ogg", controller[0])}
+    Browser no supporty
+    `
+}
 
 function addText(textLocation){
     
