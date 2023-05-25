@@ -304,7 +304,7 @@ async function getData(infoWindow) {
       });
 
       map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterWrapper);
-
+      console.log(data)
       //TODO: Legge til slik at vi kan vise hvor brukeren er.
       playerLocation(data["user"].iconPath, data[0]["user"].iconSize);
 
