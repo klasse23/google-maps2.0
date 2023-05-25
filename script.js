@@ -212,7 +212,7 @@ async function getData(infoWindow) {
       let markers = [];
 
       let item = data["category"];
-      //console.log(item);
+ 
       const filterWrapper = document.createElement("div");
       filterWrapper.classList.add("filter-wrapper");
 
@@ -225,7 +225,7 @@ async function getData(infoWindow) {
         let color = item[key]["color"];
         let icon = item[key]["Ikon"]
         let currentWindowPosition;
-        //console.log(item[key]);
+        console.log(item[key]);
 
         const marker = Object.values(item[key]["pages"]).forEach(
           (markerData) => {
@@ -242,8 +242,9 @@ async function getData(infoWindow) {
 
             google.maps.event.addListenerOnce(map, "idle", function () {
               google.maps.event.addListener(marker, "click", function () {
+                console.log("Marker clicked 2")
                 map.setCenter(marker.getPosition());
-
+  
                 const category = key.charAt(0).toUpperCase() + key.slice(1);
 
                 document
@@ -264,9 +265,10 @@ async function getData(infoWindow) {
           }
         );
 
-        google.maps.event.addListener(map, "click", function () {
+        /* google.maps.event.addListener(map, "click", function () {
+          console.log("marker clicked")
           document.getElementById("infoWindowCustom").classList.add("hidden");
-        });
+        }); */
 
         const filterButton = document.createElement("button");
         const str = key;
@@ -282,14 +284,14 @@ async function getData(infoWindow) {
 
         filterButton.addEventListener("click", () => {
           const filterButtonData = filterButtons[key];
-
+          console.log("Filter button clicked")
           const shown = item[key].shown;
 
           if (shown) {
             filterButton.classList.add("deactive");
             filterButton.style.backgroundColor = "#F0F0F0";
             filterButton.style.color = "black";
-            clusterer.removeMarkers(marker);
+            //clusterer.removeMarkers(marker);
 
             item[key].shown = false;
           } else {
@@ -297,24 +299,24 @@ async function getData(infoWindow) {
             filterButton.style.border = "2px solid " + color;
             filterButton.style.backgroundColor = color;
             filterButton.style.color = "white";
-            clusterer.addMarkers(marker);
+            //clusterer.addMarkers(marker);
             item[key].shown = true;
           }
         });
       });
 
       map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterWrapper);
-      console.log(data)
-      //TODO: Legge til slik at vi kan vise hvor brukeren er.
-      playerLocation(data["user"].iconPath, data[0]["user"].iconSize);
+      console.log(data["user"].iconPath)
+      //TODO: Legge til slik at vi kan vise hvor spilleren er.
+      playerLocation(data["user"].iconPath, data["user"].iconSize);
 
       google.maps.event.addListener(map, "drag", function () {
         document.getElementById("infoWindowCustom").classList.add("hidden");
 
         const clusterer = new MarkerClusterer(map, markers, {
-          imagePath: data[0]["markers"].imagePath,
-          gridSize: data[0]["markers"].gridSize,
-          minimumClusterSize: data[0]["markers"].minimumClusterSize,
+          imagePath: data["markerConfig"].imagePath,
+          gridSize: data["markerConfig"].gridSize,
+          minimumClusterSize: data["markerConfig"].minimumClusterSize,
         });
       });
     });

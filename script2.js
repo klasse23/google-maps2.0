@@ -1,4 +1,5 @@
 let map;
+let filterButtons = {};
 const { Map } = await google.maps.importLibrary("maps");
 const { Marker } = await google.maps.importLibrary("marker");
 
@@ -201,18 +202,13 @@ async function getData(infoWindow) {
   fetch(defaultPath+"pages.json")
     .then((response) => response.json())
     .then((data) => {
-      const filterButtons = {};
+		console.log("Creating filter")
+      
       let markers = [];
 
       let category = data["category"];
  
-      const filterWrapper = document.createElement("div");
-      filterWrapper.classList.add("filter-wrapper");
-
-      const filterDiv = document.createElement("div");
-      filterDiv.classList.add("filterMain");
-
-      filterWrapper.appendChild(filterDiv);
+      const filterWrapper = document.createElement("div");filterWrapper.classList.add("filter-wrapper");
 
       Object.keys(category).forEach((key, index) => {
         let color = category[key]["color"];
@@ -242,6 +238,7 @@ async function getData(infoWindow) {
           }
 
         );
+        createFiltration(color, category, filterWrapper)
       });
 
       map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterWrapper);
@@ -261,16 +258,16 @@ async function getData(infoWindow) {
  * InfoWindow, en klasse som har funksjoner som å sette opp vindu får info.
  */
 
-function createFiltration() {
-    const filterButton = document.createElement("button");
-        const str = key;
-        const str2 = str.charAt(0).toUpperCase() + str.slice(1);
-        filterButton.textContent = str2;
-        filterButton.style.border = "2px solid " + color;
-        filterButton.style.backgroundColor = color;
-        filterButton.classList.add("filter-button");
-
-        filterDiv.appendChild(filterButton);
+function createFiltration(color, category) {
+    let container = document.querySelector("filter-wrapper")
+	
+	
+	const filterButton = document.createElement("button");
+    filterButton.textContent = category;
+    filterButton.style.border = "2px solid " + color;
+    filterButton.style.backgroundColor = color;
+    filterButton.classList.add("filter-button");
+	container.appendChild(filterButton);
 
         filterButtons[key] = { button: filterButton, index: index };
 
@@ -279,7 +276,7 @@ function createFiltration() {
           console.log("Filter button clicked")
           const shown = category[key].shown;
 
-          if (shown) {
+          /* if (shown) {
             filterButton.classList.add("deactive");
             filterButton.style.backgroundColor = "#F0F0F0";
             filterButton.style.color = "black";
@@ -293,7 +290,8 @@ function createFiltration() {
             filterButton.style.color = "white";
             //clusterer.addMarkers(marker);
             category[key].shown = true;
-          }})
+          } */
+        })
 }
 
 
