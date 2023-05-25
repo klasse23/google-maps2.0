@@ -136,11 +136,7 @@ async function initMap() {
   }
 }
 
-/**
- * Finne hvor spilleren er.
- * @param {*} icon
- * @param {*} size
- */
+
 function playerLocation(icon, size) {
   let infoWindow = new google.maps.InfoWindow();
   const playerLocationBtn = document.createElement("button");
@@ -201,10 +197,6 @@ function playerLocation(icon, size) {
   }
 }
 
-/**
- * Get data from pages.json
- * @//param {*} infoWindow
- */
 async function getData(infoWindow) {
   fetch(defaultPath+"pages.json")
     .then((response) => response.json())
@@ -228,7 +220,7 @@ async function getData(infoWindow) {
         let currentWindowPosition;
         console.log(category[key]);
 
-        const marker = Object.values(category[key]["pages"]).forEach(
+        Object.values(category[key]["pages"]).forEach(
           (markerData) => {
             const marker = new google.maps.Marker({
               position: { lat: markerData.lat, lng: markerData.lng },
@@ -246,31 +238,21 @@ async function getData(infoWindow) {
                 console.log("Marker clicked 2")
                 map.setCenter(marker.getPosition());
               });
-            
-
-            markers.push(marker);
-            return marker;
+            markers.push(marker)
           }
-        );
 
-        /* google.maps.event.addListener(map, "click", function () {
-          console.log("marker clicked")
-          document.getElementById("infoWindowCustom").classList.add("hidden");
-        }); */
+        );
       });
 
       map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterWrapper);
       console.log(data["user"].iconPath)
       //TODO: Legge til slik at vi kan vise hvor spilleren er.
       //playerLocation(data["user"].iconPath, data["user"].iconSize);
-
-      map.addListener(map, "drag", function () {
-        const clusterer = new MarkerClusterer(map, markers, {
-          imagePath: data["markerConfig"].imagePath,
-          gridSize: data["markerConfig"].gridSize,
-          minimumClusterSize: data["markerConfig"].minimumClusterSize,
-        });
-      });
+    const clusterer = new MarkerClusterer(map, markers, {
+        imagePath: data["markerConfig"].imagePath,
+        gridSize: data["markerConfig"].gridSize,
+        minimumClusterSize: data["markerConfig"].minimumClusterSize,
+    });
     });
 }
 
