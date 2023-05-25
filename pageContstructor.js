@@ -60,6 +60,9 @@ async function getAudio(Land, fileType, format, audioController){
             audioController.style.visibility = "visible"
             let audioString = `<source src="${defaultPath}Lydfiler/${fileType}/${Land.charAt(0).toUpperCase() + Land.slice(1) + " " + title}.${fileType}" type="${format}" />`
             return audioString
+        } else {
+            console.log("No audio file found!")
+            return ""
         }})
 }
 
