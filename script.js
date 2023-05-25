@@ -4,10 +4,16 @@ const { Marker } = await google.maps.importLibrary("marker");
 
 const markerSize = 50;
 
+
+const defaultPath = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
+
+const l = document.querySelector("#content")
+
 /**
  * Sette opp kartet, overlay, markers, og mer
  */
 async function initMap() {
+  l.style = "margin:auto;max-width:none;"
   console.log("This is a test");
   const position = { lat: 60.797912, lng: 11.029991 };
   const infoWindow = new InfoWindow();
@@ -23,7 +29,7 @@ async function initMap() {
     new google.maps.LatLng(60.79927, 11.03643)
   );
 
-  let image = "img/uten_bakgrunn.svg";
+  let image = defaultPath + "img/uten_bakgrunn.svg";
 
   class USGSOverlay extends google.maps.OverlayView {
     bounds;
@@ -199,14 +205,14 @@ function playerLocation(icon, size) {
  * @param {*} infoWindow
  */
 async function getData(infoWindow) {
-  fetch("pages.json")
+  fetch(defaultPath+"pages.json")
     .then((response) => response.json())
     .then((data) => {
       const filterButtons = {};
       let markers = [];
 
       let item = data["category"];
-      console.log(item);
+      //console.log(item);
       const filterWrapper = document.createElement("div");
       filterWrapper.classList.add("filter-wrapper");
 
@@ -217,8 +223,9 @@ async function getData(infoWindow) {
 
       Object.keys(item).forEach((key, index) => {
         let color = item[key]["color"];
+        let icon = item[key]["Ikon"]
         let currentWindowPosition;
-        console.log(item[key]);
+        //console.log(item[key]);
 
         const marker = Object.values(item[key]["pages"]).forEach(
           (markerData) => {
@@ -228,7 +235,7 @@ async function getData(infoWindow) {
               animation: google.maps.Animation.DROP,
               map,
               icon: {
-                url: item[key].icon,
+                url: icon,
                 scaledSize: new google.maps.Size(30, 30),
               },
             });
@@ -298,8 +305,8 @@ async function getData(infoWindow) {
 
       map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterWrapper);
 
-      //TODO: Legge til slik at vi kan vise hvor spilleren er.
-      playerLocation(data["user"].iconPath, data[0]["player"].iconSize);
+      //TODO: Legge til slik at vi kan vise hvor brukeren er.
+      playerLocation(data["user"].iconPath, data[0]["user"].iconSize);
 
       google.maps.event.addListener(map, "drag", function () {
         document.getElementById("infoWindowCustom").classList.add("hidden");
