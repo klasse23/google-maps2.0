@@ -474,6 +474,6 @@ p {
   
 }
 main#content {
-	max-width:fit-content !important;
+	max-width:fit-content;
   margin:auto;
 }
