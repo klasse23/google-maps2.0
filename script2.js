@@ -242,7 +242,7 @@ async function getData(infoWindow) {
             });
 
             
-              google.maps.event.addListener(marker, "click", function () {
+              marker.addListener(marker, "click", function () {
                 console.log("Marker clicked 2")
                 map.setCenter(marker.getPosition());
               });
@@ -264,7 +264,7 @@ async function getData(infoWindow) {
       //TODO: Legge til slik at vi kan vise hvor spilleren er.
       //playerLocation(data["user"].iconPath, data["user"].iconSize);
 
-      google.maps.event.addListener(map, "drag", function () {
+      map.addListener(map, "drag", function () {
         const clusterer = new MarkerClusterer(map, markers, {
           imagePath: data["markerConfig"].imagePath,
           gridSize: data["markerConfig"].gridSize,
