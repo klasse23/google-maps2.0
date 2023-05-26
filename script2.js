@@ -238,11 +238,11 @@ async function getData(infoWindow) {
           }
 
         );
-        createFiltration(color, category, filterWrapper)
+        //createFiltration(color, key)
       });
 
       map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterWrapper);
-      console.log(data["user"].iconPath)
+      //console.log(data["user"].iconPath)
       //TODO: Legge til slik at vi kan vise hvor spilleren er.
       //playerLocation(data["user"].iconPath, data["user"].iconSize);
     const clusterer = new MarkerClusterer(map, markers, {
@@ -259,7 +259,7 @@ async function getData(infoWindow) {
  */
 
 function createFiltration(color, category) {
-    let container = document.querySelector("filter-wrapper")
+  let container = document.querySelector("filter-wrapper")
 	
 	
 	const filterButton = document.createElement("button");
@@ -276,21 +276,7 @@ function createFiltration(color, category) {
           console.log("Filter button clicked")
           const shown = category[key].shown;
 
-          /* if (shown) {
-            filterButton.classList.add("deactive");
-            filterButton.style.backgroundColor = "#F0F0F0";
-            filterButton.style.color = "black";
-            //clusterer.removeMarkers(marker);
-
-            category[key].shown = false;
-          } else {
-            filterButton.classList.remove("deactive");
-            filterButton.style.border = "2px solid " + color;
-            filterButton.style.backgroundColor = color;
-            filterButton.style.color = "white";
-            //clusterer.addMarkers(marker);
-            category[key].shown = true;
-          } */
+          
         })
 }
 
