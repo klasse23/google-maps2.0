@@ -1,8 +1,9 @@
 let map;
 let filterButtons = {};
+let sortedMarkers = {}
 const { Map } = await google.maps.importLibrary("maps");
 const { Marker } = await google.maps.importLibrary("marker");
-
+let clusterer
 const markerSize = 50;
 const defaultPath = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
 const l = document.querySelector("#content")
@@ -205,18 +206,18 @@ async function getData(infoWindow) {
 		console.log("Creating filter")
       
       let markers = [];
-
-      let category = data["category"];
+      
+      let categories = data["category"];
  
       const filterWrapper = document.createElement("div");filterWrapper.classList.add("filter-wrapper");
-
-      Object.keys(category).forEach((key, index) => {
-        let color = category[key]["color"];
-        let icon = category[key]["Ikon"]
+      console.log(categories)
+      Object.keys(categories).forEach((category, index) => {
+        let color = categories[category]["color"];
+        let icon = categories[category]["Ikon"]
         let currentWindowPosition;
-        console.log(category[key]);
-
-        Object.values(category[key]["pages"]).forEach(
+        filterButtons[category] = {"markers":[]}
+        console.log("check",filterButtons)
+        Object.values(categories[category]["pages"]).forEach(
           (markerData) => {
             const marker = new google.maps.Marker({
               position: { lat: markerData.lat, lng: markerData.lng },
@@ -234,21 +235,23 @@ async function getData(infoWindow) {
                 console.log("Marker clicked 2")
                 map.setCenter(marker.getPosition());
               });
+            
+            
+            filterButtons[category]["markers"].push(marker)
             markers.push(marker)
           }
 
         );
-        //createFiltration(color, key)
+        createFiltration(color, category, filterWrapper, index, categories)
       });
 
       map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterWrapper);
       //console.log(data["user"].iconPath)
       //TODO: Legge til slik at vi kan vise hvor spilleren er.
       //playerLocation(data["user"].iconPath, data["user"].iconSize);
-    const clusterer = new MarkerClusterer(map, markers, {
-        imagePath: data["markerConfig"].imagePath,
-        gridSize: data["markerConfig"].gridSize,
-        minimumClusterSize: data["markerConfig"].minimumClusterSize,
+    clusterer = new markerClusterer.MarkerClusterer({
+        map:map,
+        markers:markers
     });
     });
 }
@@ -258,28 +261,35 @@ async function getData(infoWindow) {
  * InfoWindow, en klasse som har funksjoner som å sette opp vindu får info.
  */
 
-function createFiltration(color, category) {
-  let container = document.querySelector("filter-wrapper")
-	
-	
-	const filterButton = document.createElement("button");
-    filterButton.textContent = category;
-    filterButton.style.border = "2px solid " + color;
-    filterButton.style.backgroundColor = color;
-    filterButton.classList.add("filter-button");
-	container.appendChild(filterButton);
-
-        filterButtons[key] = { button: filterButton, index: index };
+function createFiltration(color, category, filterWrapper, index, categories) {
+  console.log("filterWrapper", filterWrapper)
+  let filterButton = document.createElement("button");filterButton.textContent = category;filterButton.classList.add("filter-button");
+  filterButton.style.border = "2px solid " + color;
+  filterButton.style.backgroundColor = color;
+  
+  filterWrapper.appendChild(filterButton);
+  
+  filterButtons[category].button = filterButton 
+  filterButtons[category].shown = true
 
         filterButton.addEventListener("click", () => {
-          const filterButtonData = filterButtons[key];
-          console.log("Filter button clicked")
-          const shown = category[key].shown;
-
-          
+          if (filterButtons[category].shown) {
+            filterButton.classList.add("deactive");
+            filterButton.style.backgroundColor = "#F0F0F0";
+            filterButton.style.color = "black";
+            clusterer.removeMarkers(filterButtons[category]["markers"], true)
+            
+    
+            filterButtons[category].shown = false;
+          } else {
+            filterButton.classList.remove("deactive");
+            filterButton.style.border = "2px solid " + color;
+            filterButton.style.backgroundColor = color;
+            filterButton.style.color = "white";
+            clusterer.addMarkers(filterButtons[category]["markers"], false)
+            filterButtons[category].shown = true;
+          }
         })
 }
-
-
 
 initMap();
