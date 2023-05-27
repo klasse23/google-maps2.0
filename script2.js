@@ -7,11 +7,12 @@ let clusterer
 const markerSize = 50;
 const defaultPath = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
 const l = document.querySelector("#content")
-
+let dataSheet = getDataSheet()
 /**
  * Sette opp kartet, overlay, markers, og mer
  */
 async function initMap() {
+  
   l.style = "margin:auto;max-width:none;"
   console.log("Init Map Started");
   const position = { lat: 60.797912, lng: 11.029991 };
@@ -129,10 +130,11 @@ async function initMap() {
 
   const overlay = new USGSOverlay(bounds, image);
   overlay.setMap(map);
-
+  
   try {
     console.log("This tests infoWindow", infoWindow)
     getData(infoWindow);
+    
   } catch (err) {
     console.log("Error when fetching overlay json: ", err);
   }
@@ -217,11 +219,14 @@ async function getData(infoWindow) {
         let currentWindowPosition;
         filterButtons[category] = {"markers":[]}
         console.log("check",filterButtons)
-        Object.values(categories[category]["pages"]).forEach(
-          (markerData) => {
+        
+        Object.entries(categories[category]["pages"]).forEach(
+          ([markerTitle, markerData]) => {
+            
+            
             const marker = new google.maps.Marker({
               position: { lat: markerData.lat, lng: markerData.lng },
-              title: markerData.title,
+              title: markerTitle,
               //animation: google.maps.Animation.DROP,
               map,
               icon: {
@@ -231,9 +236,10 @@ async function getData(infoWindow) {
             });
 
             
-              marker.addListener(marker, "click", function () {
+              marker.addListener("click", function () {
                 console.log("Marker clicked 2")
                 map.setCenter(marker.getPosition());
+                createWindow(marker)
               });
             
             
@@ -268,7 +274,7 @@ function createFiltration(color, category, filterWrapper, index, categories) {
   filterButton.style.backgroundColor = color;
   
   filterWrapper.appendChild(filterButton);
-  
+  console.log("dataSheet", dataSheet)
   filterButtons[category].button = filterButton 
   filterButtons[category].shown = true
 
@@ -293,3 +299,29 @@ function createFiltration(color, category, filterWrapper, index, categories) {
 }
 
 initMap();
+
+
+
+function createWindow(marker) {
+
+
+
+  try {
+    console.log("filterButtons", filterButtons)
+  } catch(err) {
+    console.log(marker)
+    let window = document.createElement("div")
+    let mapA = document.getElementById("map")
+    window.classList.add("infoWindow")
+    mapA.appendChild(window)
+  }
+
+  
+  
+}
+
+function lowerWindow() {
+  console.log("lower the window")
+}
+
+
