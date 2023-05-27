@@ -290,7 +290,7 @@ function createFiltration(color, category, filterWrapper, index, categories) {
             filterButton.classList.add("deactive");
             filterButton.style.backgroundColor = "#F0F0F0";
             filterButton.style.color = "black";
-            clusterer.removeMarkers(filterButtons[category]["markers"], true)
+            clusterer.removeMarkers(filterButtons[category]["markers"], false)
             
     
             filterButtons[category].shown = false;
@@ -321,12 +321,9 @@ function createWindow(marker, categories, category) {
 }
 
 function showHideWindow(move = windowUp) {
-
   if(move) {
     window.style.top = "95%"
     windowUp = false
-    
-    
     //windowControllButton.style = "transform-origin:rotate(180deg);"
     
     return
