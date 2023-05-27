@@ -7,7 +7,7 @@ let clusterer
 const markerSize = 50;
 const defaultPath = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
 const l = document.querySelector("#content")
-let dataSheet = getDataSheet()
+let window
 /**
  * Sette opp kartet, overlay, markers, og mer
  */
@@ -212,13 +212,11 @@ async function getData(infoWindow) {
       let categories = data["category"];
  
       const filterWrapper = document.createElement("div");filterWrapper.classList.add("filter-wrapper");
-      console.log(categories)
       Object.keys(categories).forEach((category, index) => {
         let color = categories[category]["color"];
         let icon = categories[category]["Ikon"]
         let currentWindowPosition;
         filterButtons[category] = {"markers":[]}
-        console.log("check",filterButtons)
         
         Object.entries(categories[category]["pages"]).forEach(
           ([markerTitle, markerData]) => {
@@ -239,7 +237,7 @@ async function getData(infoWindow) {
               marker.addListener("click", function () {
                 console.log("Marker clicked 2")
                 map.setCenter(marker.getPosition());
-                createWindow(marker)
+                createWindow(marker, categories, category)
               });
             
             
@@ -274,7 +272,7 @@ function createFiltration(color, category, filterWrapper, index, categories) {
   filterButton.style.backgroundColor = color;
   
   filterWrapper.appendChild(filterButton);
-  console.log("dataSheet", dataSheet)
+
   filterButtons[category].button = filterButton 
   filterButtons[category].shown = true
 
@@ -302,19 +300,26 @@ initMap();
 
 
 
-function createWindow(marker) {
-
-
-
-  try {
-    console.log("filterButtons", filterButtons)
-  } catch(err) {
-    console.log(marker)
-    let window = document.createElement("div")
-    let mapA = document.getElementById("map")
+function createWindow(marker, categories, category) {
+  console.log(categories[category]["pages"][marker.title])
+  
+  window = document.createElement("div")
+  let mapA = document.getElementById("map")
+  let windowControllButton = document.createElement("button")
+  windowControllButton.classList.add("custom-window-button") 
+  window.appendChild(windowControllButton)
     window.classList.add("infoWindow")
     mapA.appendChild(window)
-  }
+    window.style.backgroundColor = categories[category].color
+  
+    console.log("finalle")
+    
+    window.innerHTML = `
+    <div className="custom-infoWindow">
+    
+      <h2 className="custom-window-title">${marker.title}</h2>
+    </div>`
+  
 
   
   
@@ -325,3 +330,6 @@ function lowerWindow() {
 }
 
 
+function buildWindow() {
+    
+}
