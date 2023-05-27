@@ -7,7 +7,8 @@ let clusterer
 const markerSize = 50;
 const defaultPath = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
 const l = document.querySelector("#content")
-let window
+let windowUp = false
+let customWindowTitle , filterWrapper,windowControllButton,window
 /**
  * Sette opp kartet, overlay, markers, og mer
  */
@@ -33,9 +34,13 @@ async function initMap() {
     new google.maps.LatLng(60.79697, 11.02375),
     new google.maps.LatLng(60.79927, 11.03643)
   );
-
+  
   let image = defaultPath + "img/uten_bakgrunn.svg";
-
+   map.addListener("click", () => {
+    // 3 seconds after the center of the map has changed, pan back to the
+    // marker.
+   showHideWindow(true)
+  });
   class USGSOverlay extends google.maps.OverlayView {
     bounds;
     image;
@@ -133,6 +138,8 @@ async function initMap() {
   const overlay = new USGSOverlay(bounds, image);
   overlay.setMap(map);
   buildWindow()
+  
+  
   try {
     console.log("This tests infoWindow", infoWindow)
     getData(infoWindow);
@@ -213,7 +220,7 @@ async function getData(infoWindow) {
       
       let categories = data["category"];
  
-      const filterWrapper = document.createElement("div");filterWrapper.classList.add("filter-wrapper");
+      filterWrapper = document.createElement("div");filterWrapper.classList.add("filter-wrapper");
       Object.keys(categories).forEach((category, index) => {
         let color = categories[category]["color"];
         let icon = categories[category]["Ikon"]
@@ -303,32 +310,45 @@ initMap();
 
 
 function createWindow(marker, categories, category) {
-    window.innerHTML = `
-    <div className="custom-infoWindow">
-    
-    
-      <h2 className="custom-window-title">${marker.title}</h2>
-    </div>`
+  console.log(marker, categories, category)
+    window.style.backgroundColor = categories[category].color
+     customWindowTitle.textContent = marker.title
+  showHideWindow(false)
   
 
   
   
 }
 
-function showHideWindow() {
-  window.style.backgroundColor = "red"
-  window.style.top = "95%"
+function showHideWindow(move = windowUp) {
+
+  if(move) {
+    window.style.top = "95%"
+    windowUp = false
+    
+    
+    //windowControllButton.style = "transform-origin:rotate(180deg);"
+    
+    return
+  }
+  window.style.top = "55%"
+
+  //windowControllButton.style = "transform-origin:rotate(180deg);"
+  windowUp = true
 }
 
 
 function buildWindow() {
     window = document.createElement("div")
     let mapA = document.getElementById("map")
-    let windowControllButton = document.createElement("button")
+    windowControllButton = document.createElement("button")
     windowControllButton.classList.add("custom-window-button") 
-  windowControllButton.innerHTML = "<i class='fas fa-chevron-up' style='font-size:24px'></i>"
+    windowControllButton.innerHTML = "<i class='fas fa-chevron-up' style='font-size:24px'></i>"
     mapA.appendChild(window)
     window.appendChild(windowControllButton)
+    customWindowTitle = document.createElement("h2")
+    customWindowTitle.classList.add("custom-window-title")
+    window.appendChild(customWindowTitle)
     window.classList.add("infoWindow")
     windowControllButton.addEventListener("click", () => {
       showHideWindow()
