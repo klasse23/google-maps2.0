@@ -19,12 +19,14 @@ async function initMap() {
   const infoWindow = new google.maps.InfoWindow({
     content: "",
     disableAutoPan: true,
+    
   });
 
   map = new Map(document.getElementById("map"), {
     zoom: 17,
     center: position,
     fullscreenControl: false,
+    
   });
 
   const bounds = new google.maps.LatLngBounds(
@@ -130,7 +132,7 @@ async function initMap() {
 
   const overlay = new USGSOverlay(bounds, image);
   overlay.setMap(map);
-  
+  buildWindow()
   try {
     console.log("This tests infoWindow", infoWindow)
     getData(infoWindow);
@@ -301,21 +303,9 @@ initMap();
 
 
 function createWindow(marker, categories, category) {
-  console.log(categories[category]["pages"][marker.title])
-  
-  window = document.createElement("div")
-  let mapA = document.getElementById("map")
-  let windowControllButton = document.createElement("button")
-  windowControllButton.classList.add("custom-window-button") 
-  window.appendChild(windowControllButton)
-    window.classList.add("infoWindow")
-    mapA.appendChild(window)
-    window.style.backgroundColor = categories[category].color
-  
-    console.log("finalle")
-    
     window.innerHTML = `
     <div className="custom-infoWindow">
+    
     
       <h2 className="custom-window-title">${marker.title}</h2>
     </div>`
@@ -325,11 +315,22 @@ function createWindow(marker, categories, category) {
   
 }
 
-function lowerWindow() {
-  console.log("lower the window")
+function showHideWindow() {
+  window.style.backgroundColor = "red"
+  window.style.top = "95%"
 }
 
 
 function buildWindow() {
-    
+    window = document.createElement("div")
+    let mapA = document.getElementById("map")
+    let windowControllButton = document.createElement("button")
+    windowControllButton.classList.add("custom-window-button") 
+  windowControllButton.innerHTML = "<i class='fas fa-chevron-up' style='font-size:24px'></i>"
+    mapA.appendChild(window)
+    window.appendChild(windowControllButton)
+    window.classList.add("infoWindow")
+    windowControllButton.addEventListener("click", () => {
+      showHideWindow()
+    })
 }
