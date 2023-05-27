@@ -13,7 +13,7 @@ complete = {
       "minimumClusterSize": 3,
       "imagePath": "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
     },
-    "player": {
+    "user": {
       "iconPath": "img/points/utstilling.svg",
       "iconSize": 25
     },
@@ -27,12 +27,13 @@ complete = {
 
 
 for idx, row in df.iterrows():
-    print(idx, row)
+    
     try: 
        print(complete["category"][row["Kategori"]])
     except:
         complete["category"][row["Kategori"]] = {
             "color":row["fargekode"],
+            "Ikon": row["Ikon"],
             "pages":{
                 
             }
@@ -52,4 +53,4 @@ for idx, row in df.iterrows():
     
 
 
-print(complete)
+print("\n",complete)
