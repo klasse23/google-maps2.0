@@ -1,11 +1,11 @@
 {
    "markerConfig":{
       "gridSize":40,
-      "minimumClusterSize":5,
+      "minimumClusterSize":3,
       "imagePath":"https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
    },
    "user":{
-      "iconPath":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/verksted-1.svg",
+      "iconPath":"img/points/utstilling.svg",
       "iconSize":25
    },
    "category":{
@@ -103,12 +103,12 @@
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/KASAKHSTAN_Takiya_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/KASAKHSTAN_Takiya_tmb_1024x1024.png"
             },
-            "Italmalal":{
+            "Itamalal":{
                "URL":"https://program.stoppestedverden.no/italmalal/",
                "Land":"CHILE",
                "lat":60.7980456443033,
                "lng":11.030261583269784,
-               "textLocation":"Italmalal.txt",
+               "textLocation":"Itamalal.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/CHILE_Itamalal_1280x844.jpg",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/CHILE_Itamalal_1024x1024.jpg"
             }
@@ -118,7 +118,15 @@
          "color":"#f6d109",
          "Ikon":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/aktiviteter-1.svg",
          "pages":{
-
+            "Cabezonas":{
+               "URL":"https://program.stoppestedverden.no/cabezones/",
+               "Land":"STORBRITANNIA",
+               "lat":"nan",
+               "lng":"nan",
+               "textLocation":"Cabezonas.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/STORBRITANNIA_Cabez_tmb_1280.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/STORBRITANNIA_Cabez_tmb_1024.png"
+            },
             "Circus Raj":{
                "URL":"https://program.stoppestedverden.no/circus-raj/",
                "Land":"INDIA",
@@ -128,7 +136,7 @@
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/INDIA_CircusRaj_tmb_1280-1.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/INDIA_CircusRaj_tmb_1024.png"
             },
-            "Afro beat":{
+            "Afro Beat":{
                "URL":"https://program.stoppestedverden.no/afro-beat/",
                "Land":"AFRIKA",
                "lat":60.7988629276354,
@@ -146,7 +154,7 @@
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/BRASIL_Sirkus_tmb_1280x1280.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/BRASIL_Sirkus_tmb_1024x1024.png"
             },
-            "Hjelp mor Gaia":{
+            "Gaia Hjelp Mamma Gaia":{
                "URL":"https://program.stoppestedverden.no/gaia-hjelp-mamma-gaia/",
                "Land":"SIRKULA",
                "lat":60.797238160303216,
@@ -171,7 +179,44 @@
                "lng":11.0264748436624,
                "textLocation":"Phi ta khon.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/THAILAND_Klong-Yao_tmb_1280x844.png",
-               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/THAILAND_Klong-Yao_tmb_1024x1024.png"},
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/THAILAND_Klong-Yao_tmb_1024x1024.png"
+            },
+            "Parol":{
+               "URL":"https://program.stoppestedverden.no/parol/",
+               "Land":"FILIPPINENE",
+               "lat":"nan",
+               "lng":"nan",
+               "textLocation":"Parol.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/FILIPPINENE_Pastillas_foto-Tuva-Kleven_tmb_1280x844.png",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/FILIPPINENE_Pastillas_foto-Tuva-Kleven_tmb_1024x1024.png"
+            },
+            "Dabke dans":{
+               "URL":"https://program.stoppestedverden.no/dabke-dans/",
+               "Land":"SYRIA",
+               "lat":"nan",
+               "lng":"nan",
+               "textLocation":"Dabke dans.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/SYRIA_Dabke_1280x844.jpg",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/SYRIA_Dabke_1024x1024.jpg"
+            },
+            "Spå":{
+               "URL":"https://program.stoppestedverden.no/albania/",
+               "Land":"ALBANIA",
+               "lat":"nan",
+               "lng":"nan",
+               "textLocation":"Spå.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Albania_1280x844.jpg",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Albania_1024x1024.jpg"
+            },
+            "Du store alpakka":{
+               "URL":"https://program.stoppestedverden.no/du-store-alpakka/",
+               "Land":"CHILE",
+               "lat":"nan",
+               "lng":"nan",
+               "textLocation":"Du store alpakka.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Alpakka_1280x844.jpg",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Alpakka_1024x1024.jpg"
+            },
             "Judo":{
                "URL":"https://program.stoppestedverden.no/judo/",
                "Land":"JAPAN",
@@ -180,6 +225,15 @@
                "textLocation":"Judo.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/JAPAN_Judo_1280x844.jpg",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/JAPAN_Judo_1024x1024.jpeg"
+            },
+            "Vår kultur":{
+               "URL":"https://program.stoppestedverden.no/ukraina/",
+               "Land":"UKRAINA",
+               "lat":"nan",
+               "lng":"nan",
+               "textLocation":"Vår kultur.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/UKRAINA_1280x844.jpg",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/UKRAINA_1024x1024.jpg"
             },
             "Minitoget Knertitten":{
                "URL":"https://program.stoppestedverden.no/minitoget-knertitten/",
@@ -315,7 +369,104 @@
                "textLocation":"Årets kunstprosjekt i regionens barnehager.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Kunstprosjekt_1280x844.jpg",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Kunstprosjekt_1024x1024.jpg"
+            },
+            "Vindu mot kulturskolene":{
+               "URL":"https://program.stoppestedverden.no/kulturskolene/",
+               "Land":"NORGE",
+               "lat":"nan",
+               "lng":"nan",
+               "textLocation":"Vindu mot kulturskolene.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Kulturskolene_1280x844.jpg",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Kulturskolene_1024x1024.jpg"
+            },
+            "Pop art":{
+               "URL":"https://program.stoppestedverden.no/pop-art/",
+               "Land":"NORGE",
+               "lat":"nan",
+               "lng":"nan",
+               "textLocation":"Pop art.txt",
+               "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/POP-ART_1280x844.jpg",
+               "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/POP-ART_1024x1024.jpg"
             }
          }
-      }}
+      },
+      "nan":{
+         "color":"nan",
+         "Ikon":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/toilet.svg",
+         "pages":{
+            "Toalett 1":{
+               "URL":"nan",
+               "Land":"nan",
+               "lat":60.797536735163,
+               "lng":11.0348544002608,
+               "textLocation":"Toalett 1.txt",
+               "1280x844":"nan",
+               "1024x1024":"nan"
+            },
+            "Toalett 2":{
+               "URL":"nan",
+               "Land":"nan",
+               "lat":60.797976577151,
+               "lng":11.0300964264665,
+               "textLocation":"Toalett 2.txt",
+               "1280x844":"nan",
+               "1024x1024":"nan"
+            },
+            "Toalett 3":{
+               "URL":"nan",
+               "Land":"nan",
+               "lat":60.7995098317116,
+               "lng":11.0264211123407,
+               "textLocation":"Toalett 3.txt",
+               "1280x844":"nan",
+               "1024x1024":"nan"
+            },
+            "Toalett 4":{
+               "URL":"nan",
+               "Land":"nan",
+               "lat":60.8005298577968,
+               "lng":11.0270158513709,
+               "textLocation":"Toalett 4.txt",
+               "1280x844":"nan",
+               "1024x1024":"nan"
+            },
+            "Førstehjelp":{
+               "URL":"nan",
+               "Land":"nan",
+               "lat":60.800042234193,
+               "lng":11.0259820893933,
+               "textLocation":"Førstehjelp.txt",
+               "1280x844":"nan",
+               "1024x1024":"nan"
+            },
+            "Informasjon 1":{
+               "URL":"nan",
+               "Land":"nan",
+               "lat":60.797536735163,
+               "lng":11.0348544002608,
+               "textLocation":"Informasjon 1.txt",
+               "1280x844":"nan",
+               "1024x1024":"nan"
+            },
+            "Informasjon 2":{
+               "URL":"nan",
+               "Land":"nan",
+               "lat":60.797976577151,
+               "lng":11.0300964264665,
+               "textLocation":"Informasjon 2.txt",
+               "1280x844":"nan",
+               "1024x1024":"nan"
+            },
+            "Informasjon 3":{
+               "URL":"nan",
+               "Land":"nan",
+               "lat":"nan",
+               "lng":"nan",
+               "textLocation":"Informasjon 3.txt",
+               "1280x844":"nan",
+               "1024x1024":"nan"
+            }
+         }
+      }
+   }
 }
