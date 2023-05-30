@@ -104,7 +104,7 @@
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/KASAKHSTAN_Takiya_tmb_1024x1024.png"
             },
             "Itamalal":{
-               "URL":"https://program.stoppestedverden.no/italmalal/",
+               "URL":"https://program.stoppestedverden.no/itamalal/",
                "Land":"CHILE",
                "lat":60.7980456443033,
                "lng":11.030261583269784,
@@ -119,7 +119,7 @@
          "Ikon":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/aktiviteter-1.svg",
          "pages":{
             "Cabezonas":{
-               "URL":"https://program.stoppestedverden.no/cabezones/",
+               "URL":"https://program.stoppestedverden.no/cabezonas/",
                "Land":"STORBRITANNIA",
                "lat":"nan",
                "lng":"nan",
@@ -141,7 +141,7 @@
                "Land":"AFRIKA",
                "lat":60.7988629276354,
                "lng":11.02845665535337,
-               "textLocation":"Afro beat.txt",
+               "textLocation":"Afro Beat.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/AFRIKA_Afro-Beat_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/AFRIKA_Afro-Beat_tmb_1024x1024.png"
             },
@@ -154,12 +154,12 @@
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/BRASIL_Sirkus_tmb_1280x1280.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/BRASIL_Sirkus_tmb_1024x1024.png"
             },
-            "Gaia Hjelp Mamma Gaia":{
+            "Hjelp Mamma Gaia":{
                "URL":"https://program.stoppestedverden.no/gaia-hjelp-mamma-gaia/",
                "Land":"SIRKULA",
                "lat":60.797238160303216,
                "lng":11.03306831087882,
-               "textLocation":"Hjelp mor Gaia.txt",
+               "textLocation":"Hjelp Mamma Gaia.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/GAIA_Hjelp_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/GAIA_Hjelp_tmb_1024x1024.png"
             },
@@ -208,7 +208,7 @@
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Albania_1280x844.jpg",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/Albania_1024x1024.jpg"
             },
-            "Du store alpakka":{
+            "Du store Alpakka":{
                "URL":"https://program.stoppestedverden.no/du-store-alpakka/",
                "Land":"CHILE",
                "lat":"nan",
@@ -328,12 +328,12 @@
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/MEXICO_Mariachi-Del-Sol_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/MEXICO_Mariachi-Del-Sol_tmb_1024x1024.png"
             },
-            "Swingit":{
+            "Swing `it":{
                "URL":"https://program.stoppestedverden.no/swingit/",
                "Land":"NORGE",
                "lat":60.7980456443033,
                "lng":11.030497521560092,
-               "textLocation":"Swingit.txt",
+               "textLocation":"Swing `it.txt",
                "1280x844":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Swing-it_tmb_1280x844.png",
                "1024x1024":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/NORGE_Swing-it_tmb_1024x1024.png"
             }
@@ -390,7 +390,7 @@
             }
          }
       },
-      "nan":{
+      "Ekstra":{
          "color":"nan",
          "Ikon":"http://program.stoppestedverden.no/wp-content/uploads/2023/05/toilet.svg",
          "pages":{
@@ -460,8 +460,8 @@
             "Informasjon 3":{
                "URL":"nan",
                "Land":"nan",
-               "lat":"nan",
-               "lng":"nan",
+               "lat":60.797976577151,
+               "lng":11.0300964264665,
                "textLocation":"Informasjon 3.txt",
                "1280x844":"nan",
                "1024x1024":"nan"
