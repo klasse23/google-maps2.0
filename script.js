@@ -1,36 +1,46 @@
 let map;
+let filterButtons = {};
+let sortedMarkers = {}
 const { Map } = await google.maps.importLibrary("maps");
 const { Marker } = await google.maps.importLibrary("marker");
-
+let clusterer
 const markerSize = 50;
-
-
 const defaultPath = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
-
 const l = document.querySelector("#content")
-
+let windowUp = false
+let customWindowTitle , filterWrapper,windowControllButton,window
 /**
  * Sette opp kartet, overlay, markers, og mer
  */
 async function initMap() {
+  
   l.style = "margin:auto;max-width:none;"
-  console.log("This is a test");
+  console.log("Init Map Started");
   const position = { lat: 60.797912, lng: 11.029991 };
-  const infoWindow = new InfoWindow();
+  const infoWindow = new google.maps.InfoWindow({
+    content: "",
+    disableAutoPan: true,
+    
+  });
 
   map = new Map(document.getElementById("map"), {
     zoom: 17,
     center: position,
     fullscreenControl: false,
+    
   });
 
   const bounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(60.79697, 11.02375),
     new google.maps.LatLng(60.79927, 11.03643)
   );
-
+  
   let image = defaultPath + "img/uten_bakgrunn.svg";
-
+   map.addListener("click", () => {
+    // 3 seconds after the center of the map has changed, pan back to the
+    // marker.
+   showHideWindow(true)
+  });
   class USGSOverlay extends google.maps.OverlayView {
     bounds;
     image;
@@ -127,19 +137,19 @@ async function initMap() {
 
   const overlay = new USGSOverlay(bounds, image);
   overlay.setMap(map);
-
+  buildWindow()
+  
+  
   try {
+    console.log("This tests infoWindow", infoWindow)
     getData(infoWindow);
+    
   } catch (err) {
     console.log("Error when fetching overlay json: ", err);
   }
 }
 
-/**
- * Finne hvor spilleren er.
- * @param {*} icon
- * @param {*} size
- */
+
 function playerLocation(icon, size) {
   let infoWindow = new google.maps.InfoWindow();
   const playerLocationBtn = document.createElement("button");
@@ -200,39 +210,31 @@ function playerLocation(icon, size) {
   }
 }
 
-/**
- * Get data from pages.json
- * @param {*} infoWindow
- */
 async function getData(infoWindow) {
   fetch(defaultPath+"pages.json")
     .then((response) => response.json())
     .then((data) => {
-      const filterButtons = {};
+		console.log("Creating filter")
+      
       let markers = [];
-
-      let item = data["category"];
+      
+      let categories = data["category"];
  
-      const filterWrapper = document.createElement("div");
-      filterWrapper.classList.add("filter-wrapper");
-
-      const filterDiv = document.createElement("div");
-      filterDiv.classList.add("filterMain");
-
-      filterWrapper.appendChild(filterDiv);
-
-      Object.keys(item).forEach((key, index) => {
-        let color = item[key]["color"];
-        let icon = item[key]["Ikon"]
+      filterWrapper = document.createElement("div");filterWrapper.classList.add("filter-wrapper");
+      Object.keys(categories).forEach((category, index) => {
+        let color = categories[category]["color"];
+        let icon = categories[category]["Ikon"]
         let currentWindowPosition;
-        console.log(item[key]);
-
-        const marker = Object.values(item[key]["pages"]).forEach(
-          (markerData) => {
+        filterButtons[category] = {"markers":[]}
+        
+        Object.entries(categories[category]["pages"]).forEach(
+          ([markerTitle, markerData]) => {
+            
+            
             const marker = new google.maps.Marker({
               position: { lat: markerData.lat, lng: markerData.lng },
-              title: markerData.title,
-              animation: google.maps.Animation.DROP,
+              title: markerTitle,
+              //animation: google.maps.Animation.DROP,
               map,
               icon: {
                 url: icon,
@@ -240,85 +242,30 @@ async function getData(infoWindow) {
               },
             });
 
-            google.maps.event.addListenerOnce(map, "idle", function () {
-              google.maps.event.addListener(marker, "click", function () {
+            
+              marker.addListener("click", function () {
                 console.log("Marker clicked 2")
                 map.setCenter(marker.getPosition());
-  
-                const category = key.charAt(0).toUpperCase() + key.slice(1);
-
-                document
-                  .getElementById("infoWindowCustom")
-                  .classList.remove("hidden");
-                document.getElementById("infoWindowTitle").innerText =
-                  markerData.title;
-                document.getElementById("infoWindowDescription").innerText =
-                  markerData.description;
-
-                document.getElementById("infoWindowReadMore").href =
-                  markerData.web_location ? markerData.web_location : "#";
+                createWindow(marker, categories, category)
               });
-            });
-
-            markers.push(marker);
-            return marker;
+            
+            
+            filterButtons[category]["markers"].push(marker)
+            markers.push(marker)
           }
+
         );
-
-        /* google.maps.event.addListener(map, "click", function () {
-          console.log("marker clicked")
-          document.getElementById("infoWindowCustom").classList.add("hidden");
-        }); */
-
-        const filterButton = document.createElement("button");
-        const str = key;
-        const str2 = str.charAt(0).toUpperCase() + str.slice(1);
-        filterButton.textContent = str2;
-        filterButton.style.border = "2px solid " + color;
-        filterButton.style.backgroundColor = color;
-        filterButton.classList.add("filter-button");
-
-        filterDiv.appendChild(filterButton);
-
-        filterButtons[key] = { button: filterButton, index: index };
-
-        filterButton.addEventListener("click", () => {
-          const filterButtonData = filterButtons[key];
-          console.log("Filter button clicked")
-          const shown = item[key].shown;
-
-          if (shown) {
-            filterButton.classList.add("deactive");
-            filterButton.style.backgroundColor = "#F0F0F0";
-            filterButton.style.color = "black";
-            //clusterer.removeMarkers(marker);
-
-            item[key].shown = false;
-          } else {
-            filterButton.classList.remove("deactive");
-            filterButton.style.border = "2px solid " + color;
-            filterButton.style.backgroundColor = color;
-            filterButton.style.color = "white";
-            //clusterer.addMarkers(marker);
-            item[key].shown = true;
-          }
-        });
+        createFiltration(color, category, filterWrapper, index, categories)
       });
 
       map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterWrapper);
-      console.log(data["user"].iconPath)
+      //console.log(data["user"].iconPath)
       //TODO: Legge til slik at vi kan vise hvor spilleren er.
-      playerLocation(data["user"].iconPath, data["user"].iconSize);
-
-      google.maps.event.addListener(map, "drag", function () {
-        document.getElementById("infoWindowCustom").classList.add("hidden");
-
-        const clusterer = new MarkerClusterer(map, markers, {
-          imagePath: data["markerConfig"].imagePath,
-          gridSize: data["markerConfig"].gridSize,
-          minimumClusterSize: data["markerConfig"].minimumClusterSize,
-        });
-      });
+      //playerLocation(data["user"].iconPath, data["user"].iconSize);
+    clusterer = new markerClusterer.MarkerClusterer({
+        map:map,
+        markers:markers
+    });
     });
 }
 
@@ -326,156 +273,81 @@ async function getData(infoWindow) {
 /**
  * InfoWindow, en klasse som har funksjoner som å sette opp vindu får info.
  */
-class InfoWindow {
-  constructor() {}
 
-  async createInfoWindow() {
-    const infoWindow = document.createElement("div");
-    infoWindow.setAttribute("id", "infoWindowCustom");
-    infoWindow.classList.add("infoWindow");
-    infoWindow.classList.add("hidden");
+function createFiltration(color, category, filterWrapper, index, categories) {
+  console.log("filterWrapper", filterWrapper)
+  let filterButton = document.createElement("button");filterButton.textContent = category;filterButton.classList.add("filter-button");
+  filterButton.style.border = "2px solid " + color;
+  filterButton.style.backgroundColor = color;
+  
+  filterWrapper.appendChild(filterButton);
 
-    const infoWindowContent = document.createElement("div");
-    infoWindowContent.classList.add("infoWindowContent");
+  filterButtons[category].button = filterButton 
+  filterButtons[category].shown = true
 
-    const infoWindowDropdown = document.createElement("button");
-    infoWindowDropdown.classList.add("infoWindowDropdown");
-
-    const infoWindowDropdownIcon = document.createElement("span");
-    infoWindowDropdownIcon.classList.add("material-symbols-outlined");
-    infoWindowDropdownIcon.innerText = "expand_more";
-    infoWindowDropdownIcon.setAttribute("id", "infoWindowIcon");
-
-    infoWindowDropdown.appendChild(infoWindowDropdownIcon);
-
-    const infoWindowHeader = document.createElement("div");
-    infoWindowHeader.classList.add("infoWindowHeader");
-
-    const infoWindowBody = document.createElement("div");
-    infoWindowBody.classList.add("infoWindowBody");
-
-    const infoWindowTitle = document.createElement("h3");
-    infoWindowTitle.classList.add("infoWindowTitle");
-    infoWindowTitle.setAttribute("id", "infoWindowTitle");
-    infoWindowTitle.innerText = "Hello World";
-
-    const infoWindowCategory = document.createElement("p");
-    infoWindowCategory.setAttribute("id", "infoWindowCategory");
-    infoWindowCategory.classList.add("infoWindowCategory");
-    infoWindowCategory.innerText = "This is just a description.";
-
-    const images = document.createElement("div");
-    images.classList.add("images");
-
-    const image1 = document.createElement("img");
-    image1.src = "https://www.w3schools.com/howto/img_snow_wide.jpg";
-
-    const image2 = document.createElement("img");
-    image2.src = "https://www.w3schools.com/howto/img_snow_wide.jpg";
-
-    const image3 = document.createElement("img");
-    image3.src = "https://www.w3schools.com/howto/img_snow_wide.jpg";
-
-    images.appendChild(image1);
-    images.appendChild(image2);
-    images.appendChild(image3);
-
-    const infoWindowReadMore = document.createElement("a");
-    infoWindowReadMore.setAttribute("id", "infoWindowReadMore");
-    infoWindowReadMore.classList.add("infoWindowReadMore");
-    infoWindowReadMore.innerText = "Les mer";
-
-    const infoWindowReadMoreIcon = document.createElement("span");
-
-    infoWindowReadMoreIcon.classList.add("material-symbols-outlined");
-    infoWindowReadMoreIcon.innerText = "arrow_forward";
-    infoWindowReadMoreIcon.setAttribute("id", "infoWindowNextIcon");
-
-    infoWindowReadMore.appendChild(infoWindowReadMoreIcon);
-
-    const details = document.createElement("h4");
-    details.classList.add("infoWindowDetails");
-    details.innerText = "Detaljer";
-
-    const infoWindowDetails = document.createElement("div");
-    infoWindowDetails.classList.add("infoWindowDetailsDiv");
-
-    const infoWindowDetailsHead = document.createElement("h5");
-    infoWindowDetailsHead.classList.add("infoWindowDetailsHead");
-    infoWindowDetailsHead.innerText = "Tidstider";
-
-    const infoWindowDetailsStatus = document.createElement("h4");
-    infoWindowDetailsStatus.classList.add("infoWindowDetailsStatus");
-    infoWindowDetailsStatus.innerText = "Åpent";
-
-    const infoWindowDetailsList = document.createElement("ul");
-    infoWindowDetailsList.classList.add("infoWindowDetailsList");
-
-    const infoWindowDetailsListItem = document.createElement("li");
-    infoWindowDetailsListItem.classList.add("infoWindowDetailsListItem");
-    infoWindowDetailsListItem.innerText = "hello world";
-
-    const infoWindowDetailsListItemTime = document.createElement("span");
-    infoWindowDetailsListItemTime.classList.add(
-      "infoWindowDetailsListItemTime"
-    );
-    infoWindowDetailsListItemTime.innerText = "23:00";
-    infoWindowDetailsListItem.appendChild(infoWindowDetailsListItemTime);
-
-    const infoWindowDetailsListItem2 = document.createElement("li");
-    infoWindowDetailsListItem2.classList.add("infoWindowDetailsListItem");
-    infoWindowDetailsListItem2.innerText = "hello world";
-
-    const infoWindowDetailsListItemTime2 = document.createElement("span");
-    infoWindowDetailsListItemTime2.classList.add(
-      "infoWindowDetailsListItemTime"
-    );
-    infoWindowDetailsListItemTime2.innerText = "12:00";
-    infoWindowDetailsListItem2.appendChild(infoWindowDetailsListItemTime2);
-
-    infoWindow.appendChild(infoWindowContent);
-    infoWindowContent.appendChild(infoWindowDropdown);
-    infoWindowContent.appendChild(infoWindowHeader);
-    infoWindowContent.appendChild(infoWindowBody);
-
-    infoWindowHeader.appendChild(infoWindowTitle);
-    infoWindowHeader.appendChild(infoWindowCategory);
-    infoWindowHeader.appendChild(infoWindowReadMore);
-    infoWindowHeader.appendChild(details);
-    infoWindowHeader.appendChild(infoWindowDetails);
-    infoWindowDetails.appendChild(infoWindowDetailsHead);
-    infoWindowDetails.appendChild(infoWindowDetailsStatus);
-    infoWindowDetails.appendChild(infoWindowDetailsList);
-    infoWindowDetails.appendChild(infoWindowDetailsListItem);
-    infoWindowDetails.appendChild(infoWindowDetailsListItem2);
-
-    document.getElementById("map").appendChild(infoWindow);
-
-    infoWindowDropdown.addEventListener("click", function () {
-      this.toggleInfoWindow();
-    });
-  }
-
-  async toggleInfoWindow() {
-    const infoWIndow = document.querySelector(".infoWindow");
-    infoWIndow.classList.toggle("small");
-    document.querySelector(".infoWindowDropdown span").innerText =
-      infoWIndow.classList.contains("small") ? "expand_less" : "expand_more";
-  }
-
-  async makeInfoWindowBigger() {
-    const infoWIndow = document.querySelector(".infoWindow");
-    infoWIndow.classList.remove("small");
-    document.querySelector(".infoWindowDropdown span").innerText =
-      "expand_more";
-  }
-
-  async makeInfoWindowSmaller() {
-    const infoWIndow = document.querySelector(".infoWindow");
-    infoWIndow.classList.add("small");
-    document.querySelector(".infoWindowDropdown span").innerText =
-      "expand_less";
-  }
+        filterButton.addEventListener("click", () => {
+          if (filterButtons[category].shown) {
+            filterButton.classList.add("deactive");
+            filterButton.style.backgroundColor = "#F0F0F0";
+            filterButton.style.color = "black";
+            clusterer.removeMarkers(filterButtons[category]["markers"], false)
+            
+    
+            filterButtons[category].shown = false;
+          } else {
+            filterButton.classList.remove("deactive");
+            filterButton.style.border = "2px solid " + color;
+            filterButton.style.backgroundColor = color;
+            filterButton.style.color = "white";
+            clusterer.addMarkers(filterButtons[category]["markers"], false)
+            filterButtons[category].shown = true;
+          }
+        })
 }
 
 initMap();
+
+
+
+function createWindow(marker, categories, category) {
+  console.log(marker, categories, category)
+    window.style.backgroundColor = categories[category].color
+     customWindowTitle.textContent = marker.title
+  showHideWindow(false)
+  
+
+  
+  
+}
+
+function showHideWindow(move = windowUp) {
+  if(move) {
+    window.style.top = "95%"
+    windowUp = false
+    //windowControllButton.style = "transform-origin:rotate(180deg);"
+    
+    return
+  }
+  window.style.top = "55%"
+
+  //windowControllButton.style = "transform-origin:rotate(180deg);"
+  windowUp = true
+}
+
+
+function buildWindow() {
+    window = document.createElement("div")
+    let mapA = document.getElementById("map")
+    windowControllButton = document.createElement("button")
+    windowControllButton.classList.add("custom-window-button") 
+    windowControllButton.innerHTML = "<i class='fas fa-chevron-up' style='font-size:24px'></i>"
+    mapA.appendChild(window)
+    window.appendChild(windowControllButton)
+    customWindowTitle = document.createElement("h2")
+    customWindowTitle.classList.add("custom-window-title")
+    window.appendChild(customWindowTitle)
+    window.classList.add("infoWindow")
+    windowControllButton.addEventListener("click", () => {
+      showHideWindow()
+    })
+}
