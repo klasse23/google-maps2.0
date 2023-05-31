@@ -1,7 +1,7 @@
 
 body {
   background: #333;
-  color: white;
+  /* color: white; */
   margin: 0;
   padding: 0;
 }
@@ -191,7 +191,10 @@ body {
 }
 
 .filter-wrapper {
-  max-width: 600px;
+  max-width: 895px;
+  transition: all .5s ease-out;
+  
+  position:absolute;
 }
 
 .filterMain {
@@ -243,13 +246,15 @@ body {
 .infoWindow {
   font-family: inherit;
   position: absolute;
-  z-index: 50;
+  z-index: 1;
   bottom: 0;
+  top:95%;
   left: 0;
   width: 100%;
   height: calc(100% - 55%);
+  transition: all 0.25s ease-in-out ;
+  
   /*242px*/
-
   background-color: #f9e36b;
   color: black;
 }
@@ -477,3 +482,37 @@ main#content {
 	max-width:fit-content;
   margin:auto;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.custom-window-button {
+  border:none;
+  position:relative;
+  color: black;
+  left:50%;
+  transform: translateX(-50%)
+}
+
+.custom-window-button:hover, .custom-window-button:active, .custom-window-button:focus-visible, .custom-window-button:focus {
+  background-color:transparent!important;
+  border:none;
+  color:black;
+  transform: rotate(180deg);
+  outline:none;
+  transform: translateX(-50%)
+}
+

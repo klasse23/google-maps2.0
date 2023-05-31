@@ -1,37 +1,46 @@
 let map;
 let filterButtons = {};
+let sortedMarkers = {}
 const { Map } = await google.maps.importLibrary("maps");
 const { Marker } = await google.maps.importLibrary("marker");
-
+let clusterer
 const markerSize = 50;
 const defaultPath = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
 const l = document.querySelector("#content")
-
+let windowUp = false
+let customWindowTitle , filterWrapper,windowControllButton,window
 /**
  * Sette opp kartet, overlay, markers, og mer
  */
 async function initMap() {
+  
   l.style = "margin:auto;max-width:none;"
   console.log("Init Map Started");
   const position = { lat: 60.797912, lng: 11.029991 };
   const infoWindow = new google.maps.InfoWindow({
     content: "",
     disableAutoPan: true,
+    
   });
 
   map = new Map(document.getElementById("map"), {
     zoom: 17,
     center: position,
     fullscreenControl: false,
+    
   });
 
   const bounds = new google.maps.LatLngBounds(
     new google.maps.LatLng(60.79697, 11.02375),
     new google.maps.LatLng(60.79927, 11.03643)
   );
-
+  
   let image = defaultPath + "img/uten_bakgrunn.svg";
-
+   map.addListener("click", () => {
+    // 3 seconds after the center of the map has changed, pan back to the
+    // marker.
+   showHideWindow(true)
+  });
   class USGSOverlay extends google.maps.OverlayView {
     bounds;
     image;
@@ -128,10 +137,13 @@ async function initMap() {
 
   const overlay = new USGSOverlay(bounds, image);
   overlay.setMap(map);
-
+  buildWindow()
+  
+  
   try {
     console.log("This tests infoWindow", infoWindow)
     getData(infoWindow);
+    
   } catch (err) {
     console.log("Error when fetching overlay json: ", err);
   }
@@ -205,22 +217,23 @@ async function getData(infoWindow) {
 		console.log("Creating filter")
       
       let markers = [];
-
-      let category = data["category"];
+      
+      let categories = data["category"];
  
-      const filterWrapper = document.createElement("div");filterWrapper.classList.add("filter-wrapper");
-
-      Object.keys(category).forEach((key, index) => {
-        let color = category[key]["color"];
-        let icon = category[key]["Ikon"]
+      filterWrapper = document.createElement("div");filterWrapper.classList.add("filter-wrapper");
+      Object.keys(categories).forEach((category, index) => {
+        let color = categories[category]["color"];
+        let icon = categories[category]["Ikon"]
         let currentWindowPosition;
-        console.log(category[key]);
-
-        Object.values(category[key]["pages"]).forEach(
-          (markerData) => {
+        filterButtons[category] = {"markers":[]}
+        
+        Object.entries(categories[category]["pages"]).forEach(
+          ([markerTitle, markerData]) => {
+            
+            
             const marker = new google.maps.Marker({
               position: { lat: markerData.lat, lng: markerData.lng },
-              title: markerData.title,
+              title: markerTitle,
               //animation: google.maps.Animation.DROP,
               map,
               icon: {
@@ -230,25 +243,28 @@ async function getData(infoWindow) {
             });
 
             
-              marker.addListener(marker, "click", function () {
+              marker.addListener("click", function () {
                 console.log("Marker clicked 2")
                 map.setCenter(marker.getPosition());
+                createWindow(marker, categories, category)
               });
+            
+            
+            filterButtons[category]["markers"].push(marker)
             markers.push(marker)
           }
 
         );
-        //createFiltration(color, key)
+        createFiltration(color, category, filterWrapper, index, categories)
       });
 
       map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterWrapper);
       //console.log(data["user"].iconPath)
       //TODO: Legge til slik at vi kan vise hvor spilleren er.
       //playerLocation(data["user"].iconPath, data["user"].iconSize);
-    const clusterer = new MarkerClusterer(map, markers, {
-        imagePath: data["markerConfig"].imagePath,
-        gridSize: data["markerConfig"].gridSize,
-        minimumClusterSize: data["markerConfig"].minimumClusterSize,
+    clusterer = new markerClusterer.MarkerClusterer({
+        map:map,
+        markers:markers
     });
     });
 }
@@ -258,28 +274,80 @@ async function getData(infoWindow) {
  * InfoWindow, en klasse som har funksjoner som å sette opp vindu får info.
  */
 
-function createFiltration(color, category) {
-  let container = document.querySelector("filter-wrapper")
-	
-	
-	const filterButton = document.createElement("button");
-    filterButton.textContent = category;
-    filterButton.style.border = "2px solid " + color;
-    filterButton.style.backgroundColor = color;
-    filterButton.classList.add("filter-button");
-	container.appendChild(filterButton);
+function createFiltration(color, category, filterWrapper, index, categories) {
+  console.log("filterWrapper", filterWrapper)
+  let filterButton = document.createElement("button");filterButton.textContent = category;filterButton.classList.add("filter-button");
+  filterButton.style.border = "2px solid " + color;
+  filterButton.style.backgroundColor = color;
+  
+  filterWrapper.appendChild(filterButton);
 
-        filterButtons[key] = { button: filterButton, index: index };
+  filterButtons[category].button = filterButton 
+  filterButtons[category].shown = true
 
         filterButton.addEventListener("click", () => {
-          const filterButtonData = filterButtons[key];
-          console.log("Filter button clicked")
-          const shown = category[key].shown;
-
-          
+          if (filterButtons[category].shown) {
+            filterButton.classList.add("deactive");
+            filterButton.style.backgroundColor = "#F0F0F0";
+            filterButton.style.color = "black";
+            clusterer.removeMarkers(filterButtons[category]["markers"], false)
+            
+    
+            filterButtons[category].shown = false;
+          } else {
+            filterButton.classList.remove("deactive");
+            filterButton.style.border = "2px solid " + color;
+            filterButton.style.backgroundColor = color;
+            filterButton.style.color = "white";
+            clusterer.addMarkers(filterButtons[category]["markers"], false)
+            filterButtons[category].shown = true;
+          }
         })
 }
 
-
-
 initMap();
+
+
+
+function createWindow(marker, categories, category) {
+  console.log(marker, categories, category)
+    window.style.backgroundColor = categories[category].color
+     customWindowTitle.textContent = marker.title
+  showHideWindow(false)
+  
+
+  
+  
+}
+
+function showHideWindow(move = windowUp) {
+  if(move) {
+    window.style.top = "95%"
+    windowUp = false
+    //windowControllButton.style = "transform-origin:rotate(180deg);"
+    
+    return
+  }
+  window.style.top = "55%"
+
+  //windowControllButton.style = "transform-origin:rotate(180deg);"
+  windowUp = true
+}
+
+
+function buildWindow() {
+    window = document.createElement("div")
+    let mapA = document.getElementById("map")
+    windowControllButton = document.createElement("button")
+    windowControllButton.classList.add("custom-window-button") 
+    windowControllButton.innerHTML = "<i class='fas fa-chevron-up' style='font-size:24px'></i>"
+    mapA.appendChild(window)
+    window.appendChild(windowControllButton)
+    customWindowTitle = document.createElement("h2")
+    customWindowTitle.classList.add("custom-window-title")
+    window.appendChild(customWindowTitle)
+    window.classList.add("infoWindow")
+    windowControllButton.addEventListener("click", () => {
+      showHideWindow()
+    })
+}

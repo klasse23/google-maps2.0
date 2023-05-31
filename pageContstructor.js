@@ -83,8 +83,16 @@ function addText(textLocation){
     .then((response) => response.text())
     .then((data)=> {
         console.log(data.replace(regexPattern, "<a class'textlinks' href='$1'>$2</a>"))
-         document.getElementById("page-content").innerHTML = data.replace(regexPattern, "<a class'textlinks' href='$1'>$2</a>").replace(regexStraightLink, "<a class'textLinks' href='$1'>$1</a>")
-         //Something is breaking
+         try {
+            data = data.replace(regexPattern, "<a class'textlinks' href='$1'>$2</a>")//.replace(regexStraightLink, "<a class'textLinks' href='$1'>$1</a>")         //Something is breaking
+         } catch(err) {
+            console.log(err)
+         }
+        
+        document.getElementById("page-content").innerHTML = data//.replace(regexPattern, "<a class'textlinks' href='$1'>$2</a>")//.replace(regexStraightLink, "<a class'textLinks' href='$1'>$1</a>")
+        document.getElementById("page-content").innerHTML += "Test TExt" 
+        
+        //Something is breaking
     })
     
     

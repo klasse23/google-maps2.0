@@ -211,7 +211,7 @@ function playerLocation(icon, size) {
 }
 
 async function getData(infoWindow) {
-  fetch(defaultPath+"pages.json")
+  fetch("pages.json")
     .then((response) => response.json())
     .then((data) => {
 		console.log("Creating filter")
@@ -237,7 +237,7 @@ async function getData(infoWindow) {
               //animation: google.maps.Animation.DROP,
               map,
               icon: {
-                url: icon,
+                url: item[key].icon,
                 scaledSize: new google.maps.Size(30, 30),
               },
             });
