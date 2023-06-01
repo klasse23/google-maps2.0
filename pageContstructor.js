@@ -30,10 +30,26 @@ function createPage(category, pageData, color) {
     console.log(pageData["Land"],category, pageData)
     const newContainer = document.createElement("div");
     newContainer.classList.add("custom-page-container")
-    
+    let flipState=["Forestilling", "Konsert", "Utstilling"]
     
     
     let Land = pageData.Land.toLowerCase()
+    console.log(flipState.includes(category))
+    if(flipState.includes(category)){
+        newContainer.innerHTML = 
+    `
+    <img src="${pageData["1280x844"]}" class="cover-bilde">
+    <button class="Kategori-knapp" style="background-color:${color};">${category}</button>
+    <div id="middle-info">
+        <h1 class="Side-Tittel">${title}</h1>
+        <h4 class="Land">${pageData.Land}</h4> 
+        <audio controls class="Lyd-avspiller" style="visibility: hidden;"">
+          Browser does not support this audio!
+         </audio>
+        <p id="page-content"></p>
+    </div>
+    <link rel="stylesheet" type="text/css" href="https://program.stoppestedverden.no/wp-content/plugins/Klasse23/style.css" />`
+    } else {
     newContainer.innerHTML = 
     `
     <img src="${pageData["1280x844"]}" class="cover-bilde">
@@ -47,6 +63,7 @@ function createPage(category, pageData, color) {
         <p id="page-content"></p>
     </div>
     <link rel="stylesheet" type="text/css" href="https://program.stoppestedverden.no/wp-content/plugins/Klasse23/style.css" />`
+    }
     attachmentPoint[0].appendChild(newContainer);
     
     addAudio(Land)
