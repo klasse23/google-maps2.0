@@ -9,7 +9,7 @@ const defaultPath = "https://program.stoppestedverden.no/wp-content/plugins/Klas
 const l = document.querySelector("#content");
 let windowUp = false;
 let filterHidden = false;
-let customWindowTitle,filterWrapper,windowControlButton,window, customCountry
+let customWindowTitle,filterWrapper,windowControlButton,window, customCountry,filterHideButton, greedySwitch
 let infoWindow
 /**
  * Sette opp kartet, overlay, markers, og mer
@@ -34,9 +34,10 @@ async function initMap() {
     new google.maps.LatLng(60.79697, 11.02375),
     new google.maps.LatLng(60.79927, 11.03643)
   );
-  
+
   let image = defaultPath + "img/uten_bakgrunn.svg";
    map.addListener("click", () => {
+    infoWindow.close()
     // 3 seconds after the center of the map has changed, pan back to the
     // marker.
    //showHideWindow(true)
@@ -142,7 +143,7 @@ async function initMap() {
   
   
   try {
-    console.log("This tests infoWindow", infoWindow)
+    //console.log("This tests infoWindow", infoWindow)
     getData();
     
   } catch (err) {
@@ -220,8 +221,38 @@ async function getData() {
       let markers = [];
       
       let categories = data["category"];
- 
+
+      greedySwitch = document.createElement("div")
+      greedySwitch.classList.add("greedySwitch-div")
+      greedySwitch.innerHTML = `
+      <label class="switch">
+        <input type="checkbox" id="greedySwitch">
+        <span class="slider round"></span>
+      </label>`
+      
+      greedySwitch.addEventListener('change', function () {
+        let greedySwitchBox =document.getElementById("greedySwitch")
+   
+        if (greedySwitchBox.checked == true){
+          
+          map.setOptions({gestureHandling:"greedy"})
+      } else {
+          
+          map.setOptions({gestureHandling:"cooperative"})
+      }
+      });
+      
+      
       filterWrapper = document.createElement("div");filterWrapper.classList.add("filter-wrapper");
+      filterHideButton= document.createElement("button")
+      filterHideButton.classList.add("close-filterWrapper")
+      filterHideButton.innerHTML = "<i class='fas fa-chevron-up' style='font-size:24px;transform: translateY(-22%);'></i>"
+      filterHideButton.addEventListener("click", function () {
+        showHideFilterButtons()
+      });
+                //infoWindow.setContent(marker.title)
+
+      
       Object.keys(categories).forEach((category, index) => {
         let color = categories[category]["color"];
         let icon = categories[category]["Ikon"];
@@ -266,9 +297,13 @@ async function getData() {
         );
         createFiltration(color, category, filterWrapper, index, categories)
       });
-
+      map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterHideButton);
       map.controls[google.maps.ControlPosition.LEFT_CENTER].push(filterWrapper);
+      map.controls[google.maps.ControlPosition.TOP_RIGHT].push(greedySwitch);
       //console.log(data["user"].iconPath)
+      
+      var checkedValue = document.querySelector("#map > div > div > div:nth-child(7) > div > label > input[type=checkbox]")
+      console.log(checkedValue)
       //TODO: Legge til slik at vi kan vise hvor spilleren er.
       //playerLocation(data["user"].iconPath, data["user"].iconSize);
     clusterer = new markerClusterer.MarkerClusterer({
@@ -284,7 +319,7 @@ async function getData() {
  */
 
 function createFiltration(color, category, filterWrapper, index, categories) {
-  console.log("filterWrapper", filterWrapper)
+  //console.log("filterWrapper", filterWrapper)
   let filterButton = document.createElement("button");filterButton.textContent = category;filterButton.classList.add("filter-button");
   filterButton.style.border = "2px solid " + color;
   filterButton.style.backgroundColor = color;
@@ -344,11 +379,14 @@ function showHideWindow(move = windowUp) {
 }
 function showHideFilterButtons(move = filterHidden) {
   if(move) {
-    filterWrapper.style.transform = "translateX(100%)";
+    filterWrapper.style.transform = "translateX(-90%)";
+    filterHideButton.style.transform = "rotate(90deg)"
     filterHidden = false;
     return
   }
   filterWrapper.style.transform = "translateX(0%)";
+  filterHidden = true;
+  filterHideButton.style.transform = "rotate(270deg)"
 }
 
 
