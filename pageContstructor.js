@@ -1,8 +1,8 @@
 const title = document.title.replace(" – Program Stoppested verden", "")
 const attachmentPoint = document.getElementsByClassName("page-content")
 
-const regexPattern = /\[(.*?)\]\((.*?)\)/g
-const regexStraightLink = /(?<!href=[\'\"])(https?:\/\/[^\s]+)/g
+//const regexPattern = /\[(.*?)\]\((.*?)\)/g
+//const regexStraightLink = /(?<!href=[\'\"])(https?:\/\/[^\s]+)/g
 const defaultPath = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
 
 
@@ -30,10 +30,26 @@ function createPage(category, pageData, color) {
     console.log(pageData["Land"],category, pageData)
     const newContainer = document.createElement("div");
     newContainer.classList.add("custom-page-container")
-    
+    let flipState=["Forestilling", "Konsert", "Utstilling"]
     
     
     let Land = pageData.Land.toLowerCase()
+    console.log(flipState.includes(category))
+    if(flipState.includes(category)){
+        newContainer.innerHTML = 
+    `
+    <img src="${pageData["1280x844"]}" class="cover-bilde">
+    <button class="Kategori-knapp" style="background-color:${color};">${category}</button>
+    <div id="middle-info">
+        <h1 class="Side-Tittel">${title}</h1>
+        <h4 class="Land">${pageData.Land}</h4> 
+        <audio controls class="Lyd-avspiller" style="visibility: hidden;"">
+          Browser does not support this audio!
+         </audio>
+        <p id="page-content"></p>
+    </div>
+    <link rel="stylesheet" type="text/css" href="https://program.stoppestedverden.no/wp-content/plugins/Klasse23/style.css" />`
+    } else {
     newContainer.innerHTML = 
     `
     <img src="${pageData["1280x844"]}" class="cover-bilde">
@@ -47,10 +63,11 @@ function createPage(category, pageData, color) {
         <p id="page-content"></p>
     </div>
     <link rel="stylesheet" type="text/css" href="https://program.stoppestedverden.no/wp-content/plugins/Klasse23/style.css" />`
+    }
     attachmentPoint[0].appendChild(newContainer);
     
     addAudio(Land)
-    addText(title+".txt");
+    addText(pageData.textLocation);
 }
 async function getAudio(Land, fileType, format, audioController){
     return fetch(defaultPath+`Lydfiler/${fileType}/${Land.charAt(0).toUpperCase() + Land.slice(1) + " " + title}.${fileType}`)
@@ -82,15 +99,19 @@ function addText(textLocation){
     fetch(`https://program.stoppestedverden.no/wp-content/plugins/Klasse23/Text/${textLocation}`)
     .then((response) => response.text())
     .then((data)=> {
-        console.log(data.replace(regexPattern, "<a class'textlinks' href='$1'>$2</a>"))
+        //console.log(data.replace(regexPattern, "<a class'textlinks' href='$1'>$2</a>"))
          try {
-            data = data.replace(regexPattern, "<a class'textlinks' href='$1'>$2</a>")//.replace(regexStraightLink, "<a class'textLinks' href='$1'>$1</a>")         //Something is breaking
+            data = data.replace(/(https?:\/\/|www\.)\S+/g, (match) => {
+                if(match.startsWith("www")){
+                    match = "https://" + match
+                }
+                return `<a class'textlinks' href='${match}'>${match}</a>`})//.replace(regexStraightLink, "<a class'textLinks' href='$1'>$1</a>")         //Something is breaking
          } catch(err) {
             console.log(err)
          }
         
         document.getElementById("page-content").innerHTML = data//.replace(regexPattern, "<a class'textlinks' href='$1'>$2</a>")//.replace(regexStraightLink, "<a class'textLinks' href='$1'>$1</a>")
-        document.getElementById("page-content").innerHTML += "Test TExt" 
+       
         
         //Something is breaking
     })
