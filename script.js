@@ -1,14 +1,16 @@
 let map;
 let filterButtons = {};
-let sortedMarkers = {}
+let sortedMarkers = {};
 const { Map } = await google.maps.importLibrary("maps");
 const { Marker } = await google.maps.importLibrary("marker");
-let clusterer
+let clusterer;
 const markerSize = 50;
-const defaultPath = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/"
-const l = document.querySelector("#content")
-let windowUp = false
-let customWindowTitle , filterWrapper,windowControllButton,window
+const defaultPath = "https://program.stoppestedverden.no/wp-content/plugins/Klasse23/";
+const l = document.querySelector("#content");
+let windowUp = false;
+let filterHidden = false;
+let customWindowTitle,filterWrapper,windowControlButton,window, customCountry
+let infoWindow
 /**
  * Sette opp kartet, overlay, markers, og mer
  */
@@ -17,10 +19,9 @@ async function initMap() {
   l.style = "margin:auto;max-width:none;"
   console.log("Init Map Started");
   const position = { lat: 60.797912, lng: 11.029991 };
-  const infoWindow = new google.maps.InfoWindow({
+  infoWindow = new google.maps.InfoWindow({
     content: "",
     disableAutoPan: true,
-    
   });
 
   map = new Map(document.getElementById("map"), {
@@ -39,7 +40,7 @@ async function initMap() {
    map.addListener("click", () => {
     // 3 seconds after the center of the map has changed, pan back to the
     // marker.
-   showHideWindow(true)
+   //showHideWindow(true)
   });
   class USGSOverlay extends google.maps.OverlayView {
     bounds;
@@ -137,12 +138,13 @@ async function initMap() {
 
   const overlay = new USGSOverlay(bounds, image);
   overlay.setMap(map);
-  buildWindow()
+  
+  //buildWindow()
   
   
   try {
     console.log("This tests infoWindow", infoWindow)
-    getData(infoWindow);
+    getData();
     
   } catch (err) {
     console.log("Error when fetching overlay json: ", err);
@@ -210,8 +212,8 @@ function playerLocation(icon, size) {
   }
 }
 
-async function getData(infoWindow) {
-  fetch("pages.json")
+async function getData() {
+  fetch(defaultPath+"pages.json")
     .then((response) => response.json())
     .then((data) => {
 		console.log("Creating filter")
@@ -223,13 +225,16 @@ async function getData(infoWindow) {
       filterWrapper = document.createElement("div");filterWrapper.classList.add("filter-wrapper");
       Object.keys(categories).forEach((category, index) => {
         let color = categories[category]["color"];
-        let icon = categories[category]["Ikon"]
+        let icon = categories[category]["Ikon"];
         let currentWindowPosition;
         filterButtons[category] = {"markers":[]}
         
         Object.entries(categories[category]["pages"]).forEach(
           ([markerTitle, markerData]) => {
-            
+            if(markerData.lng == "nan" || markerData.lat == "nan"){
+              console.log(markerTitle, ": failed due to nan positioning.")
+              return;
+            }
             
             const marker = new google.maps.Marker({
               position: { lat: markerData.lat, lng: markerData.lng },
@@ -237,16 +242,21 @@ async function getData(infoWindow) {
               //animation: google.maps.Animation.DROP,
               map,
               icon: {
-                url: item[key].icon,
+                url: icon,
                 scaledSize: new google.maps.Size(30, 30),
               },
             });
 
             
               marker.addListener("click", function () {
-                console.log("Marker clicked 2")
+                updateInfoWindow(markerTitle, markerData)
+                //infoWindow.setContent(marker.title)
+                infoWindow.open({
+                  anchor: marker,
+                  map,
+                });
                 map.setCenter(marker.getPosition());
-                createWindow(marker, categories, category)
+               
               });
             
             
@@ -333,21 +343,54 @@ function showHideWindow(move = windowUp) {
   //windowControllButton.style = "transform-origin:rotate(180deg);"
   windowUp = true
 }
+function showHideFilterButtons(move = filterHidden) {
+  if(move) {
+    filterWrapper.style.transform = "translateX(100%)";
+    filterHidden = false;
+    return
+  }
+  filterWrapper.style.transform = "translateX(0%)";
+}
 
 
 function buildWindow() {
-    window = document.createElement("div")
     let mapA = document.getElementById("map")
-    windowControllButton = document.createElement("button")
-    windowControllButton.classList.add("custom-window-button") 
-    windowControllButton.innerHTML = "<i class='fas fa-chevron-up' style='font-size:24px'></i>"
+    window = Object.assign(document.createElement("div"), {className: "infoWindow"})
     mapA.appendChild(window)
-    window.appendChild(windowControllButton)
-    customWindowTitle = document.createElement("h2")
-    customWindowTitle.classList.add("custom-window-title")
-    window.appendChild(customWindowTitle)
-    window.classList.add("infoWindow")
-    windowControllButton.addEventListener("click", () => {
+    
+    
+    // ARRAY STARTS DURING CONSOLE LOG BELOW
+    windowControlButton = createElementWithParent("button", window, {className:"custom-window-button", innerHTML: "<i class='fas fa-chevron-up' style='font-size:24px;transform: translateY(-22%);'></i>"})
+    customWindowTitle = createElementWithParent("h2", window, {className: "custom-window-title"} )
+    customCountry = createElementWithParent("h2", window, {className: "custom-country"})
+    
+    
+    windowControlButton.addEventListener("click", () => {
       showHideWindow()
     })
+}
+
+function createElementWithParent(type, parent, {className, innerHTML}) {
+  let elem = Object.assign(document.createElement(type), { className: className, innerHTML: innerHTML });
+  parent.appendChild(elem);
+  return elem;
+}
+
+
+
+function updateInfoWindow(markerTitle, markerData){
+  infoWindow.setContent(`
+  <div class="infoWindow-container">
+    <div class="infoWindow-column-1"> 
+      <img src="${markerData["1024x1024"]}">
+    </div>
+    <div class="infoWindow-column-2"> 
+      <h2>${markerTitle}</h2>
+      <h2>${markerData.Land}</h2>
+    </div>
+    <div class="infoWindow-column-3">
+      <span>Button</span>
+    </div>
+    
+  </div>`)
 }
