@@ -16,11 +16,10 @@ let infoWindow
  */
 async function initMap() {
   
-  l.style = "margin:auto;max-width:none;"
+  l.style = "margin:auto;max-width:none;"//
   console.log("Init Map Started");
   const position = { lat: 60.797912, lng: 11.029991 };
   infoWindow = new google.maps.InfoWindow({
-    content: "",
     disableAutoPan: true,
   });
 
@@ -249,7 +248,7 @@ async function getData() {
 
             
               marker.addListener("click", function () {
-                updateInfoWindow(markerTitle, markerData)
+                updateInfoWindow(markerTitle, markerData, color, category)
                 //infoWindow.setContent(marker.title)
                 infoWindow.open({
                   anchor: marker,
@@ -378,19 +377,17 @@ function createElementWithParent(type, parent, {className, innerHTML}) {
 
 
 
-function updateInfoWindow(markerTitle, markerData){
+function updateInfoWindow(markerTitle, markerData, color, category){
+
   infoWindow.setContent(`
-  <div class="infoWindow-container">
-    <div class="infoWindow-column-1"> 
-      <img src="${markerData["1024x1024"]}">
+  <div class="infoWindow-container" onclick="window.location.href='${markerData.URL}'">
+
+    <img src="${markerData["1024x1024"]}">
+    <div class="infoWindow-column"> 
+      <p class="infoWindow-category" ><span style="background-color:${color};">${category}</span></p>
+      <h4>${markerTitle}</h4>
     </div>
-    <div class="infoWindow-column-2"> 
-      <h2>${markerTitle}</h2>
-      <h2>${markerData.Land}</h2>
-    </div>
-    <div class="infoWindow-column-3">
-      <span>Button</span>
-    </div>
+      <button><i class='fas fa-chevron-up' style='font-size:24px;transform: translateY(-22%);'></i></button>
     
   </div>`)
 }
