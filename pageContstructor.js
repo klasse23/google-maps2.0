@@ -84,7 +84,7 @@ function addText(textLocation){
     .then((data)=> {
         //console.log(data.replace(regexPattern, "<a class'textlinks' href='$1'>$2</a>"))
          try {
-            data = data.replace(/(https?:\/\/|www\.)\S+/, (match) => {
+            data = data.replace(/(https?:\/\/|www\.)\S+/g, (match) => {
                 return `<a class'textlinks' href='${match}'>${match}</a>`})//.replace(regexStraightLink, "<a class'textLinks' href='$1'>$1</a>")         //Something is breaking
          } catch(err) {
             console.log(err)
