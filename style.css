@@ -348,7 +348,7 @@ main#content {
   padding-bottom:10px;
 }
 
-.infoWindow-container{
+.infoWindow-container, .infoWindow-container{
   height: fit-content;
   display: flex;
   grid-template-columns: auto 1fr auto;
