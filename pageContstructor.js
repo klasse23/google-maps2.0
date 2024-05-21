@@ -96,9 +96,10 @@ async function addAudio(Land){
 function addText(textLocation){
     
     
-    fetch(`https://program.stoppestedverden.no/wp-content/plugins/Klasse23/Text/${textLocation}`)
+    fetch(`${defaultPath}/Text/${textLocation}`)
     .then((response) => response.text())
     .then((data)=> {
+        console.log(data)
         //console.log(data.replace(regexPattern, "<a class'textlinks' href='$1'>$2</a>"))
          try {
             data = data.replace(/(https?:\/\/|www\.)\S+/g, (match) => {
@@ -114,6 +115,10 @@ function addText(textLocation){
        
         
         //Something is breaking
+    })
+    .catch(e => {
+        document.getElementById("page-content").innerHTML = "Something went wrong!"
+        console.error(e)
     })
     
     
